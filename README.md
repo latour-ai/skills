@@ -9,6 +9,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | Skill | Use case |
 |---|---|
 | [Intro Email Generator](intro-email-generator/SKILL.md) | Write warm, high-signal introduction emails between two people |
+| [Call Transcript Follow-Up](call-transcript-followup/SKILL.md) | Turn a meeting or sales call transcript into a post-call package with summary, action items, and next steps |
 | Inbox Triage | Coming Soon |
 
 ## How to use
