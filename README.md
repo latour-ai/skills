@@ -8,8 +8,8 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 
 | Skill | Use case |
 |---|---|
-| Email Introductions | Write thoughtful, high-signal intros | 
-| Inbox Triage | Coming Soon | 
+| [Intro Email Generator](intro-email-generator/SKILL.md) | Write warm, high-signal introduction emails between two people |
+| Inbox Triage | Coming Soon |
 
 ## How to use
 
