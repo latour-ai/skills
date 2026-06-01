@@ -12,6 +12,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Call Transcript Follow-Up](call-transcript-followup/SKILL.md) | Turn a meeting or sales call transcript into a post-call package with summary, action items, and next steps |
 | [Private Company Tear Sheet](tear-sheet-private-co/SKILL.md) | Generate investor-grade tear sheets on venture-backed private companies — funding history, operating metrics, competitive landscape, and investor perspective |
 | [Inbox Triage](inbox-triage/SKILL.md) | Pre-market inbox triage for hedge fund executives — ruthlessly filters hundreds of emails down to what matters before the trading day starts |
+| [Executive Briefing](executive-briefing/SKILL.md) | Turn messy source material into a concise executive briefing (500 words or fewer) — source-agnostic, built for busy decision-makers |
 | [Earnings Call Extractor](earnings-call-extractor/) | Turn a raw earnings call transcript into a structured public equity memo — financial metrics, YoY changes, full analyst Q&A, and red flags |
 
 ## How to use
