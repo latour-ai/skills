@@ -14,6 +14,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Inbox Triage](inbox-triage/SKILL.md) | Pre-market inbox triage for hedge fund executives — ruthlessly filters hundreds of emails down to what matters before the trading day starts |
 | [Executive Briefing](executive-briefing/SKILL.md) | Turn messy source material into a concise executive briefing (500 words or fewer) — source-agnostic, built for busy decision-makers |
 | [Public Company First Pass](public-company-first-pass/SKILL.md) | Generate a concise first-pass tear sheet on any US-listed public company — 11-section structured analysis from public sources, no fabricated data |
+| [LP Update Generator](lp-update-generator/SKILL.md) | Draft a polished quarterly LP update letter from raw fund inputs — performance data, portfolio updates, exits, and market commentary |
 | [Earnings Call Extractor](earnings-call-extractor/) | Turn a raw earnings call transcript into a structured public equity memo — financial metrics, YoY changes, full analyst Q&A, and red flags |
 
 ## How to use
