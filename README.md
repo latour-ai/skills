@@ -4,7 +4,7 @@ Practical AI workflows for investment firms.
 
 These skills are reusable instruction files you can copy into ChatGPT, Claude, Gemini, or any AI assistant that supports custom instructions or skill-style workflows.
 
-These skills are working examples, not finished products. Run your own tests and evaluations with your data and connectors, and modify them accordingly using [skill-creator](https://claude.ai).
+*Before you begin: These skills are working examples and not finished products. Run your own tests and evaluations with your data and connectors, and modify them accordingly using your LLM's "skill-creator" skill.*
 
 ## Start here
 
