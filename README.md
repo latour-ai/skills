@@ -35,6 +35,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Fund Marketing One-Pager](fund-marketing-one-pager/SKILL.md) | Draft a polished fund overview document for LP outreach from any inputs — pitch deck, bullet points, or a few sentences |
 | [Intro Email Generator](intro-email-generator/SKILL.md) | Write warm, high-signal introduction emails between two people |
 | [LinkedIn Post Generator](linkedin-post-generator/SKILL.md) | Turn a rough idea, notes, or article into a polished LinkedIn post — optimized for executives building thought leadership, zero AI tells |
+| [Relationship Status Summarizer](relationship-status-summarizer/SKILL.md) | Surface where a professional relationship stands by pulling from Gmail — last touchpoint, open threads, relationship temperature, and suggested next move |
 
 ## How to use
 
