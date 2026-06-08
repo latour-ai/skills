@@ -1,6 +1,6 @@
 # LaTour AI Skills Library
 
-Practical AI workflows for investment firms.
+**15 skills** — practical AI workflows for investment firms.
 
 These skills are reusable instruction files you can copy into ChatGPT, Claude, Gemini, or any AI assistant that supports custom instructions or skill-style workflows.
 
@@ -22,6 +22,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | Skill | Use case |
 |---|---|
 | [Public Company First Pass](public-company-first-pass/SKILL.md) | Generate a concise first-pass tear sheet on any US-listed public company — 11-section structured analysis from public sources, no fabricated data |
+| [Public Company Unit Economics](public-co-unit-economics/SKILL.md) | Build a neutral, sourced two-page HTML unit economics memo from public filings — identify the best unit of analysis, explain the economic engine, and flag disclosure gaps |
 | [Private Company Tear Sheet](tear-sheet-private-co/SKILL.md) | Generate investor-grade tear sheets on venture-backed private companies — funding history, operating metrics, competitive landscape, and investor perspective |
 | [Hedge Fund Diligence](hedge-fund-diligence/SKILL.md) | First-pass diligence note on a hedge fund manager for allocators, FOFs, OCIOs, and family offices — separates known from unknown, surfaces gaps, generates meeting questions |
 | [Earnings Call Extractor](earnings-call-extractor/) | Turn a raw earnings call transcript into a structured public equity memo — financial metrics, YoY changes, full analyst Q&A, and red flags |
