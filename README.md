@@ -27,6 +27,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Hedge Fund Diligence](hedge-fund-diligence/SKILL.md) | First-pass diligence note on a hedge fund manager for allocators, FOFs, OCIOs, and family offices — separates known from unknown, surfaces gaps, generates meeting questions |
 | [Earnings Call Extractor](earnings-call-extractor/) | Turn a raw earnings call transcript into a structured public equity memo — financial metrics, YoY changes, full analyst Q&A, and red flags |
 | [Investment Folder Organizer](investment-folder-organizer/SKILL.md) | Organize a messy deal or diligence folder into eight standardized subfolders with a consistent, sortable filename convention — non-destructive, works for any asset class |
+| [Teach Me](teach-me/) | Learn any company, industry, technology, or professional concept fast — structured lessons with mental models, concrete examples, and templates for cheat sheets, quizzes, and more |
 
 ### Investor Relations & Outreach
 
@@ -37,12 +38,6 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Intro Email Generator](intro-email-generator/SKILL.md) | Write warm, high-signal introduction emails between two people |
 | [LinkedIn Post Generator](linkedin-post-generator/SKILL.md) | Turn a rough idea, notes, or article into a polished LinkedIn post — optimized for executives building thought leadership, zero AI tells |
 | [Relationship Status Summarizer](relationship-status-summarizer/SKILL.md) | Surface where a professional relationship stands by pulling from Gmail — last touchpoint, open threads, relationship temperature, and suggested next move |
-
-### Learning
-
-| Skill | Use case |
-|---|---|
-| [Teach Me](teach-me/) | Learn any company, industry, technology, or professional concept fast — structured lessons with mental models, concrete examples, and templates for cheat sheets, quizzes, and more |
 
 ## How to use
 
