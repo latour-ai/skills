@@ -1,6 +1,6 @@
 # LaTour AI Skills Library
 
-**15 skills** — practical AI workflows for investment firms.
+**16 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
 
 These skills are reusable instruction files you can copy into ChatGPT, Claude, Gemini, or any AI assistant that supports custom instructions or skill-style workflows.
 
@@ -38,6 +38,12 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [LinkedIn Post Generator](linkedin-post-generator/SKILL.md) | Turn a rough idea, notes, or article into a polished LinkedIn post — optimized for executives building thought leadership, zero AI tells |
 | [Relationship Status Summarizer](relationship-status-summarizer/SKILL.md) | Surface where a professional relationship stands by pulling from Gmail — last touchpoint, open threads, relationship temperature, and suggested next move |
 
+### Learning
+
+| Skill | Use case |
+|---|---|
+| [Teach Me](teach-me/) | Learn any company, industry, technology, or professional concept fast — structured lessons with mental models, concrete examples, and templates for cheat sheets, quizzes, and more |
+
 ## How to use
 
 Most skills are a single `SKILL.md` file:
@@ -50,9 +56,10 @@ Most skills are a single `SKILL.md` file:
 
 ### Multi-file skills
 
-Some skills include extra reference files alongside `SKILL.md` (the [Earnings Call Extractor](earnings-call-extractor/) has a `references/` folder). For these, download the packaged `.skill` bundle — a single file containing everything — and upload it directly to Claude:
+Some skills include extra reference files alongside `SKILL.md` (the [Earnings Call Extractor](earnings-call-extractor/) and [Teach Me](teach-me/) have `references/` folders). For these, download the packaged `.skill` bundle — a single file containing everything — and upload it directly to Claude:
 
 - [Download `earnings-call-extractor.skill`](https://github.com/latour-ai/skills/raw/main/earnings-call-extractor/earnings-call-extractor.skill)
+- [Download `teach-me.skill`](https://github.com/latour-ai/skills/raw/main/teach-me/teach-me.skill)
 
 You can also browse the folder to read the files individually.
 
