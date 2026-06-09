@@ -1,6 +1,6 @@
 # LaTour AI Skills Library
 
-**16 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
+**17 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
 
 These skills are reusable instruction files you can copy into ChatGPT, Claude, Gemini, or any AI assistant that supports custom instructions or skill-style workflows.
 
@@ -38,6 +38,12 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Intro Email Generator](intro-email-generator/SKILL.md) | Write warm, high-signal introduction emails between two people |
 | [LinkedIn Post Generator](linkedin-post-generator/SKILL.md) | Turn a rough idea, notes, or article into a polished LinkedIn post — optimized for executives building thought leadership, zero AI tells |
 | [Relationship Status Summarizer](relationship-status-summarizer/SKILL.md) | Surface where a professional relationship stands by pulling from Gmail — last touchpoint, open threads, relationship temperature, and suggested next move |
+
+### Reporting & Internal Productivity
+
+| Skill | Use case |
+|---|---|
+| [Investment Skill Creator](investment-skill-creator/SKILL.md) | Brainstorm, score and prioritize new AI skill ideas for investment teams and fundraisers — turn recurring workflow pain into concrete, buildable skill concepts |
 
 ## How to use
 
