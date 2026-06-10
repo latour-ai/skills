@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Investment Podcast Brief — {episode_title}</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #111;
+      line-height: 1.45;
+      max-width: 920px;
+      margin: 40px auto;
+      padding: 0 32px;
+      background: #fff;
+    }
+    h1 { font-size: 26px; margin-bottom: 2px; }
+    h2 {
+      font-size: 18px;
+      margin-top: 30px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 4px;
+    }
+    h3 { font-size: 15px; margin-top: 22px; margin-bottom: 4px; }
+    .meta { color: #555; font-size: 13px; margin-bottom: 20px; }
+    .summary-box {
+      border: 1px solid #ddd;
+      background: #fafafa;
+      padding: 14px 16px;
+      margin: 18px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #f3f3f3; }
+    .label { font-weight: bold; }
+    .bull { color: #1a7f37; }
+    .bear { color: #b42318; }
+    .mixed { color: #9a6700; }
+    .undef { color: #555; }
+    .company-block {
+      border-top: 2px solid #222;
+      padding-top: 6px;
+      margin-top: 28px;
+    }
+    .facts { font-size: 13px; color: #333; margin: 4px 0 10px; }
+    .note { color: #555; font-size: 13px; }
+    .sources { font-size: 12px; color: #444; }
+    ul, ol { margin-top: 6px; }
+    @media print {
+      body { margin: 20px auto; padding: 0 24px; }
+      h2 { page-break-after: avoid; }
+      table { page-break-inside: avoid; }
+      .company-block { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>Investment Podcast Brief</h1>
+<div class="meta">
+  Generated: {date} &nbsp;|&nbsp; Transcript source: {transcript_source}
+</div>
+
+<!-- 1. EPISODE SNAPSHOT -->
+<h2>1. Episode Snapshot</h2>
+<table>
+  <tr><th>Podcast</th><td>{podcast_name}</td></tr>
+  <tr><th>Episode</th><td>{episode_title}</td></tr>
+  <tr><th>URL</th><td><a href="{episode_url}">{episode_url}</a></td></tr>
+  <tr><th>Platform</th><td>{platform}</td></tr>
+  <tr><th>Date</th><td>{episode_date}</td></tr>
+  <tr><th>Host</th><td>{host_name}</td></tr>
+  <tr><th>Guest</th><td>{guest_name}</td></tr>
+  <tr><th>Guest firm / affiliation</th><td>{guest_firm}</td></tr>
+  <tr><th>Transcript source used</th><td>{transcript_source}</td></tr>
+</table>
+<div class="summary-box"><strong>One-sentence summary:</strong> {episode_summary}</div>
+
+<!-- 2. GUEST BIO -->
+<h2>2. Guest Bio and Investing Context</h2>
+<p><strong>Self-description (from the episode):</strong> {guest_self_description}</p>
+<p><strong>Public bio:</strong> {guest_public_bio}</p>
+<ul>
+  <li><strong>Current role:</strong> {guest_role}</li>
+  <li><strong>Prior relevant experience:</strong> {guest_prior}</li>
+  <li><strong>Style / sector / strategic lens:</strong> {guest_lens}</li>
+  <li><strong>Why this view may matter:</strong> {guest_why}</li>
+  <li><strong>Potential bias or incentive:</strong> {guest_bias}</li>
+</ul>
+
+<!-- 3. TOP INVESTMENT THEMES -->
+<h2>3. Top Investment Themes</h2>
+<table>
+  <tr>
+    <th>Theme</th><th>Companies</th><th>Directional tone</th>
+    <th>Why it matters</th><th>Best supporting quote / timestamp</th>
+  </tr>
+  <!-- Repeat 5–10 rows -->
+  <tr>
+    <td>{theme}</td><td>{theme_companies}</td><td>{theme_tone}</td>
+    <td>{theme_why}</td><td>{theme_quote}</td>
+  </tr>
+</table>
+
+<!-- 4. COMPANY INDEX -->
+<h2>4. Company Index</h2>
+<table>
+  <tr>
+    <th>Company</th><th>Pub/Priv</th><th>Ticker</th><th>Sector</th>
+    <th>Speaker</th><th>Thesis</th><th>Main theme</th>
+    <th>Metrics?</th><th>Diligence priority</th>
+  </tr>
+  <!-- Repeat one row per company -->
+  <tr>
+    <td>{company}</td><td>{pub_priv}</td><td>{ticker}</td><td>{sector}</td>
+    <td>{speaker}</td><td>{thesis_label}</td><td>{main_theme}</td>
+    <td>{metrics_flag}</td><td>{diligence_priority}</td>
+  </tr>
+</table>
+
+<!-- 5. COMPANY-BY-COMPANY -->
+<h2>5. Company-by-Company Analysis</h2>
+
+<!-- Repeat this block per company -->
+<div class="company-block">
+  <h3>{company_name}</h3>
+  <div class="facts">
+    <strong>Status:</strong> {pub_priv} &nbsp;|&nbsp;
+    <strong>Ticker:</strong> {ticker} &nbsp;|&nbsp;
+    <strong>Sector:</strong> {sector} &nbsp;|&nbsp;
+    <strong>Speaker(s):</strong> {speakers} &nbsp;|&nbsp;
+    <strong>Thesis:</strong> <span class="label">{thesis_label}</span> &nbsp;|&nbsp;
+    <strong>Main theme:</strong> {main_theme}
+  </div>
+
+  <p><strong>What was said:</strong> {what_was_said}</p>
+
+  <p class="label">Supporting evidence</p>
+  <table>
+    <tr><th>Speaker</th><th>Timestamp</th><th>Quote / paraphrase</th><th>Label</th><th>Why this label</th></tr>
+    <tr><td>{ev_speaker}</td><td>{ev_ts}</td><td>{ev_quote}</td><td>{ev_label}</td><td>{ev_reason}</td></tr>
+  </table>
+
+  <p class="label">Metrics mentioned</p>
+  <table>
+    <tr><th>Metric</th><th>Value</th><th>Period</th><th>Speaker</th><th>Timestamp</th><th>Why it matters</th></tr>
+    <tr><td>{m_metric}</td><td>{m_value}</td><td>{m_period}</td><td>{m_speaker}</td><td>{m_ts}</td><td>{m_why}</td></tr>
+  </table>
+  <!-- If none: replace table with: <p class="note">No explicit company-level metrics were mentioned.</p> -->
+
+  <p><strong>Investment interpretation:</strong> {interpretation}</p>
+
+  <p class="label">Open diligence questions</p>
+  <ul>
+    <li>{diligence_q}</li>
+  </ul>
+</div>
+
+<!-- 6. CROSS-COMPANY TAKEAWAYS -->
+<h2>6. Cross-Company Takeaways</h2>
+<ul>
+  <li><strong>Most important bullish signal:</strong> {x_bull}</li>
+  <li><strong>Most important bearish signal:</strong> {x_bear}</li>
+  <li><strong>Most important metric mentioned:</strong> {x_metric}</li>
+  <li><strong>Most interesting private company:</strong> {x_private}</li>
+  <li><strong>Most actionable public-company research lead:</strong> {x_lead}</li>
+  <li><strong>Biggest unresolved question:</strong> {x_question}</li>
+</ul>
+
+<!-- 7. SOURCE NOTES -->
+<h2>7. Source Notes</h2>
+<ul class="sources">
+  <li><strong>Podcast URL:</strong> <a href="{episode_url}">{episode_url}</a></li>
+  <li><strong>Transcript source:</strong> {transcript_source}</li>
+  <li><strong>Guest bio sources:</strong> {bio_sources}</li>
+  <li><strong>Company / ticker validation sources:</strong> {validation_sources}</li>
+</ul>
+
+</body>
+</html>

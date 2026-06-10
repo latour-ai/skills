@@ -1,6 +1,6 @@
 # LaTour AI Skills Library
 
-**17 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
+**18 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
 
 These skills are reusable instruction files you can copy into ChatGPT, Claude, Gemini, or any AI assistant that supports custom instructions or skill-style workflows.
 
@@ -26,6 +26,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Private Company Tear Sheet](tear-sheet-private-co/SKILL.md) | Generate investor-grade tear sheets on venture-backed private companies — funding history, operating metrics, competitive landscape, and investor perspective |
 | [Hedge Fund Diligence](hedge-fund-diligence/SKILL.md) | First-pass diligence note on a hedge fund manager for allocators, FOFs, OCIOs, and family offices — separates known from unknown, surfaces gaps, generates meeting questions |
 | [Earnings Call Extractor](earnings-call-extractor/) | Turn a raw earnings call transcript into a structured public equity memo — financial metrics, YoY changes, full analyst Q&A, and red flags |
+| [Investment Podcast Analyzer](investment-podcast-analyzer/) | Turn an investment podcast episode into a skimmable, citation-backed HTML brief — companies, theses, metrics, and themes with speaker attribution |
 | [Investment Folder Organizer](investment-folder-organizer/SKILL.md) | Organize a messy deal or diligence folder into eight standardized subfolders with a consistent, sortable filename convention — non-destructive, works for any asset class |
 | [Teach Me](teach-me/) | Learn any company, industry, technology, or professional concept fast — structured lessons with mental models, concrete examples, and templates for cheat sheets, quizzes, and more |
 | [Investment Skill Creator](investment-skill-creator/SKILL.md) | Brainstorm, score and prioritize new AI skill ideas for investment teams and fundraisers — turn recurring workflow pain into concrete, buildable skill concepts |
@@ -52,9 +53,10 @@ Most skills are a single `SKILL.md` file:
 
 ### Multi-file skills
 
-Some skills include extra reference files alongside `SKILL.md` (the [Earnings Call Extractor](earnings-call-extractor/) and [Teach Me](teach-me/) have `references/` folders). For these, download the packaged `.skill` bundle — a single file containing everything — and upload it directly to Claude:
+Some skills include extra reference files alongside `SKILL.md` (the [Earnings Call Extractor](earnings-call-extractor/) and [Teach Me](teach-me/) have `references/` folders; the [Investment Podcast Analyzer](investment-podcast-analyzer/) includes a YouTube transcript script and HTML report template). For these, download the packaged `.skill` bundle — a single file containing everything — and upload it directly to Claude:
 
 - [Download `earnings-call-extractor.skill`](https://github.com/latour-ai/skills/raw/main/earnings-call-extractor/earnings-call-extractor.skill)
+- [Download `investment-podcast-analyzer.skill`](https://github.com/latour-ai/skills/raw/main/investment-podcast-analyzer/investment-podcast-analyzer.skill)
 - [Download `teach-me.skill`](https://github.com/latour-ai/skills/raw/main/teach-me/teach-me.skill)
 
 You can also browse the folder to read the files individually.
