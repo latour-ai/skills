@@ -1,6 +1,6 @@
 # LaTour AI Skills Library
 
-**18 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
+**24 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
 
 These skills are reusable instruction files you can copy into ChatGPT, Claude, Gemini, or any AI assistant that supports custom instructions or skill-style workflows.
 
@@ -25,11 +25,16 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Public Company Unit Economics](public-co-unit-economics/SKILL.md) | Build a neutral, sourced two-page HTML unit economics memo from public filings — identify the best unit of analysis, explain the economic engine, and flag disclosure gaps |
 | [Private Company Tear Sheet](tear-sheet-private-co/SKILL.md) | Generate investor-grade tear sheets on venture-backed private companies — funding history, operating metrics, competitive landscape, and investor perspective |
 | [Hedge Fund Diligence](hedge-fund-diligence/SKILL.md) | First-pass diligence note on a hedge fund manager for allocators, FOFs, OCIOs, and family offices — separates known from unknown, surfaces gaps, generates meeting questions |
+| [DDQ Red-Flag Scanner](ddq-red-flag-scanner/SKILL.md) | Scan a completed DDQ or RFP response for vague answers, missing disclosures, internal inconsistencies, and contradictions with the manager's deck or letters — severity-ranked findings with follow-up questions |
+| [Quarterly Letter Synthesizer](quarterly-letter-synthesizer/SKILL.md) | Synthesize a stack of manager quarterly letters into one cross-manager memo — shared themes, divergences, positioning shifts, and contradictions with quoted receipts |
+| [Market Map Builder](market-map-builder/SKILL.md) | Build a sourced market map of a sector for VC and growth investors — segmentation logic, players per segment with dated funding data, recent entrants and exits, and whitespace observations |
+| [Thesis Red Team](thesis-red-team/SKILL.md) | Run an adversarial pre-mortem on an investment thesis — steelman the opposite case, rank assumptions by fragility, define falsification evidence and kill criteria, and surface cognitive traps |
 | [Earnings Call Extractor](earnings-call-extractor/) | Turn a raw earnings call transcript into a structured public equity memo — financial metrics, YoY changes, full analyst Q&A, and red flags |
 | [Investment Podcast Analyzer](investment-podcast-analyzer/) | Turn an investment podcast episode into a skimmable, citation-backed HTML brief — companies, theses, metrics, and themes with speaker attribution |
 | [Investment Folder Organizer](investment-folder-organizer/SKILL.md) | Organize a messy deal or diligence folder into eight standardized subfolders with a consistent, sortable filename convention — non-destructive, works for any asset class |
 | [Teach Me](teach-me/) | Learn any company, industry, technology, or professional concept fast — structured lessons with mental models, concrete examples, and templates for cheat sheets, quizzes, and more |
 | [Investment Skill Creator](investment-skill-creator/SKILL.md) | Brainstorm, score and prioritize new AI skill ideas for investment teams and fundraisers — turn recurring workflow pain into concrete, buildable skill concepts |
+| [AI Workflow Audit](ai-workflow-audit/SKILL.md) | Interview a team about recurring workflows, bottlenecks, and tools — then map the work to AI opportunities scored on impact × feasibility and deliver a prioritized adoption roadmap |
 
 ### Investor Relations & Outreach
 
@@ -40,6 +45,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Intro Email Generator](intro-email-generator/SKILL.md) | Write warm, high-signal introduction emails between two people |
 | [LinkedIn Post Generator](linkedin-post-generator/SKILL.md) | Turn a rough idea, notes, or article into a polished LinkedIn post — optimized for executives building thought leadership, zero AI tells |
 | [Relationship Status Summarizer](relationship-status-summarizer/SKILL.md) | Surface where a professional relationship stands by pulling from Gmail — last touchpoint, open threads, relationship temperature, and suggested next move |
+| [Weekly Market Recap Writer](weekly-market-recap-writer/SKILL.md) | Turn a batch of links, notes, and data points into a client-ready weekly market recap — what happened, why it matters, neutral tone, every claim sourced, no predictions or advice |
 
 ## How to use
 
