@@ -1,6 +1,6 @@
 # LaTour AI Skills Library
 
-**24 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
+**28 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
 
 These skills are reusable instruction files you can copy into ChatGPT, Claude, Gemini, or any AI assistant that supports custom instructions or skill-style workflows.
 
@@ -16,6 +16,8 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Executive Briefing](executive-briefing/SKILL.md) | Turn messy source material into a concise executive briefing (500 words or fewer) — source-agnostic, built for busy decision-makers |
 | [Professional Profile Brief](professional-profile-brief/SKILL.md) | Pre-meeting prep note on any person — who they are, what they care about, relationship hooks, and smart conversation openers |
 | [Call Transcript Follow-Up](call-transcript-followup/SKILL.md) | Turn a meeting or sales call transcript into a post-call package with summary, action items, and next steps |
+| [Conference Prep Planner](conference-prep-planner/SKILL.md) | Turn a conference attendee or speaker list plus your goals into a tiered target list, pre-event outreach drafts, per-day scheduling logic, talking points, and a post-conference follow-up tracker |
+| [IC Minutes Generator](ic-minutes-generator/SKILL.md) | Turn an investment committee transcript or detailed notes into formal minutes — balanced per-item discussion summaries, decisions with vote outcomes, action items with owners, and documents referenced |
 
 ### Investment Research
 
@@ -24,6 +26,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Public Company First Pass](public-company-first-pass/SKILL.md) | Generate a concise first-pass tear sheet on any US-listed public company — 11-section structured analysis from public sources, no fabricated data |
 | [Public Company Unit Economics](public-co-unit-economics/SKILL.md) | Build a neutral, sourced two-page HTML unit economics memo from public filings — identify the best unit of analysis, explain the economic engine, and flag disclosure gaps |
 | [Private Company Tear Sheet](tear-sheet-private-co/SKILL.md) | Generate investor-grade tear sheets on venture-backed private companies — funding history, operating metrics, competitive landscape, and investor perspective |
+| [CIM First Pass](cim-first-pass/SKILL.md) | Turn a CIM, teaser, or management presentation into a first-pass PE deal screen memo — business model, financial snapshot with page references, banker emphasis vs. avoidance, red flags, and fit-vs-mandate checklist |
 | [Hedge Fund Diligence](hedge-fund-diligence/SKILL.md) | First-pass diligence note on a hedge fund manager for allocators, FOFs, OCIOs, and family offices — separates known from unknown, surfaces gaps, generates meeting questions |
 | [DDQ Red-Flag Scanner](ddq-red-flag-scanner/SKILL.md) | Scan a completed DDQ or RFP response for vague answers, missing disclosures, internal inconsistencies, and contradictions with the manager's deck or letters — severity-ranked findings with follow-up questions |
 | [Quarterly Letter Synthesizer](quarterly-letter-synthesizer/SKILL.md) | Synthesize a stack of manager quarterly letters into one cross-manager memo — shared themes, divergences, positioning shifts, and contradictions with quoted receipts |
@@ -42,6 +45,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 |---|---|
 | [LP Update Generator](lp-update-generator/SKILL.md) | Draft a polished quarterly LP update letter from raw fund inputs — performance data, portfolio updates, exits, and market commentary |
 | [Fund Marketing One-Pager](fund-marketing-one-pager/SKILL.md) | Draft a polished fund overview document for LP outreach from any inputs — pitch deck, bullet points, or a few sentences |
+| [Marketing Compliance Pre-Screen](marketing-compliance-prescreen/SKILL.md) | Pre-screen fund marketing material against common SEC Marketing Rule pitfalls — gross-without-net, cherry-picked track records, unsubstantiated claims, and missing disclosures — with severity-ranked flags and quoted language |
 | [Intro Email Generator](intro-email-generator/SKILL.md) | Write warm, high-signal introduction emails between two people |
 | [LinkedIn Post Generator](linkedin-post-generator/SKILL.md) | Turn a rough idea, notes, or article into a polished LinkedIn post — optimized for executives building thought leadership, zero AI tells |
 | [Relationship Status Summarizer](relationship-status-summarizer/SKILL.md) | Surface where a professional relationship stands by pulling from Gmail — last touchpoint, open threads, relationship temperature, and suggested next move |
