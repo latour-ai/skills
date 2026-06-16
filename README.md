@@ -1,6 +1,6 @@
 # LaTour AI Skills Library
 
-**28 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
+**29 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
 
 These skills are reusable instruction files you can copy into ChatGPT, Claude, Gemini, or any AI assistant that supports custom instructions or skill-style workflows.
 
@@ -46,6 +46,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [LP Update Generator](lp-update-generator/SKILL.md) | Draft a polished quarterly LP update letter from raw fund inputs — performance data, portfolio updates, exits, and market commentary |
 | [Fund Marketing One-Pager](fund-marketing-one-pager/SKILL.md) | Draft a polished fund overview document for LP outreach from any inputs — pitch deck, bullet points, or a few sentences |
 | [Marketing Compliance Pre-Screen](marketing-compliance-prescreen/SKILL.md) | Pre-screen fund marketing material against common SEC Marketing Rule pitfalls — gross-without-net, cherry-picked track records, unsubstantiated claims, and missing disclosures — with severity-ranked flags and quoted language |
+| [Side Letter Term Extractor](side-letter-term-extractor/SKILL.md) | Summarize a hedge fund side letter and extract key commercial, operational, and legal terms from the GP's perspective — economics, liquidity, MFN, capacity, and reporting, with risk flags and a Word review memo |
 | [Intro Email Generator](intro-email-generator/SKILL.md) | Write warm, high-signal introduction emails between two people |
 | [LinkedIn Post Generator](linkedin-post-generator/SKILL.md) | Turn a rough idea, notes, or article into a polished LinkedIn post — optimized for executives building thought leadership, zero AI tells |
 | [Relationship Status Summarizer](relationship-status-summarizer/SKILL.md) | Surface where a professional relationship stands by pulling from Gmail — last touchpoint, open threads, relationship temperature, and suggested next move |
@@ -63,7 +64,7 @@ Most skills are a single `SKILL.md` file:
 
 ### Multi-file skills
 
-Some skills include extra reference files alongside `SKILL.md` (the [Earnings Call Extractor](earnings-call-extractor/) and [Teach Me](teach-me/) have `references/` folders; the [Investment Podcast Analyzer](investment-podcast-analyzer/) includes a YouTube transcript script and HTML report template). For these, download the packaged `.skill` bundle — a single file containing everything — and upload it directly to Claude:
+Some skills include extra reference files alongside `SKILL.md` (the [Earnings Call Extractor](earnings-call-extractor/), [Side Letter Term Extractor](side-letter-term-extractor/), and [Teach Me](teach-me/) have `references/` folders; the [Investment Podcast Analyzer](investment-podcast-analyzer/) includes a YouTube transcript script and HTML report template). For these, download the packaged `.skill` bundle — a single file containing everything — and upload it directly to Claude:
 
 - [Download `earnings-call-extractor.skill`](https://github.com/latour-ai/skills/raw/main/earnings-call-extractor/earnings-call-extractor.skill)
 - [Download `investment-podcast-analyzer.skill`](https://github.com/latour-ai/skills/raw/main/investment-podcast-analyzer/investment-podcast-analyzer.skill)
