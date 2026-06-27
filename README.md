@@ -1,6 +1,6 @@
 # LaTour AI Skills Library
 
-**29 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
+**30 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
 
 These skills are reusable instruction files you can copy into ChatGPT, Claude, Gemini, or any AI assistant that supports custom instructions or skill-style workflows.
 
@@ -28,6 +28,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Private Company Tear Sheet](tear-sheet-private-co/SKILL.md) | Generate investor-grade tear sheets on venture-backed private companies — funding history, operating metrics, competitive landscape, and investor perspective |
 | [CIM First Pass](cim-first-pass/SKILL.md) | Turn a CIM, teaser, or management presentation into a first-pass PE deal screen memo — business model, financial snapshot with page references, banker emphasis vs. avoidance, red flags, and fit-vs-mandate checklist |
 | [Hedge Fund Diligence](hedge-fund-diligence/SKILL.md) | First-pass diligence note on a hedge fund manager for allocators, FOFs, OCIOs, and family offices — separates known from unknown, surfaces gaps, generates meeting questions |
+| [Fund News Alert](fund-news-alert/) | Monitor a watchlist of hedge funds for recent, diligence-relevant public news and produce an email-ready alert summary — risk-first weekly scan for allocators, FOFs, OCIOs, and family offices |
 | [DDQ Red-Flag Scanner](ddq-red-flag-scanner/SKILL.md) | Scan a completed DDQ or RFP response for vague answers, missing disclosures, internal inconsistencies, and contradictions with the manager's deck or letters — severity-ranked findings with follow-up questions |
 | [Quarterly Letter Synthesizer](quarterly-letter-synthesizer/SKILL.md) | Synthesize a stack of manager quarterly letters into one cross-manager memo — shared themes, divergences, positioning shifts, and contradictions with quoted receipts |
 | [Market Map Builder](market-map-builder/SKILL.md) | Build a sourced market map of a sector for VC and growth investors — segmentation logic, players per segment with dated funding data, recent entrants and exits, and whitespace observations |
@@ -64,11 +65,12 @@ Most skills are a single `SKILL.md` file:
 
 ### Multi-file skills
 
-Some skills include extra reference files alongside `SKILL.md` (the [Earnings Call Extractor](earnings-call-extractor/), [Side Letter Term Extractor](side-letter-term-extractor/), and [Teach Me](teach-me/) have `references/` folders; the [Investment Podcast Analyzer](investment-podcast-analyzer/) includes a YouTube transcript script and HTML report template). For these, download the packaged `.skill` bundle — a single file containing everything — and upload it directly to Claude:
+Some skills include extra reference files alongside `SKILL.md` (the [Earnings Call Extractor](earnings-call-extractor/), [Side Letter Term Extractor](side-letter-term-extractor/), and [Teach Me](teach-me/) have `references/` folders; the [Investment Podcast Analyzer](investment-podcast-analyzer/) includes a YouTube transcript script and HTML report template; the [Fund News Alert](fund-news-alert/) includes an editable `funds-to-monitor.md` watchlist). For these, download the packaged `.skill` bundle — a single file containing everything — and upload it directly to Claude:
 
 - [Download `earnings-call-extractor.skill`](https://github.com/latour-ai/skills/raw/main/earnings-call-extractor/earnings-call-extractor.skill)
 - [Download `investment-podcast-analyzer.skill`](https://github.com/latour-ai/skills/raw/main/investment-podcast-analyzer/investment-podcast-analyzer.skill)
 - [Download `teach-me.skill`](https://github.com/latour-ai/skills/raw/main/teach-me/teach-me.skill)
+- [Download `fund-news-alert.skill`](https://github.com/latour-ai/skills/raw/main/fund-news-alert/fund-news-alert.skill)
 
 You can also browse the folder to read the files individually.
 
