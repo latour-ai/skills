@@ -1,6 +1,6 @@
 # LaTour AI Skills Library
 
-**30 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
+**40 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
 
 These skills are reusable instruction files you can copy into ChatGPT, Claude, Gemini, or any AI assistant that supports custom instructions or skill-style workflows.
 
@@ -39,6 +39,9 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Teach Me](teach-me/) | Learn any company, industry, technology, or professional concept fast — structured lessons with mental models, concrete examples, and templates for cheat sheets, quizzes, and more |
 | [Investment Skill Creator](investment-skill-creator/SKILL.md) | Brainstorm, score and prioritize new AI skill ideas for investment teams and fundraisers — turn recurring workflow pain into concrete, buildable skill concepts |
 | [AI Workflow Audit](ai-workflow-audit/SKILL.md) | Interview a team about recurring workflows, bottlenecks, and tools — then map the work to AI opportunities scored on impact × feasibility and deliver a prioritized adoption roadmap |
+| [Expert Call Synthesis](expert-call-synthesis/SKILL.md) | Synthesize 5–20 expert network transcripts into one view — consensus, genuine disagreements weighted by vantage point, every number in a sourced table, view drift over time, and the open questions that become your next call list |
+| [Performance Attribution Narrator](performance-attribution-narrator/SKILL.md) | Turn raw attribution output into the month-end narrative — alpha vs. factor beta, contributors assessed against the thesis that justified them, "right for the wrong reasons" flagged, and a drafted investor-letter commentary |
+| [FOMC Statement Diff](fomc-statement-diff/SKILL.md) | Word-level redline of a central bank statement against the prior meeting, with every change classified hawkish/dovish, dot-plot shifts, and a read on whether the market is trading the text or something else |
 
 ### Investor Relations & Outreach
 
@@ -52,6 +55,23 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [LinkedIn Post Generator](linkedin-post-generator/SKILL.md) | Turn a rough idea, notes, or article into a polished LinkedIn post — optimized for executives building thought leadership, zero AI tells |
 | [Relationship Status Summarizer](relationship-status-summarizer/SKILL.md) | Surface where a professional relationship stands by pulling from Gmail — last touchpoint, open threads, relationship temperature, and suggested next move |
 | [Weekly Market Recap Writer](weekly-market-recap-writer/SKILL.md) | Turn a batch of links, notes, and data points into a client-ready weekly market recap — what happened, why it matters, neutral tone, every claim sourced, no predictions or advice |
+| [DDQ Response Drafter](ddq-response-drafter/SKILL.md) | Draft an incoming LP DDQ or consultant RFP from your approved answer library — adapted to the asker's format, every answer carrying its source and approval date, no-match questions flagged rather than improvised, and compliance-sensitive answers routed |
+
+### Deal Execution & Credit
+
+| Skill | Use case |
+|---|---|
+| [IC Memo Drafter](ic-memo-drafter/SKILL.md) | Draft a full investment committee memo from the CIM, diligence, model, and call notes — with every claim tagged by evidence quality, so management assertions never read as verified facts |
+| [PE NDA Review](pe-nda-review/SKILL.md) | Review an inbound process NDA from the buy side — non-solicits, standstills, portfolio company attribution, and competing-deal restrictions — severity-ranked with drafted markup language and a sign / mark up / send-to-counsel call |
+| [Hundred Day Plan Drafter](hundred-day-plan-drafter/SKILL.md) | Turn diligence findings and the deal model into a post-close 100-day plan with named owners and weekly milestones — and flag every value-creation assumption in the model that no workstream actually owns |
+| [Credit Agreement Covenant Extractor](credit-agreement-covenant-extractor/SKILL.md) | Extract the full covenant package from a credit agreement or indenture into a page-cited abstract — financial covenants, basket capacity, every EBITDA add-back — and flag what's off-market |
+
+### Fund Operations & Compliance
+
+| Skill | Use case |
+|---|---|
+| [Waterfall Carry Checker](waterfall-carry-checker/SKILL.md) | Independently recompute the distribution waterfall and carry from raw cash flows and the LPA, reconcile against the administrator line by line, and compute the current clawback position |
+| [Regulatory Exam Binder](regulatory-exam-binder/SKILL.md) | Turn an SEC document request list into an indexed production and an honest gap list — including the policy-with-no-testing-evidence gaps — or run it as a mock exam before any letter arrives |
 
 ## How to use
 
