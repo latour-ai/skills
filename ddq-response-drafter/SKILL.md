@@ -66,6 +66,8 @@ So the discipline this skill enforces is narrow and strict: adapt approved langu
 
 ## Output format
 
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
+
 ```
 # DDQ Response Draft — [asker] [questionnaire name/version]
 Received: [date] | Due: [date] | Questions: [N]
@@ -133,19 +135,6 @@ These answer types go to compliance review without exception, regardless of how 
 - **Never omit a question.** An unanswered question left out of the response document is worse than one flagged as needing drafting.
 - **This is a draft, not a submission.** Every response requires human review by someone accountable for its accuracy, and compliance review for the routed items, before it goes to the LP.
 - **Confidentiality:** DDQs, answer libraries, and fund documents are confidential. Assume a firm-approved AI environment.
-
-## Quality checks
-
-- [ ] Every question in the source questionnaire appears in the output, in the asker's numbering
-- [ ] Compound questions split and each part addressed
-- [ ] Every drafted answer carries a library source and approval date
-- [ ] No fact appears that is not in the library or the provided firm facts
-- [ ] Every no-match flagged NEEDS DRAFTING with a note on the specific gap and who should draft it
-- [ ] All performance, regulatory, and policy answers routed to compliance
-- [ ] Gross and net labeled wherever performance appears
-- [ ] Stale-dated facts flagged with their as-of dates
-- [ ] Consistency checked internally and against Form ADV / governing documents where provided
-- [ ] Assembled document is in the asker's required format and respects length limits
 
 ## Example prompts
 

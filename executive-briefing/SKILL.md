@@ -25,10 +25,12 @@ This matters because executives make decisions based on briefings. An unsupporte
 3. Extract the most relevant facts. Relevance means: would an executive preparing for a decision or meeting need this?
 4. Separate confirmed facts from open questions. This distinction is the backbone of a good briefing.
 5. Preserve important background context — history, stakeholders, prior events, market dynamics — but only what appears in the sources.
-6. Strip out duplication, filler, promotional language, and unsupported interpretation.
+6. Strip out duplication, filler, promotional language, and unsupported interpretation. Keep the nuance that matters: concise, not shallow.
 7. Write the briefing in the output format below.
 
 ## Output format
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 Use this exact structure. Keep the total briefing to 500 words or fewer unless the user requests otherwise.
 
@@ -65,20 +67,7 @@ This is more useful than refusing to produce anything. A partial briefing with c
 
 Neutral executive voice — clear, direct, thorough, and non-promotional. Avoid corporate-speak ("synergies," "leverage," "align"), generic filler ("it's worth noting that"), and unnecessary hedging. If the source material uses specialized terminology the reader would expect (financial terms, technical concepts), keep it — but don't add jargon that isn't in the source.
 
-Write as if you're briefing a smart, busy person who respects your judgment and has zero patience for fluff.
-
-## Quality checks
-
-Before delivering the briefing, verify:
-
-- Total length is 500 words or fewer (unless the user requested otherwise)
-- Tone is neutral and executive-appropriate
-- Every factual claim traces back to the provided source material
-- Facts and open questions are clearly separated
-- No unsupported recommendations or speculation
-- Concise but not shallow — important nuance is preserved
-- No generic filler sentences that could appear in any briefing
-- A reader unfamiliar with the topic could act on this
+Write as if you're briefing a smart, busy person who respects your judgment and has zero patience for fluff. A reader unfamiliar with the topic should be able to act on the briefing.
 
 ## Example prompt
 

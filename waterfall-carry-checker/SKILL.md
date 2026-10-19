@@ -60,6 +60,8 @@ The waterfall is the highest-stakes arithmetic in a fund. It determines what eve
 
 ## Output format
 
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
+
 ```
 # [Fund] — Waterfall Check, [Distribution Date] Distribution of $[amount]
 Sources: [cash flow file] | [LPA §§] | [calculation being checked, version/date]
@@ -143,18 +145,6 @@ The differences are almost never arithmetic. In order of how often they cause a 
 - **This is a check, not the fund's calculation.** The LPA governs, the administrator's books are the record, and this output is a review workpaper — not a distribution instruction, not an accounting opinion, and not a basis for a wire.
 - **Not tax or legal advice.** Clawback, tax distribution, and allocation questions have tax and legal consequences that belong with the fund's counsel and tax advisors.
 - **Confidentiality:** LP-level cash flow data is highly sensitive. Assume a firm-approved AI environment; do not reproduce investor names or amounts beyond what the check requires.
-
-## Quality checks
-
-- [ ] Waterfall restated as explicit tiers before any computation
-- [ ] Every convention has an LPA citation, or is flagged as not established by the document
-- [ ] Pref accrual shown period by period with running balances, not just a total
-- [ ] Reconciliation covers every differing line, each with a specific mechanism
-- [ ] Dollar impact quantified per difference and in total
-- [ ] Investor-level vs. aggregate scope stated at the top
-- [ ] Clawback position computed with a sensitivity, not a single point
-- [ ] Ambiguities surfaced as decisions for a human rather than resolved silently
-- [ ] No input silently adopted from the calculation being checked
 
 ## Example prompts
 

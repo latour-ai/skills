@@ -54,13 +54,15 @@ The analytically interesting part is the one that gets skipped under time pressu
 1. **Reconcile the total before decomposing it.** Confirm the contributions sum to the reported period return, and flag any residual. An unexplained residual is a data problem that invalidates everything downstream — surface it rather than distributing it.
 2. **Decompose the return** into market/beta, factor contributions, and residual/idiosyncratic. Where a risk model was provided, use its numbers and name the model. Where one was not, separate what can be attributed to obvious sector and market moves from what cannot, and label the whole section as inference.
 3. **Rank contributors and detractors** — typically the top five each — with contribution in basis points, average weight, and return.
-4. **Assess each against its thesis.** For each major contributor and detractor, ask: did this work for the reason we underwrote? Sort into four buckets — right for the right reasons, right for the wrong reasons, wrong for the right reasons, wrong for the wrong reasons. The two middle buckets are where the learning is, and they are the ones a normal write-up erases.
+4. **Assess each against its thesis.** For each major contributor and detractor, ask: did this work for the reason we underwrote? Sort into four buckets — right for the right reasons, right for the wrong reasons, wrong for the right reasons, wrong for the wrong reasons. The two middle buckets are where the learning is, and they are the ones a normal write-up erases. Where no thesis was supplied for a position, its thesis-consistent column reads "no thesis provided."
 5. **Test the user's own explanation against the data** if they offered one. If the numbers do not support it, say so directly and show which figures contradict it. This is the highest-value thing the skill does and it should not be softened.
 6. **Note what did not happen.** Positions that contributed nothing despite a thesis that predicted movement, hedges that failed to hedge, and sizing that was too small to matter given conviction — absence of contribution is information.
 7. **Check consistency with the prior period's narrative** if prior commentary was provided. A story that changes every month to fit the outcome is itself a finding.
 8. **Draft the investor commentary** — three to four paragraphs, factual, in the firm's voice, derived strictly from the same numbers, with no forward-looking claims and no spin.
 
 ## Output format
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 ```
 # [Fund / Strategy] — Performance Narrative, [period]
@@ -135,19 +137,6 @@ Numbered — what this period's data suggests should be examined.
 - **Attribution methodology varies.** Note the source system and, where it matters, that different methodologies (arithmetic vs. geometric linking, transaction-based vs. holdings-based) produce different numbers.
 - **Not investment advice, and not a recommendation to change positioning.** The open questions section raises questions; it does not answer them.
 - **Confidentiality:** position-level P&L is among the most sensitive data a fund holds. Assume a firm-approved AI environment.
-
-## Quality checks
-
-- [ ] Contributions reconciled to the reported return; residual disclosed
-- [ ] Gross and net labeled on every performance figure
-- [ ] Alpha-vs-beta split labeled as measured or inferred, with the model named
-- [ ] Every top contributor and detractor assessed against a thesis, or marked "no thesis provided"
-- [ ] All four process buckets populated — including the uncomfortable ones
-- [ ] Short book and hedges treated on their own terms, not as ordinary longs
-- [ ] "What didn't happen" section has real content
-- [ ] Any disagreement with the user's stated view is direct and evidenced
-- [ ] Draft commentary carries the compliance review flag and contains no forward-looking language
-- [ ] No figure appears that was not provided or derived from provided figures with the arithmetic shown
 
 ## Example prompts
 

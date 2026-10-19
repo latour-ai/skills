@@ -60,6 +60,8 @@ The buy-side issues are also specific and repetitive in a way that suits systema
 
 ## Output format
 
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
+
 ```
 # NDA Review — [target / project name]
 From: [banker / seller] | Received: [date] | Type: [one-way / mutual]
@@ -141,19 +143,6 @@ The recurring issues, roughly in order of how much damage they do:
 - **Markup language is a starting draft.** Proposed text must be flagged as subject to counsel review before it goes back, especially anything touching governing law, remedies, or the standstill.
 - **Do not counsel the user to breach an obligation** or to work around a provision they have already agreed to elsewhere.
 - **Confidentiality:** the NDA itself and the existence of the process are usually confidential. Assume a firm-approved AI environment.
-
-## Quality checks
-
-- [ ] Every issue has a section cite and a verbatim quote
-- [ ] Affiliate / portfolio company reach addressed explicitly, even when the answer is "no reach"
-- [ ] Standstill addressed explicitly, including its absence
-- [ ] Competing-deal and non-use breadth assessed for a sector-focused buyer
-- [ ] Non-solicit assessed on scope, duration, and carve-outs as three separate questions
-- [ ] Every negotiate-or-worse issue has actual replacement language, plus a fallback
-- [ ] Likelihood-of-concession stated, so the user knows what to spend capital on
-- [ ] The scope-of-reach table is fully answered
-- [ ] Bottom line commits to one of the three calls
-- [ ] If "send to counsel," the specific provisions are named
 
 ## Example prompts
 

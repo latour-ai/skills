@@ -56,6 +56,8 @@ The weekly note is the most reliably recurring writing task in client-facing fin
 
 ## Output format
 
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
+
 ```
 # Weekly Market Recap — Week of [date range]
 Audience: [client-facing / internal] | Length: [setting] 
@@ -92,23 +94,13 @@ For internal audience, the compliance reminder shortens to one line and tone may
 
 ## Guardrails
 
-- **No predictions, period.** Nothing about what markets, rates, or prices *will* do — including hedged versions ("could continue to," "may face pressure"). Mechanism and history are allowed; forecasts are not. Third-party forecasts appear only as attributed views.
-- **No advice.** No "investors should," no "we favor," no positioning suggestions, no "opportunities." If the user's notes contain advice-flavored lines, move them to the unsourced/flagged box with a note.
+- **No predictions, period.** Nothing about what markets, rates, or prices *will* do — including hedged versions ("could continue to," "may face pressure"). Mechanism and history are allowed; forecasts are not. Third-party forecasts appear only as attributed views. Words like "will," "expect," "likely," "should," "forecast," and "poised to" usually signal a forecast.
+- **No advice.** No "investors should," no "we favor," no positioning suggestions, no "opportunities." If the user's notes contain advice-flavored lines, move them to the unsourced/flagged box with a note. "We recommend" and "attractive" fall in the same category.
 - **Every claim attributed.** Facts trace to a provided source with date; user assertions are flagged as unsourced in the dedicated box, never silently woven in as fact.
 - **Never fill gaps from memory.** No market levels, moves, or events from the AI's own knowledge — if it wasn't in the materials, it goes in "Gaps." This is absolute: a plausible-but-wrong S&P level in a client note is the worst failure mode this skill has.
 - **Neutral tone.** No cheerleading, no doom. "Equities fell" not "markets were crushed."
 - **As-of dates on all data.** Weekly notes get forwarded weeks later; undated numbers become wrong numbers.
 - **Compliance reminder is mandatory** on every client-facing draft and may not be removed by the skill.
-
-## Quality checks
-
-- [ ] Zero forward-looking statements (scan for: will, expect, likely, should, forecast, "poised to")
-- [ ] Zero advice language (scan for: investors should, we recommend, opportunity, attractive, favor)
-- [ ] Every factual claim maps to a numbered source
-- [ ] Unsourced box lists every user assertion used
-- [ ] Every data point carries an as-of date
-- [ ] Gaps section honest about what the materials didn't cover
-- [ ] Compliance reminder present
 
 ## Example prompt
 

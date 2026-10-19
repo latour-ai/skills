@@ -36,9 +36,11 @@ A fundraiser lands at SuperReturn with 3,000 attendees, 48 hours, and a vague in
 3. **Draft pre-conference outreach** for Tiers 1–2: short, specific, sendable. Each note references something true about the target, states the ask plainly (20 minutes, specific day), and avoids the "would love to connect" void. Cold and warm variants where relationship status is known. Output as text to copy-paste — or into your email tool if one is connected.
 4. **Build the per-day schedule logic** (not a fantasy calendar): which targets to anchor each day around, when to be at which sessions (a Tier 1 target's panel is a scheduling anchor and a conversation opener), where the user's own commitments create adjacency opportunities, and explicit white space — back-to-back-packed conference schedules collapse by 2pm Day 1.
 5. **Write talking points per Tier 1 target:** an opener tied to them, two substantive threads, the soft ask, and the thing *not* to lead with (don't pitch the fund in sentence one to an LP who gets pitched forty times a day).
-6. **Produce the follow-up tracker** — a table the user fills during/after the event, with pre-drafted follow-up note skeletons keyed to meeting outcome (met / missed-but-targeted / new contact).
+6. **Produce the follow-up tracker** — a table the user fills during/after the event, with pre-drafted follow-up note skeletons keyed to meeting outcome (met / missed-but-targeted / new contact). Keep the tracker usable on a phone between meetings: simple columns, no essay fields.
 
 ## Output format
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 ```
 # Conference Plan — [Event], [Dates]
@@ -95,15 +97,6 @@ What makes a pre-conference note get answered (and what kills it):
 - **Outreach drafts contain no performance claims** unless the user supplied the exact language — fundraising outreach is marketing material and compliance rules apply; flag any draft where the user's one-liner includes returns.
 - People research stays public and professional.
 - Be honest about capacity: if Tier 1+2 exceeds realistic meeting slots, say so and force-rank rather than pretending 40 meetings fit in two days.
-
-## Quality checks
-
-- Every Tier 1–2 target has an evidence-based why-them line?
-- Outreach notes specific enough that the target can say yes to a time and place?
-- Schedule includes anchors, adjacencies, and protected white space?
-- Talking points reference something true per target, not generic openers?
-- Tracker usable on a phone between meetings (simple columns, no essay fields)?
-- Capacity math honest?
 
 ## Example prompts
 

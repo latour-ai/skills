@@ -51,13 +51,15 @@ The terms that hurt a lender show up years later, and they are almost never in t
 2. **Chase the defined terms first.** Before extracting any covenant, pull the definitions it depends on: EBITDA/Consolidated EBITDA, Indebtedness, Consolidated Total Debt (and whether cash netting is capped), Restricted Subsidiary, Unrestricted Subsidiary, Permitted Investments, Available Amount/Builder Basket, Material Subsidiary. A covenant is only as strong as the terms it is written in.
 3. **Extract financial covenants.** For each: the ratio, its full formula, testing frequency, first test date, step-down schedule with dates, equity cure rights (how many, how often, whether cure proceeds count as EBITDA or debt reduction, whether over-cure is permitted), and whether the covenant is maintenance or incurrence. For revolver-only springing covenants, note the utilization trigger.
 4. **Itemize the EBITDA definition in full.** Every add-back, separately listed, with: whether it is capped (and the cap's basis — % of EBITDA, dollar, or uncapped), whether there is a look-forward period for synergies and cost savings, whether "run-rate" or "annualized" appears, and whether add-backs are subject to a single overall cap. This section is usually the single most important output.
-5. **Extract negative covenants and size every basket.** Restricted payments, debt incurrence (including free-and-clear/incremental capacity, ratio-based incurrence, and MFN protection with any sunset), investments, liens, asset sales and reinvestment rights, affiliate transactions, restricted/unrestricted subsidiary designation rights. For each basket, give the fixed dollar amount, the grower component if any (usually % of total assets or EBITDA), and the conditions to use it.
+5. **Extract negative covenants and size every basket.** Restricted payments, debt incurrence (including free-and-clear/incremental capacity, ratio-based incurrence, and MFN protection with any sunset), investments, liens, asset sales and reinvestment rights, affiliate transactions, restricted/unrestricted subsidiary designation rights. For each basket, give the fixed dollar amount, the grower component if any (usually % of total assets or EBITDA), and the conditions to use it. Lien subordination and non-pro-rata exchange rights, alongside unrestricted subsidiary designation, are addressed explicitly even where the language is standard.
 6. **Extract prepayment and control terms.** Mandatory prepayments (excess cash flow sweep and its step-downs, asset sale and debt issuance sweeps, reinvestment periods), call protection and soft-call, change of control definition and whether the deal is portable, and any anti-net-short or disqualified-lender provisions.
 7. **Run the off-market flag pass** using the checklist below, judged against the stated or inferred deal type.
 8. **Compute headroom where the inputs allow it,** labeling every derived figure and showing the arithmetic. If current financials were not provided, say so rather than estimating.
 9. **Write the one-page key terms abstract** the monitoring team will use going forward.
 
 ## Output format
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 ```
 # [Borrower] — Credit Agreement Abstract
@@ -147,19 +149,6 @@ Apply as hypotheses to test against the stated deal type, not as automatic findi
 - **"Off-market" is a benchmark comparison, not a legal conclusion.** State the standard formulation you are comparing against, and note that market conventions vary by vintage, size, and sponsor.
 - **This is not legal advice** and does not replace counsel's review, a formal covenant analysis, or the credit agreement itself, which governs. Complex intercreditor, lien subordination, and structural subordination questions belong with a lawyer.
 - **Confidentiality:** private credit documents are confidential and often NDA-covered. This skill assumes a firm-approved AI environment. Do not reproduce large verbatim sections of the agreement in the output.
-
-## Quality checks
-
-- [ ] Deal type stated or inferred, with the inference labeled
-- [ ] Every covenant, basket, and add-back has a section citation
-- [ ] EBITDA add-backs itemized individually — not summarized as "customary add-backs"
-- [ ] Cap status recorded for every add-back, including "uncapped"
-- [ ] Unrestricted subsidiary and lien subordination provisions addressed explicitly, even if standard
-- [ ] Every basket shows fixed amount *and* grower component
-- [ ] Off-market flags each name the standard formulation being compared against
-- [ ] Derived figures labeled and arithmetic shown
-- [ ] Missing sections listed rather than silently skipped
-- [ ] The one-page abstract is usable standalone by someone who never sees the full output
 
 ## Example prompts
 

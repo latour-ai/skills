@@ -66,6 +66,8 @@ The last output matters most for spend. Knowing which questions remain unanswere
 
 ## Output format
 
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
+
 ```
 # Expert Call Synthesis — [company / industry]
 Calls: [N] | Date range: [earliest]–[latest] | Networks: [ ]
@@ -142,21 +144,6 @@ Credibility is question-specific, not person-specific. The useful test is always
 - **MNPI and compliance.** Expert network calls carry real regulatory risk. Flag any content that appears to be material non-public information — undisclosed financial results, specific unannounced customer wins or losses, pending transactions, or anything an expert describes as confidential to their current employer. Do not incorporate flagged content into the synthesis; surface it separately for the compliance team. Where an expert appears to be a current employee of the subject company or a covered supplier discussing confidential specifics, say so prominently. This skill does not replace the firm's expert network policy, chaperone requirements, or pre-clearance process.
 - **Not investment advice.** The synthesis maps what is known, contested, and unasked. It does not recommend a position.
 - **Confidentiality:** expert call transcripts are licensed content subject to the network's terms and are usually restricted to the subscribing firm. Assume a firm-approved AI environment, and do not reproduce transcripts beyond the quotes the synthesis requires.
-
-## Quality checks
-
-- [ ] Every expert on the roster with a vantage point and recency
-- [ ] Every claim attributed to a numbered expert
-- [ ] Every quote verbatim, no composites
-- [ ] Consensus sections distinguish independent sources from voice count
-- [ ] Disagreements preserved with both sides quoted, never averaged
-- [ ] Credibility assessed per question, not per person
-- [ ] Every quantitative data point sourced and dated; conflicts flagged
-- [ ] View drift section run or explicitly skipped for missing dates
-- [ ] Thesis contradictions stated directly, or the section marked skipped
-- [ ] Coverage gaps and sourcing bias assessed honestly
-- [ ] Possible MNPI surfaced separately and excluded from the synthesis body
-- [ ] Next call list specifies the vantage point needed, not just the topic
 
 ## Example prompts
 

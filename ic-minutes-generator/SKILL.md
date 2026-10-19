@@ -1,6 +1,6 @@
 ---
 name: ic-minutes-generator
-description: Turn an investment committee meeting transcript or detailed notes into formal IC minutes — attendees, agenda items, balanced per-item discussion summaries including dissent and risks raised, decisions with vote outcomes, action items with owners, and documents referenced. Built for fund operations, compliance, and CCO teams that need a defensible written record. Trigger on "draft IC minutes", "turn this transcript into minutes", "minutes for the investment committee meeting", "formalize these IC notes", "document the committee's decision", "write up Tuesday's IC", or when a user provides an IC/valuation committee/credit committee transcript and needs the formal record. Accuracy over polish — flags inaudible or ambiguous passages rather than guessing. Do NOT use for client/prospect call recaps and follow-up emails — use the call-transcript-followup skill. Do NOT use for portfolio company board packs — use the board-pack-kpi-digest skill.
+description: Turn an investment committee meeting transcript or detailed notes into formal IC minutes — attendees, agenda items, balanced per-item discussion summaries including dissent and risks raised, decisions with vote outcomes, action items with owners, and documents referenced. Built for fund operations, compliance, and CCO teams that need a defensible written record. Trigger on "draft IC minutes", "turn this transcript into minutes", "minutes for the investment committee meeting", "formalize these IC notes", "document the committee's decision", "write up Tuesday's IC", or when a user provides an IC/valuation committee/credit committee transcript and needs the formal record. Accuracy over polish — flags inaudible or ambiguous passages rather than guessing. Do NOT use for client/prospect call recaps and follow-up emails — use the call-transcript-followup skill. Do NOT use for summarizing portfolio company board packs.
 ---
 
 # IC Minutes Generator
@@ -31,13 +31,15 @@ IC minutes are one of the most consequential documents a fund produces and one o
 1. **Establish the frame:** committee, date, time, location/medium, attendees (present/absent/guests, with roles), quorum status if rules were provided, and who chaired.
 2. **Segment the transcript by agenda item.** Mark where each item starts and ends; discussion that wanders gets attributed to the item it substantively belongs to.
 3. **Summarize discussion per item — balanced by construction.** For each item capture: the proposal or matter presented and by whom; the material points raised in support; **the concerns, risks, and dissenting views raised, attributed appropriately**; questions asked and whether they were answered or deferred; any conditions or modifications introduced during discussion. Minutes are a summary, not a transcript — but a summary that omits the pushback is a misrepresentation.
-4. **Record decisions with precision.** For each decision: the exact matter decided (including amendments adopted along the way — the thing voted on is often not the thing originally proposed), the vote outcome (for/against/abstain/recused, by name where the transcript supports it), and conditions attached to approval. Recusals and their stated reasons always get recorded.
+4. **Record decisions with precision.** For each decision: the exact matter decided (including amendments adopted along the way — the thing voted on is often not the thing originally proposed), the vote outcome (for/against/abstain/recused, by name where the transcript supports it), and conditions attached to approval. Recusals and their stated reasons always get recorded. Vote counts must reconcile with the voting members recorded as present; if they don't, flag the discrepancy.
 5. **Extract action items:** task, owner, deadline if stated. Only what was actually assigned — don't invent owners for orphaned tasks; flag them as **[unassigned in meeting]**.
 6. **List documents referenced:** memos, models, valuation reports, third-party reports the committee discussed or relied on, with dates/versions if mentioned.
 7. **Flag, don't guess.** Every inaudible passage, ambiguous attribution, unclear vote, or contradictory moment gets an explicit marker: **[INAUDIBLE — transcript 00:42:15]**, **[AMBIGUOUS: unclear whether the motion included the fee waiver — confirm with chair]**. These flags are for the human finalizer and should be resolved before the minutes are adopted.
 8. **Close with the formalities:** next meeting if stated, adjournment time, and a signature/approval block per the firm's convention.
 
 ## Output format
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 ```
 # Minutes of the [Committee Name]
@@ -92,15 +94,6 @@ The recurring judgment call in minutes is granularity. Working rules:
 - **No editorializing.** Minutes record what occurred; they do not assess whether the decision was good, characterize tone beyond what was said, or add context the meeting didn't contain.
 - **The DRAFT banner stays** until a human finalizes; this skill never produces "final" minutes.
 - **Confidentiality:** IC discussions routinely contain MNPI and deal-confidential information — firm-approved AI environment assumed; distribution of the draft should follow the firm's existing minutes-handling practice.
-
-## Quality checks
-
-- Every decision states the exact matter voted on, post-amendment?
-- Vote counts add up against the voting-member attendance?
-- Each substantive item's summary includes concerns/dissent, or an explicit "no objections raised"?
-- All flags consolidated in the finalization list — none buried?
-- No quoted language that isn't verbatim from the transcript?
-- DRAFT status and approval block present?
 
 ## Example prompts
 

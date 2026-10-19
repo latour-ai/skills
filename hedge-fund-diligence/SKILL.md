@@ -13,7 +13,7 @@ This is explicitly **not** full investment diligence, operational due diligence 
 
 ## The five core questions
 
-Organize the analysis around these five questions. They are the spine of the note — every section should ultimately serve one of them:
+Organize the analysis around these five questions. They are the spine of the note — every section should ultimately serve one of them, and the note should address all five, even where the answer is that the available information is insufficient:
 
 1. **Are incentives aligned?** (GP commit, fees vs. liquidity vs. alpha, side letters)
 2. **Is the edge real?** (what inefficiency, why it persists, differentiation)
@@ -44,6 +44,8 @@ Write like a fund-of-funds analyst note: neutral, direct, evidence-based, concis
 The core discipline throughout: **distinguish what the manager claims, what the evidence supports, and what still needs diligence.** Marketing claims are not facts until verified.
 
 ## Output length
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 Scale the note to the quality of available information — usefulness over completeness:
 
@@ -171,7 +173,3 @@ The note loses its value the moment it overreaches. So:
 - Don't use stale information without flagging the date.
 - Don't over-index on AUM, and don't use numeric scoring.
 - Don't use strong red-flag language unless the evidence clearly supports it.
-
-## Quality checks before finalizing
-
-Confirm the note: gives a clear first impression; helps the meeting decision; produces useful diligence questions; separates known from unknown; treats marketing claims as claims, not verified facts; includes performance only if provided/public and flags it as a primary gap when missing; keeps team, terms, liquidity, and performance near the top; addresses all five core questions; reads like an allocator analyst note; and is proportional to the quality of available information.
