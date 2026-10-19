@@ -66,6 +66,8 @@ The first is the risk section. It is written last, when the author is exhausted 
 
 ## Output format
 
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
+
 ```
 # [Company / Project Name] — Investment Committee Memo
 Prepared [date] | Deal team: [ ] | Structure: [firm template / generic]
@@ -151,19 +153,6 @@ Two rules that follow: a thesis pillar supported only by [M] and [B] evidence mu
 - **Distinguish the deal team's view from the evidence.** Advocacy is legitimate in a memo; disguising advocacy as finding is not.
 - **This drafts a memo; it does not make an investment decision.** The recommendation reflects what the deal team is asking for based on the materials provided, and it is never a substitute for the committee's judgment or for completing diligence.
 - **Confidentiality:** deal materials are NDA-covered. This skill assumes a firm-approved AI environment that complies with the firm's NDAs and information-security policies. Do not reproduce large verbatim sections of the CIM.
-
-## Quality checks
-
-- [ ] Every material claim carries an evidence tag
-- [ ] No figure appears that was not in the provided materials or derived with shown arithmetic
-- [ ] Missing sections marked `[NOT PROVIDED]` rather than filled
-- [ ] Each thesis pillar is falsifiable and states what would break it
-- [ ] Reported EBITDA shown alongside adjusted, with an itemized bridge
-- [ ] Every model value-creation assumption mapped to a thesis pillar and a diligence finding, with unsupported ones listed
-- [ ] Risks ordered by expected cost, each mitigant labeled real or aspirational
-- [ ] Open diligence items state what each would change
-- [ ] Executive summary is one page and reads standalone
-- [ ] Anticipated questions ordered by decision impact, with honest "we don't know" answers where applicable
 
 ## Example prompts
 

@@ -64,6 +64,8 @@ The gap that causes real problems is specific and predictable: a written policy 
 
 ## Output format
 
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
+
 ```
 # [Firm] — Examination Preparation Binder
 Mode: [live request list / mock exam vs. current priorities]
@@ -106,6 +108,7 @@ relies on a practice not documented in the manual is marked
 ## Production index
 | Bates / file | Document | Item # responded to | Date range | Pages |
 |---|---|---|---|---|
+[Complete enough that someone who did not build the binder can locate each document from it.]
 
 ## Remediation list
 | # | Gap | Action | Owner | Fix before production? | Priority |
@@ -147,19 +150,6 @@ Use as the checklist when building a mock request list, and as a completeness te
 - **This is not legal advice.** Exam responses have legal consequences, involve privilege questions, and can create disclosure obligations. Counsel reviews before anything is produced — say so in the output.
 - **Do not assert regulatory requirements without grounding.** Where a rule is cited, cite it accurately; where a practice is convention rather than requirement, label it convention. Rules and exam priorities change — verify current requirements rather than relying on recall.
 - **Confidentiality and privilege:** exam materials, the compliance manual, and the gap analysis are sensitive and potentially privileged. Assume a firm-approved AI environment. The gap analysis in particular should be handled with counsel's guidance on privilege before it circulates.
-
-## Quality checks
-
-- [ ] Every request item split to its distinct asks and assigned a status
-- [ ] Date ranges compared — held vs. requested — not just presence checked
-- [ ] "Not applicable" items each carry a drafted explanation
-- [ ] Policy and evidence-of-testing assessed as two separate questions for every area
-- [ ] Consistency check run against Form ADV, not only across produced documents
-- [ ] Narrative responses cite the manual, with unsupported claims explicitly marked
-- [ ] No remediation item involves creating a document that implies it existed earlier
-- [ ] Remediation split into pre-production vs. prospective, with the distinction stated
-- [ ] Counsel items separated out
-- [ ] Production index is usable by someone who did not build it
 
 ## Example prompts
 

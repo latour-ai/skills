@@ -27,7 +27,7 @@ Market maps are how venture teams turn "AI for logistics is interesting" into a 
 ## How it works
 
 1. **Define the market boundary first.** One sentence on what's in and what's out, with the edge cases named ("includes claims-automation startups; excludes core policy-admin systems"). A map without a boundary is a list.
-2. **Build the segmentation** from how the market actually divides — by customer, by workflow stage, by business model, or by technology approach. Pick the single axis that best predicts who competes with whom, and say why. 3–6 segments; more means the axis is wrong.
+2. **Build the segmentation** from how the market actually divides — by customer, by workflow stage, by business model, or by technology approach. Pick the single axis that best predicts who competes with whom, and say why. Segments should be mutually exclusive on that axis. 3–6 segments; more means the axis is wrong.
 3. **Populate segments via web search.** For each segment, find real, verifiable companies. For each: one-line description, HQ/geography if relevant, last known funding round (stage, amount, lead if notable), and **the date of the source for that funding data**. Prioritize primary-ish sources: company announcements, credible press, regulatory filings. 
 4. **Handle data quality explicitly:**
    - Funding data older than ~18 months: tag **[stale — as of {date}]**
@@ -39,6 +39,8 @@ Market maps are how venture teams turn "AI for logistics is interesting" into a 
 7. **Position the user's known companies** (if provided) on the map neutrally.
 
 ## Output format
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 ```
 # Market Map — [Sector]
@@ -89,20 +91,12 @@ Test the chosen axis: do companies in the same segment actually lose deals to ea
 
 - **Never invent a company.** Every named company must come from a verifiable source found during research. An empty segment cell is a finding, not a failure.
 - **Every funding figure carries an as-of date and source.** No date, no figure.
+- **The sources list is complete enough that a colleague could re-verify any cell in the map.**
 - **Never reconcile conflicting data silently** — surface both numbers.
 - **Funding ≠ quality.** Don't rank companies by capital raised or imply the best-funded player wins; note it as one signal among several.
 - **Whitespace humility:** "no company found" is a search result, not a market fact. Always include the counter-case (the gap may exist because the economics don't work).
 - Private company data is inherently incomplete and lagged — the Limitations section is mandatory, not decorative.
 - No investment recommendations; the map informs a thesis, it isn't one.
-
-## Quality checks
-
-- Boundary sentence present and segments mutually exclusive on the stated axis?
-- Every company verifiable, every funding figure dated and sourced?
-- Stale/conflicting/unclear tags actually used (a map with zero flags is suspicious)?
-- Entrants/exits within the stated window only?
-- Each whitespace claim has reasoning plus a counter-case?
-- Sources list complete enough that a colleague could re-verify any cell?
 
 ## Example prompts
 

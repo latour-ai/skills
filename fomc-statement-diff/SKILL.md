@@ -51,7 +51,7 @@ Both are genuinely required. See the guardrails — this skill does not reconstr
 
 ## How it works
 
-1. **Produce the word-level redline first, mechanically, before interpreting anything.** Paragraph by paragraph, showing additions, deletions, and rewordings in place. Completeness matters more than elegance here — a missed deletion is the failure mode.
+1. **Produce the word-level redline first, mechanically, before interpreting anything.** Paragraph by paragraph, showing additions, deletions, and rewordings in place. Completeness matters more than elegance here — a missed deletion is the failure mode. Paragraphs with no changes are still listed, marked unchanged.
 2. **Separate substantive changes from housekeeping.** Date updates, rotating voter names, and routine reference changes are noted and set aside so they do not dilute the signal.
 3. **Classify each substantive change** as hawkish, dovish, or neutral/ambiguous, with one line of reasoning. Ambiguous is a legitimate and frequently correct classification — a change that cuts both ways should be labeled as such rather than forced.
 4. **Read the structural signals** that live above the word level: the order of the risk sentence, whether inflation or employment is discussed first, the balance-of-risks language, the conditionality of the forward guidance, and any change in the description of the policy stance itself.
@@ -61,6 +61,8 @@ Both are genuinely required. See the guardrails — this skill does not reconstr
 8. **Compare text against tape.** Given the market reaction, assess whether the move is consistent with what the text actually says, and name the plausible alternative explanations if it is not — a SEP surprise, a leak-to-consensus repricing, positioning unwind, or the market front-running the press conference.
 
 ## Output format
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 ```
 # [FOMC / ECB / BoE / BoJ] Statement Diff — [meeting date] vs. [prior meeting date]
@@ -139,19 +141,6 @@ Recurring patterns worth checking on every statement. These are conventions, not
 - **Market data is as-provided, timestamped, and never assumed.** Do not describe a market reaction that was not given to you, and do not extrapolate from partial data.
 - **Not investment advice.** This produces a reading of a document and a comparison to observed prices. It does not recommend trades, positioning, or a rates view, and it does not forecast the next meeting.
 - **Confirm the date and meeting** you are analyzing from the documents themselves rather than assuming the current one.
-
-## Quality checks
-
-- [ ] Both statements provided by the user — nothing reconstructed
-- [ ] Redline covers every paragraph, including unchanged ones marked as unchanged
-- [ ] Housekeeping changes separated from substantive ones
-- [ ] Every substantive change classified with a one-line reason
-- [ ] Risk balance sentence addressed explicitly, even if unchanged
-- [ ] Vote and dissents recorded, with any change in composition noted
-- [ ] SEP section either populated from provided projections or explicitly skipped
-- [ ] Verdict commits to a direction and names one most-significant change
-- [ ] Text-vs-tape section uses only provided market data, or is marked skipped
-- [ ] Press conference questions are specific to the diff, not generic
 
 ## Example prompts
 

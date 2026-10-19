@@ -69,6 +69,8 @@ This drafts from the primary record, forces the model-to-workstream reconciliati
 
 ## Output format
 
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
+
 ```
 # [Company] — 100-Day Plan
 Closed: [date] | Plan date: [date] | First board meeting: [date]
@@ -146,19 +148,6 @@ Draft against these, drop the ones that do not apply to this company, and never 
 - **Be honest about capacity.** If the plan requires more from an operating partner than one person can do, say it in the capacity check rather than distributing the milestones and hoping.
 - **This is a draft plan, not a management directive.** The company's leadership owns execution, and a plan imposed without their input rarely survives contact. Note where management buy-in is required before a workstream can start.
 - **Confidentiality:** post-close deal materials, management assessments, and organizational plans are highly sensitive, and the leadership section in particular concerns identifiable individuals. Assume a firm-approved AI environment and handle personnel content accordingly.
-
-## Quality checks
-
-- [ ] Every model value-creation assumption appears in the traceability table with a workstream or an explicit gap
-- [ ] Unmapped assumptions listed prominently, not buried
-- [ ] Weeks 1–4 are discovery, with irreversible decisions sequenced behind the fact base
-- [ ] Every KPI has a definition, a source, an owner, and an honest "available today?" answer
-- [ ] Each quick win names the model assumption or diligence finding it serves
-- [ ] Every workstream has a named owner or `[OWNER TBD]`
-- [ ] Leadership decisions carry decide-by dates and the cost of delay
-- [ ] Capacity check completed and over-commitment flagged
-- [ ] No invented company facts or figures
-- [ ] The one-pager stands alone for a board member who reads nothing else
 
 ## Example prompts
 

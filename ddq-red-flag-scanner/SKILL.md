@@ -51,6 +51,8 @@ DDQs are written by the manager's IR team and counsel, and they are very good at
 
 ## Output format
 
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
+
 ```
 # DDQ Red-Flag Scan — [Manager / Fund]
 Document: [title, date/version] | Comparison materials: [list or "none"]
@@ -95,15 +97,6 @@ Severity scale — **HIGH:** missing or evasive on compliance history, valuation
 - **Fact vs. inference:** the quote is fact; the interpretation is inference — keep them visually separate in every finding.
 - **This is a document scan, not operational due diligence.** It does not replace background checks, service-provider verification, or on-site ODD, and it is not an investment or redemption recommendation.
 - **Confidentiality:** DDQs are confidential. Remind the user to handle the scan output under the same restrictions as the source document.
-
-## Quality checks
-
-- [ ] Every language-based finding has a verbatim quote and location
-- [ ] Every absence-based finding names the specific standard disclosure
-- [ ] Each HIGH finding includes a possible benign explanation
-- [ ] Every checklist item has a status
-- [ ] Every finding has a concrete follow-up question
-- [ ] No claim about other documents without a quote from that document
 
 ## Example prompt
 

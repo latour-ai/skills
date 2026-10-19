@@ -47,9 +47,11 @@ Every quarter, allocators receive a pile of letters and most get skimmed at best
 4. **Find the divergences.** Where do managers take opposite sides of the same question? These are the most valuable findings — quote both sides.
 5. **Diff against prior letters (if provided).** For each manager: what changed in positioning, tone, or argument? Flag explicit reversals and *silent* reversals (a previously emphasized theme that simply disappeared).
 6. **Flag contradictions.** A manager saying something inconsistent with their own prior letter, or with their stated strategy, gets quoted side by side with both dates.
-7. **Write the memo** using the output format below, with every claim attributed to a specific manager and letter.
+7. **Write the memo** using the output format below, with every claim attributed to a specific manager and letter. Every manager in the stack appears at least once in the memo.
 
 ## Output format
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 ```
 # Quarterly Letter Synthesis — [Period]
@@ -97,16 +99,6 @@ Adjust length to the stack: 5 letters → ~2 pages; 20 letters → 4–5 pages w
 - **No investment advice.** The memo informs manager conversations; it does not recommend allocations, redemptions, or trades.
 - **Confidentiality.** Manager letters are typically confidential LP communications. Remind the user not to circulate the synthesis outside the team that is entitled to see the underlying letters.
 - **A missing theme is data, not license to speculate.** If no manager discussed something, say so — don't fill the gap with your own market view.
-
-## Quality checks
-
-Before delivering, verify:
-- [ ] Every manager in the stack appears at least once in the memo
-- [ ] Every quote has a manager name and letter period attached
-- [ ] No performance number appears that isn't verbatim from a letter
-- [ ] Each contradiction shows both quotes and both dates
-- [ ] Inferences are labeled as inferences
-- [ ] The manager-call questions map back to specific findings
 
 ## Example prompt
 

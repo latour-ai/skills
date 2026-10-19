@@ -33,12 +33,16 @@ CIMs are almost always covered by an NDA. Before doing anything else, note this 
 2. **Establish what the business actually does** in plain language, stripped of banker framing. "Tech-enabled services platform" usually means a services business. Identify the real product, who pays, why they pay, and how sticky that payment is.
 3. **Map the revenue model:** recurring vs. reoccurring vs. one-time, contract structure, pricing mechanism, customer concentration (top 1/5/10 customers if disclosed — and flag loudly if a sell-side doc *doesn't* disclose concentration).
 4. **Build the financial snapshot strictly from figures in the document.** Revenue, gross margin, EBITDA (reported and adjusted — list the adjustments and their size), capex, working capital, growth rates. Every number gets a page reference. If the document only shows adjusted EBITDA, say so — that is itself a finding.
-5. **Read the banker's hand.** What gets the most pages, the best charts, the boldest claims? What is conspicuously thin — customer churn, organic vs. acquired growth, management depth, capex history, the bridge from reported to adjusted EBITDA? Emphasis and avoidance are both signals.
+5. **Read the banker's hand.** What gets the most pages, the best charts, the boldest claims? What is conspicuously thin — customer churn, organic vs. acquired growth, management depth, capex history, the bridge from reported to adjusted EBITDA? Emphasis and avoidance are both signals. The avoiding section always has real content, because every CIM omits something.
 6. **Compile red flags:** concentration, declining organic growth dressed as total growth, heavy add-backs, recent ownership or management changes, projections that hockey-stick off the historicals, "pro forma" anything, pending litigation or regulatory exposure mentioned in passing.
 7. **Run the fit-vs-mandate checklist** against the criteria provided (or the labeled generic profile).
 8. **Draft the 10 questions for the banker** — specific, answerable, and ordered so the first three would change the decision.
 
 ## Output format
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
+
+The verdict paragraph stands on its own for a partner who reads nothing else.
 
 ```
 # [Company Name] — CIM First Pass
@@ -101,16 +105,6 @@ Common CIM phrasings and what they usually signal — apply as hypotheses to tes
 - **Fact vs. inference discipline:** banker claims are claims. Reported financials are "as presented" — a CIM is not audited financials. Say "the CIM states" rather than asserting truth.
 - **Confidentiality:** assume NDA coverage; firm-approved AI environments only; no bulk reproduction of the document.
 - This is a screen, not diligence, and never an investment recommendation. The verdict is "worth more work / not worth more work given the mandate," nothing stronger.
-
-## Quality checks
-
-- Every number in the memo traceable to a page reference?
-- Adjusted EBITDA add-backs itemized, not just netted?
-- Customer concentration addressed — including its absence?
-- "Avoiding" section has real content (a CIM always omits something)?
-- Fit section uses the user's mandate, or clearly labels the generic substitute?
-- First three banker questions would actually change the decision?
-- Verdict readable on its own by a partner who reads nothing else?
 
 ## Example prompts
 

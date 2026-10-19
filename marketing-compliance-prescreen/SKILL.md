@@ -46,6 +46,8 @@ The IR team finishes the deck Thursday night; compliance flags gross-only return
 
 ## Output format
 
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
+
 ```
 # Marketing Compliance Pre-Screen — [Document name]
 Screened [date] | Assumed: [registration status, audience — stated or assumed]
@@ -77,6 +79,8 @@ Pitfall categories swept with no findings — listed so the reviewer knows the
 scan was complete, not selective.
 ```
 
+The not-legal-advice disclaimer is repeated at the close of the screen, not only in the header.
+
 ## High-frequency flag patterns (the screen's cheat sheet)
 
 Language patterns that account for most routine findings:
@@ -101,15 +105,6 @@ Language patterns that account for most routine findings:
 - **Don't rewrite performance language.** Suggest the *type* of fix; drafting compliant performance presentation is compliance's call, and this skill never composes net return figures or disclosure numbers itself.
 - **Never invent rule citations or enforcement cases.** Refer to the Marketing Rule and its known pattern areas generally; if asked for specific cites, recommend counsel confirm.
 - Jurisdiction humility: the screen is built around the SEC Marketing Rule; for non-US or exempt advisers, label the analysis as analogous-concern screening, not the applicable framework.
-
-## Quality checks
-
-- Disclaimer present in header and conclusion?
-- Every flag: exact quote + location + category + severity + likely ask?
-- All six categories swept, with clean categories listed?
-- Cured-elsewhere check actually performed (footnotes and appendices read)?
-- No compliant/non-compliant verdicts anywhere in the text?
-- Reviewer-questions section converts the screen's blind spots into a checklist?
 
 ## Example prompts
 

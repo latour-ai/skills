@@ -53,6 +53,8 @@ Most teams approach AI backwards: they start from tools ("should we buy X?") ins
 
 ## Output format
 
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
+
 ```
 # AI Workflow Audit — [Team] | [Date]
 Interviewed: [who] | Batches completed: [N] | Constraints noted: [compliance/data/IT]
@@ -98,15 +100,6 @@ Week 1: [...] | Weeks 2–3: [...] | Week 4: [review — what worked, what to ki
 - **Respect the judgment line.** Where the interviewee says judgment lives, the roadmap keeps humans in the loop — the audit's credibility rests on knowing what *not* to automate.
 - **Data sensitivity is a first-class constraint,** not a footnote: anything touching client data, MNPI, or regulated records gets flagged in scoring, and the roadmap notes where compliance sign-off is needed before piloting.
 - **The roadmap reflects what the team said,** not a generic playbook. Every scored opportunity must trace to something from the interview. If the interview was thin, the roadmap is honest about its confidence level.
-
-## Quality checks
-
-- [ ] Interview ran in batches; playback step confirmed the inventory before scoring
-- [ ] Every opportunity score has a one-line reasoning traceable to interview answers
-- [ ] All savings figures labeled as estimates from the user's own numbers
-- [ ] "Keep human" section present and substantive
-- [ ] Data-sensitivity and compliance flags carried into the roadmap
-- [ ] First-30-days plan is small enough to actually happen
 
 ## Example prompt
 

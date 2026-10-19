@@ -9,8 +9,9 @@ description: >-
   "poke holes in this," "what's the bear case I'm missing," "steelman the
   short," "pre-mortem this investment," "argue against me," "stress-test
   this memo," "why am I wrong," or when a user pastes an investment write-up
-  and wants it attacked rather than summarized. Do NOT use for building
-  pre-earnings prep — use the earnings-preview-builder skill. Do NOT use for
+  and wants it attacked rather than summarized. Do NOT use for
+  pre-earnings prep or for digesting a call that already happened — use the
+  earnings-call-extractor skill for the latter. Do NOT use for
   a neutral first look at a company — use the public-company-first-pass
   skill. Do NOT use for fund-manager evaluation — use the
   hedge-fund-diligence skill.
@@ -52,6 +53,8 @@ Nobody on an investment team is truly incentivized to kill the analyst's idea �
 7. **Close constructively:** what would make this thesis stronger — the 3–5 pieces of work or evidence that would most reduce its fragility.
 
 ## Output format
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 ```
 # Red Team — [Name / Thesis] | [Long/Short] | [Date]
@@ -102,15 +105,6 @@ to die, and the single most important thing to resolve. Not a recommendation.]
 - **Quote the write-up when flagging bias.** Trap-naming without the offending sentence is name-calling.
 - **Brutal ≠ contrarian theater.** If the thesis is genuinely strong somewhere, say so — credibility of the attack depends on conceding the strong points.
 - **No recommendation.** The output is a stress test; whether to proceed, size, or pass stays with the user. Kill criteria are about evidence, never advice to sell at a price.
-
-## Quality checks
-
-- [ ] Thesis restatement the user would sign
-- [ ] Steelman includes the opponent's rebuttal to the user's best argument
-- [ ] Every critical assumption has a falsifiability entry
-- [ ] Kill criteria are observable, time-bound, and evidence-based (no price triggers)
-- [ ] Every bias flag quotes the write-up
-- [ ] "What would make it stronger" section present — the red team must be constructive
 
 ## Example prompt
 
