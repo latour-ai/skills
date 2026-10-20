@@ -10,8 +10,7 @@ description: >-
   "what's missing from this DDQ," or when the user uploads a completed due
   diligence questionnaire or RFP response. Do NOT use for a general first
   pass on a manager — use the hedge-fund-diligence skill. Do NOT use for
-  ongoing quarterly review of an existing manager — use the
-  manager-monitoring-note skill. Do NOT use for NDAs or contracts — use the
+  ongoing quarterly review of an existing manager. Do NOT use for NDAs or contracts — use the
   pe-nda-review skill.
 license: MIT
 metadata:

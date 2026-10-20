@@ -1,6 +1,6 @@
 ---
 name: conference-prep-planner
-description: Turn a conference attendee or speaker list plus the user's goals into a working conference plan — a tiered, prioritized target list with why-them one-liners, pre-conference outreach drafts, per-day scheduling logic, talking points per target, and a post-conference follow-up tracker. Built for BD, IR, and fundraising professionals attending industry events (SuperReturn, Milken, SALT, iConnections, sector conferences). Trigger on "prep me for [conference]", "here's the attendee list for [event]", "who should I meet at [conference]", "build my conference target list", "conference game plan", "outreach for [event]", "I'm going to [conference] next month", or when a user shares a speaker/attendee/exhibitor list and a goal. Do NOT use for deep prep on one specific person — use the professional-profile-brief skill. Do NOT use for institution-level LP research — use the lp-prospect-brief skill.
+description: Turn a conference attendee or speaker list plus the user's goals into a working conference plan — a tiered, prioritized target list with why-them one-liners, pre-conference outreach drafts, per-day scheduling logic, talking points per target, and a post-conference follow-up tracker. Built for BD, IR, and fundraising professionals attending industry events (SuperReturn, Milken, SALT, iConnections, sector conferences). Trigger on "prep me for [conference]", "here's the attendee list for [event]", "who should I meet at [conference]", "build my conference target list", "conference game plan", "outreach for [event]", "I'm going to [conference] next month", or when a user shares a speaker/attendee/exhibitor list and a goal. Do NOT use for deep prep on one specific person — use the professional-profile-brief skill. Do NOT use for prepping a single LP meeting — use the lp-meeting-prep-brief skill.
 ---
 
 # Conference Prep Planner
@@ -108,4 +108,4 @@ What makes a pre-conference note get answered (and what kills it):
 
 ## Works well with
 
-Deep-prep individual Tier 1 targets with **professional-profile-brief** (people) or **lp-prospect-brief** (institutions); after the event, **call-transcript-followup** and **relationship-status-summarizer** keep the tracker honest.
+Deep-prep individual Tier 1 targets with **professional-profile-brief** (people) or **lp-meeting-prep-brief** (LP meetings); after the event, **call-transcript-followup** and **relationship-status-summarizer** keep the tracker honest.

@@ -1,6 +1,6 @@
 # LaTour AI Skills Library
 
-**40 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
+**55 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
 
 These skills are reusable instruction files you can copy into ChatGPT, Claude, Gemini, or any AI assistant that supports custom instructions or skill-style workflows.
 
@@ -18,6 +18,10 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Call Transcript Follow-Up](call-transcript-followup/SKILL.md) | Turn a meeting or sales call transcript into a post-call package with summary, action items, and next steps |
 | [Conference Prep Planner](conference-prep-planner/SKILL.md) | Turn a conference attendee or speaker list plus your goals into a tiered target list, pre-event outreach drafts, per-day scheduling logic, talking points, and a post-conference follow-up tracker |
 | [IC Minutes Generator](ic-minutes-generator/SKILL.md) | Turn an investment committee transcript or detailed notes into formal minutes — balanced per-item discussion summaries, decisions with vote outcomes, action items with owners, and documents referenced |
+| [LP Meeting Prep Brief](lp-meeting-prep-brief/SKILL.md) | One-page brief before any LP meeting — relationship timeline, holdings and performance in the LP's own metrics, open items from past conversations, and the five questions they are most likely to ask |
+| [Expert Call Question Guide](expert-call-question-guide/SKILL.md) | Prepare a prioritized question guide for an expert network call from your thesis and open questions — sequenced deliberately, tailored to what this expert can actually answer, with follow-up probes for the likely evasions |
+| [Network Referral Path Mapper](network-referral-path-mapper/SKILL.md) | Find the warmest route to a target company, LP, or executive through the firm's whole relationship network — ranked paths showing who holds the relationship, how strong it is, and whether they actually make introductions |
+| [Conference Attendee Screen](conference-attendee-screen/SKILL.md) | Screen a deal conference attendee or delegate list against your live investment themes and pipeline — who to meet, why, and who is already in the CRM |
 
 ### Investment Research
 
@@ -42,6 +46,13 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Expert Call Synthesis](expert-call-synthesis/SKILL.md) | Synthesize 5–20 expert network transcripts into one view — consensus, genuine disagreements weighted by vantage point, every number in a sourced table, view drift over time, and the open questions that become your next call list |
 | [Performance Attribution Narrator](performance-attribution-narrator/SKILL.md) | Turn raw attribution output into the month-end narrative — alpha vs. factor beta, contributors assessed against the thesis that justified them, "right for the wrong reasons" flagged, and a drafted investor-letter commentary |
 | [FOMC Statement Diff](fomc-statement-diff/SKILL.md) | Word-level redline of a central bank statement against the prior meeting, with every change classified hawkish/dovish, dot-plot shifts, and a read on whether the market is trading the text or something else |
+| [Key Debates Ledger](key-debates-ledger/SKILL.md) | Keep an explicit bull/bear ledger for each position — the two to four decidable questions that will determine the outcome, the evidence on each side, and what would settle them |
+| [Claim Sentiment Extractor](claim-sentiment-extractor/SKILL.md) | Turn any research document into a table of verbatim claims — fact or sentiment, tone, theme, and a score against your thesis factors — calibrated to your own labelled examples |
+| [Sell-Side Research Triage](sellside-research-triage/SKILL.md) | Triage a morning's sell-side notes against your coverage list and positions — what changed, what matters to the book, and what can be skipped |
+| [Market Sizing Builder](market-sizing-builder/SKILL.md) | Size a market two ways — top-down from industry and government data, bottom-up from units — reconciled into a range, every input sourced or labelled as an assumption |
+| [Coinvest Triage Memo](coinvest-triage-memo/SKILL.md) | Rapid evaluation memo when a GP offers a co-investment on a short fuse — plain-English deal summary, why the GP is syndicating this deal, fit and concentration against your co-invest program, and a participate/pass recommendation |
+| [Manager AI Practices Diligence](manager-ai-practices-diligence/SKILL.md) | Add an AI-practices module to a manager's diligence file — where AI sits in their process, what data goes to which vendors, human review, and the follow-up questions for the manager call |
+| [Principal Background Brief](principal-background-brief/SKILL.md) | Sourced background brief on a fund's key principals from the public record — Form ADV, BrokerCheck and IAPD, litigation and regulatory history — with gaps and follow-ups flagged |
 
 ### Investor Relations & Outreach
 
@@ -56,6 +67,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Relationship Status Summarizer](relationship-status-summarizer/SKILL.md) | Surface where a professional relationship stands by pulling from Gmail — last touchpoint, open threads, relationship temperature, and suggested next move |
 | [Weekly Market Recap Writer](weekly-market-recap-writer/SKILL.md) | Turn a batch of links, notes, and data points into a client-ready weekly market recap — what happened, why it matters, neutral tone, every claim sourced, no predictions or advice |
 | [DDQ Response Drafter](ddq-response-drafter/SKILL.md) | Draft an incoming LP DDQ or consultant RFP from your approved answer library — adapted to the asker's format, every answer carrying its source and approval date, no-match questions flagged rather than improvised, and compliance-sensitive answers routed |
+| [DDQ Answer Library Curator](ddq-answer-library-curator/SKILL.md) | Quarterly hygiene pass on your DDQ answer library — reconcile every answer against current golden-source documents, flag stale figures and outdated references, and produce a fix-list grouped by answer owner |
 
 ### Deal Execution & Credit
 
@@ -65,6 +77,8 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [PE NDA Review](pe-nda-review/SKILL.md) | Review an inbound process NDA from the buy side — non-solicits, standstills, portfolio company attribution, and competing-deal restrictions — severity-ranked with drafted markup language and a sign / mark up / send-to-counsel call |
 | [Hundred Day Plan Drafter](hundred-day-plan-drafter/SKILL.md) | Turn diligence findings and the deal model into a post-close 100-day plan with named owners and weekly milestones — and flag every value-creation assumption in the model that no workstream actually owns |
 | [Credit Agreement Covenant Extractor](credit-agreement-covenant-extractor/SKILL.md) | Extract the full covenant package from a credit agreement or indenture into a page-cited abstract — financial covenants, basket capacity, every EBITDA add-back — and flag what's off-market |
+| [IC Question Anticipator](ic-question-anticipator/SKILL.md) | Read a draft IC memo the way the toughest committee member will and generate the twenty hardest questions, each with a suggested answer sourced to the memo and an honest rating of how well it holds up |
+| [Deal Pipeline Tracker Updater](deal-pipeline-tracker-updater/SKILL.md) | Keep the deal pipeline tracker current from email and meeting notes on a schedule — stage changes, dates, and pass decisions proposed for your confirmation, each cited to its source message |
 
 ### Fund Operations & Compliance
 
@@ -72,6 +86,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 |---|---|
 | [Waterfall Carry Checker](waterfall-carry-checker/SKILL.md) | Independently recompute the distribution waterfall and carry from raw cash flows and the LPA, reconcile against the administrator line by line, and compute the current clawback position |
 | [Regulatory Exam Binder](regulatory-exam-binder/SKILL.md) | Turn an SEC document request list into an indexed production and an honest gap list — including the policy-with-no-testing-evidence gaps — or run it as a mock exam before any letter arrives |
+| [Fund Doc Consistency Checker](fund-doc-consistency-checker/SKILL.md) | Cross-check the PPM, LPA, Form ADV, DDQ, pitch deck, and website against each other — every contradiction in fees, capacity, strategy limits, key-person and redemption terms, with the conflicting passages side by side |
 
 ## How to use
 

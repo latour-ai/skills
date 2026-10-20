@@ -1,6 +1,6 @@
 ---
 name: cim-first-pass
-description: Turn a CIM, teaser, or management presentation into a first-pass private equity deal screen memo — what the business does, revenue model, customer concentration, financial snapshot with page references, what the banker is emphasizing vs. avoiding, red flags, fit-vs-mandate checklist, and questions for the banker. Trigger on "first pass on this CIM", "screen this deal", "review this teaser", "what do you think of this CIM", "summarize this management deck", "is this deal worth a look", "deal screen", "should we pursue this", or when the user uploads/pastes a CIM, confidential information memorandum, information memorandum, teaser, or sell-side management presentation. Do NOT use for public companies — use the public-company-first-pass skill. Do NOT use for hedge fund manager materials — use the hedge-fund-diligence skill. Do NOT use for checking what's in a data room — use the data-room-gap-checker skill.
+description: Turn a CIM, teaser, or management presentation into a first-pass private equity deal screen memo — what the business does, revenue model, customer concentration, financial snapshot with page references, what the banker is emphasizing vs. avoiding, red flags, fit-vs-mandate checklist, and questions for the banker. Trigger on "first pass on this CIM", "screen this deal", "review this teaser", "what do you think of this CIM", "summarize this management deck", "is this deal worth a look", "deal screen", "should we pursue this", or when the user uploads/pastes a CIM, confidential information memorandum, information memorandum, teaser, or sell-side management presentation. Do NOT use for public companies — use the public-company-first-pass skill. Do NOT use for hedge fund manager materials — use the hedge-fund-diligence skill. Do NOT use for checking what's in a data room.
 ---
 
 # CIM First Pass
@@ -116,4 +116,4 @@ Common CIM phrasings and what they usually signal — apply as hypotheses to tes
 
 ## Works well with
 
-Run **data-room-gap-checker** once you're past the CIM and into the room; **tear-sheet-private-co** if you want a public-source view of the target to compare against the banker's narrative.
+Use **tear-sheet-private-co** if you want a public-source view of the target to compare against the banker's narrative.
