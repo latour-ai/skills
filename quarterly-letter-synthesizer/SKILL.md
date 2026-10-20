@@ -9,7 +9,7 @@ description: >-
   what stands out," or when the user uploads multiple manager letters (PDFs
   or text) and wants themes, divergences, positioning shifts, or
   contradictions surfaced. Do NOT use for a single manager's quarterly
-  check-in — use the manager-monitoring-note skill. Do NOT use for a first
+  check-in. Do NOT use for a first
   look at a new manager — use the hedge-fund-diligence skill. Do NOT use for
   drafting your own LP letter — use the lp-update-generator skill.
 license: MIT
@@ -29,7 +29,7 @@ Every quarter, allocators receive a pile of letters and most get skimmed at best
 ## Inputs
 
 **Required:**
-- Two or more manager letters (PDFs, pasted text, or files in a folder). One letter is not a synthesis — if only one is provided, suggest the manager-monitoring-note skill instead.
+- Two or more manager letters (PDFs, pasted text, or files in a folder). One letter is not a synthesis — if only one is provided, say so and offer a single-manager read instead.
 
 **Optional (each one materially improves the output):**
 - Prior-quarter letters from the same managers — enables the "shift vs. prior letter" and "contradictions" sections
