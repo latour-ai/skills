@@ -1,6 +1,6 @@
 # LaTour AI Skills Library
 
-**55 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
+**56 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
 
 These skills are reusable instruction files you can copy into ChatGPT, Claude, Gemini, or any AI assistant that supports custom instructions or skill-style workflows.
 
@@ -41,6 +41,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Investment Podcast Analyzer](investment-podcast-analyzer/) | Turn an investment podcast episode into a skimmable, citation-backed HTML brief — companies, theses, metrics, and themes with speaker attribution |
 | [Investment Folder Organizer](investment-folder-organizer/SKILL.md) | Organize a messy deal or diligence folder into eight standardized subfolders with a consistent, sortable filename convention — non-destructive, works for any asset class |
 | [Teach Me](teach-me/) | Learn any company, industry, technology, or professional concept fast — structured lessons with mental models, concrete examples, and templates for cheat sheets, quizzes, and more |
+| [Ambition Upgrade](ambition-upgrade/SKILL.md) | Take any task or prompt and make it more ambitious — climb from the literal ask to the outcome that actually matters, run the work at the highest AI-ownable rung, and design the durable workflow that keeps the model in the loop |
 | [Investment Skill Creator](investment-skill-creator/SKILL.md) | Brainstorm, score and prioritize new AI skill ideas for investment teams and fundraisers — turn recurring workflow pain into concrete, buildable skill concepts |
 | [AI Workflow Audit](ai-workflow-audit/SKILL.md) | Interview a team about recurring workflows, bottlenecks, and tools — then map the work to AI opportunities scored on impact × feasibility and deliver a prioritized adoption roadmap |
 | [Expert Call Synthesis](expert-call-synthesis/SKILL.md) | Synthesize 5–20 expert network transcripts into one view — consensus, genuine disagreements weighted by vantage point, every number in a sourced table, view drift over time, and the open questions that become your next call list |
