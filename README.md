@@ -1,6 +1,6 @@
 # LaTour AI Skills Library
 
-**56 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
+**57 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
 
 These skills are reusable instruction files you can copy into ChatGPT, Claude, Gemini, or any AI assistant that supports custom instructions or skill-style workflows.
 
@@ -16,6 +16,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Executive Briefing](executive-briefing/SKILL.md) | Turn messy source material into a concise executive briefing (500 words or fewer) — source-agnostic, built for busy decision-makers |
 | [Professional Profile Brief](professional-profile-brief/SKILL.md) | Pre-meeting prep note on any person — who they are, what they care about, relationship hooks, and smart conversation openers |
 | [Call Transcript Follow-Up](call-transcript-followup/SKILL.md) | Turn a meeting or sales call transcript into a post-call package with summary, action items, and next steps |
+| [No-Recording Meeting Debrief](no-recording/SKILL.md) | No transcript? Dictate a one-minute brain dump after the meeting and get notes, a follow-up email draft, tasks, and a CRM note, with attendees and titles pulled from your calendar and email. Works with Outlook or Gmail and your own task tool and CRM |
 | [Conference Prep Planner](conference-prep-planner/SKILL.md) | Turn a conference attendee or speaker list plus your goals into a tiered target list, pre-event outreach drafts, per-day scheduling logic, talking points, and a post-conference follow-up tracker |
 | [IC Minutes Generator](ic-minutes-generator/SKILL.md) | Turn an investment committee transcript or detailed notes into formal minutes — balanced per-item discussion summaries, decisions with vote outcomes, action items with owners, and documents referenced |
 | [LP Meeting Prep Brief](lp-meeting-prep-brief/SKILL.md) | One-page brief before any LP meeting — relationship timeline, holdings and performance in the LP's own metrics, open items from past conversations, and the five questions they are most likely to ask |
