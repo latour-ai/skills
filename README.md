@@ -1,6 +1,6 @@
 # LaTour AI Skills Library
 
-**57 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
+**58 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
 
 These skills are reusable instruction files you can copy into ChatGPT, Claude, Gemini, or any AI assistant that supports custom instructions or skill-style workflows.
 
@@ -14,6 +14,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 |---|---|
 | [Inbox Triage](inbox-triage/SKILL.md) | Pre-market inbox triage for hedge fund executives — ruthlessly filters hundreds of emails down to what matters before the trading day starts |
 | [Executive Briefing](executive-briefing/SKILL.md) | Turn messy source material into a concise executive briefing (500 words or fewer) — source-agnostic, built for busy decision-makers |
+| [Idea to Slide](idea-to-slide/SKILL.md) | Turn a rough slide idea into finished slides through a three-question interview — a full-sentence title that states the point, the right layout, one accent — built as HTML, PowerPoint, or Google Slides in your firm's brand |
 | [Professional Profile Brief](professional-profile-brief/SKILL.md) | Pre-meeting prep note on any person — who they are, what they care about, relationship hooks, and smart conversation openers |
 | [Call Transcript Follow-Up](call-transcript-followup/SKILL.md) | Turn a meeting or sales call transcript into a post-call package with summary, action items, and next steps |
 | [No-Recording Meeting Debrief](no-recording/SKILL.md) | No transcript? Dictate a one-minute brain dump after the meeting and get notes, a follow-up email draft, tasks, and a CRM note, with attendees and titles pulled from your calendar and email. Works with Outlook or Gmail and your own task tool and CRM |
@@ -102,12 +103,13 @@ Most skills are a single `SKILL.md` file:
 
 ### Multi-file skills
 
-Some skills include extra reference files alongside `SKILL.md` (the [Earnings Call Extractor](earnings-call-extractor/), [Side Letter Term Extractor](side-letter-term-extractor/), and [Teach Me](teach-me/) have `references/` folders; the [Investment Podcast Analyzer](investment-podcast-analyzer/) includes a YouTube transcript script and HTML report template; the [Fund News Alert](fund-news-alert/) includes an editable `funds-to-monitor.md` watchlist). For these, download the packaged `.skill` bundle — a single file containing everything — and upload it directly to Claude:
+Some skills include extra reference files alongside `SKILL.md` (the [Earnings Call Extractor](earnings-call-extractor/), [Side Letter Term Extractor](side-letter-term-extractor/), and [Teach Me](teach-me/) have `references/` folders; the [Investment Podcast Analyzer](investment-podcast-analyzer/) includes a YouTube transcript script and HTML report template; the [Fund News Alert](fund-news-alert/) includes an editable `funds-to-monitor.md` watchlist; [Idea to Slide](idea-to-slide/) includes an HTML deck template, an example deck, and `references/` files). For these, download the packaged `.skill` bundle — a single file containing everything — and upload it directly to Claude:
 
 - [Download `earnings-call-extractor.skill`](https://github.com/latour-ai/skills/raw/main/earnings-call-extractor/earnings-call-extractor.skill)
 - [Download `investment-podcast-analyzer.skill`](https://github.com/latour-ai/skills/raw/main/investment-podcast-analyzer/investment-podcast-analyzer.skill)
 - [Download `teach-me.skill`](https://github.com/latour-ai/skills/raw/main/teach-me/teach-me.skill)
 - [Download `fund-news-alert.skill`](https://github.com/latour-ai/skills/raw/main/fund-news-alert/fund-news-alert.skill)
+- [Download `idea-to-slide.skill`](https://github.com/latour-ai/skills/raw/main/idea-to-slide/idea-to-slide.skill)
 
 You can also browse the folder to read the files individually.
 
