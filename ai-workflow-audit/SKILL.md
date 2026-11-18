@@ -16,7 +16,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '1.1'
 ---
 
 # AI Workflow Audit
@@ -34,19 +34,19 @@ Most teams approach AI backwards: they start from tools ("should we buy X?") ins
 
 **Optional (shortens the interview):**
 - Team description: function, headcount, roles
-- Existing documentation: process docs, tool lists, an org chart
+- Existing documentation: process docs, tool lists, an org chart (attached, pasted, or pulled from connected file storage if the user names where it lives)
 - Known pain points the team already suspects
 - Constraints: compliance regime, data sensitivity, budget, IT restrictions
 - Current AI usage, if any
 
-**Missing-input behavior:** This skill *asks by design* — but in disciplined batches of 3–5 questions, never a wall of questions. If the user wants to skip the interview and dump a description instead, accept it, then ask one batch of targeted gap-filling questions before scoring.
+**Missing-input behavior:** This skill asks by design, in short batches. If the user wants to skip the interview and dump a description instead, accept it, then ask one batch of targeted gap-filling questions before scoring.
 
 ## How it works
 
 1. **Set the frame (one message).** Explain the process: ~3–4 short question batches, then a roadmap. Ask Batch 1 — the team: function, headcount, roles, and "describe a typical week in 5 lines."
 2. **Batch 2 — the recurring work.** The 5–10 tasks that recur daily/weekly/monthly; roughly how long each takes and who does it; which one the team would pay to never do again; where deadlines get missed.
 3. **Batch 3 — inputs, outputs, and tools.** For the biggest tasks: what goes in (documents, data, emails, calls) and what comes out (memos, models, updates, decisions); which systems/tools are involved; where information gets manually moved between systems; what data is sensitive or regulated.
-4. **Batch 4 — judgment and appetite.** Which parts of each task are pure mechanics vs. real judgment; what's been tried with AI already and what happened; the team's appetite and constraints (compliance review requirements, client-data rules, IT posture). Skip or compress batches the earlier answers already covered — never re-ask what's been answered.
+4. **Batch 4 — judgment and appetite.** Which parts of each task are pure mechanics vs. real judgment; what's been tried with AI already and what happened; the team's appetite and constraints (compliance review requirements, client-data rules, IT posture). Skip or compress batches the earlier answers already covered.
 5. **Build the workflow map.** Consolidate into an inventory: each workflow with frequency, time cost, people involved, inputs/outputs, judgment intensity, and data sensitivity. Play it back for correction *before* scoring — the playback catches the misunderstandings that would otherwise corrupt the roadmap.
 6. **Score AI opportunities.** For each workflow, assess: **Impact** (hours saved × frequency × who's freed up, plus quality/risk-reduction upside) and **Feasibility** (how structured the inputs are, how checkable the output is, data sensitivity, how much judgment must stay human). Score each High/Medium/Low with one line of reasoning — the reasoning is the deliverable, not the letter grade.
 7. **Deliver the roadmap** in the output format: quick wins (high impact, high feasibility, start this month), build candidates (worth a designed, reusable skill or workflow), watch list (high impact but blocked by data, risk, or maturity — with what would unblock them), and don't-automate (judgment-core work where AI assists at most). Include risks and a realistic first-30-days plan.
@@ -94,12 +94,12 @@ Week 1: [...] | Weeks 2–3: [...] | Week 4: [review — what worked, what to ki
 
 ## Guardrails
 
-- **One batch at a time, 3–5 questions, always numbered.** Never dump the full question set. Never re-ask answered questions.
-- **Time savings are estimates and say so.** Derive them from the user's own stated time costs — never invent "industry benchmark" hours or ROI figures.
+- **One batch at a time, 3–5 numbered questions.** Don't send the full question set at once, and don't re-ask what has been answered; a long form gets abandoned where a conversation doesn't.
+- **Time savings are estimates and say so.** Derive them from the user's own stated time costs, not from invented "industry benchmark" hours or ROI figures.
 - **No tool-vendor recommendations.** Describe approaches generically ("an AI assistant with web search," "a reusable skill/prompt your team shares," "your email tool if connected"). Specific procurement is the team's decision.
 - **Respect the judgment line.** Where the interviewee says judgment lives, the roadmap keeps humans in the loop — the audit's credibility rests on knowing what *not* to automate.
 - **Data sensitivity is a first-class constraint,** not a footnote: anything touching client data, MNPI, or regulated records gets flagged in scoring, and the roadmap notes where compliance sign-off is needed before piloting.
-- **The roadmap reflects what the team said,** not a generic playbook. Every scored opportunity must trace to something from the interview. If the interview was thin, the roadmap is honest about its confidence level.
+- **The roadmap reflects what the team said,** not a generic playbook. Every scored opportunity traces to something from the interview. If the interview was thin, the roadmap is honest about its confidence level.
 
 ## Example prompt
 

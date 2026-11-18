@@ -22,7 +22,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '1.1'
 ---
 
 # Expert Call Question Guide
@@ -45,7 +45,7 @@ The third is phrasing and sequence. Leading questions collect echoes of the anal
 
 **Optional but high-value:**
 - **Your thesis and your model's live assumptions** — this is what turns a generic topic list into an interrogation aimed at the numbers that move your outcome; two or three sentences of thesis and three to five assumptions are enough
-- Prior transcripts and call notes on the name, so the guide skips what you already own and probes where past experts disagreed
+- Prior transcripts and call notes on the name, so the guide skips what you already own and probes where past experts disagreed. They can be attached, pasted, or pulled from a connected transcript library or file storage if the user names where they live.
 - The call length and format (30 vs. 60 minutes changes how ruthless the prioritization must be)
 - The screening questionnaire or the expert's network profile, which often reveals what they are eager to talk about — and what they dodged
 - Whether this is public equity or a live private deal, which changes both the questions and the compliance envelope

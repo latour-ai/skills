@@ -1,6 +1,28 @@
 ---
 name: side-letter-term-extractor
-description: Summarize a hedge fund side letter and extract its key commercial, operational, and legal terms from the GP/manager's perspective, producing a Word (.docx) review memo. Use whenever an IR, fundraising, COO, legal, or compliance professional at a hedge fund manager uploads, pastes, or references a side letter (or folder of side letters) and wants it summarized, reviewed, term-extracted, risk-flagged, or checked for MFN/precedent/operational issues. Trigger on "review this side letter", "summarize this side letter", "what did we promise this investor", "what are our obligations under this side letter", "does this trigger MFN", "flag the risky terms", "side letter review", or any request to understand what a side letter commits the firm to. Works on a single letter (default) or across funds, vintages, or vehicles. Manager-side screen — does NOT give legal advice or make legal conclusions. For inbound NDA review use pe-nda-review; for full contract review against a playbook use legal:review-contract.
+description: >-
+  Summarize a hedge fund side letter and extract its key commercial,
+  operational, and legal terms from the GP/manager's perspective, producing
+  a Word (.docx) review memo: a key terms table with source quotes, an
+  obligation checklist with owners and deadlines, an MFN analysis, and risk
+  flags. For IR, fundraising, COO, legal, and compliance professionals at
+  hedge fund managers. Use when the user uploads, pastes, or references a
+  side letter (or a folder of side letters) and wants it summarized,
+  reviewed, term-extracted, risk-flagged, or checked for MFN, precedent, or
+  operational issues. Trigger on "review this side letter", "summarize this
+  side letter", "what did we promise this investor", "what are our
+  obligations under this side letter", "does this trigger MFN", "flag the
+  risky terms", "side letter review", or any request to understand what a
+  side letter commits the firm to. Works on a single letter (default) or
+  across funds, vintages, or vehicles. A manager-side screen: it does not
+  give legal advice or draw legal conclusions. Do NOT use for inbound NDA
+  review; use the pe-nda-review skill. Do NOT use to check fund documents
+  against each other; use the fund-doc-consistency-checker skill. Do NOT use
+  for a full contract review against a negotiation playbook.
+license: MIT
+metadata:
+  author: latourai
+  version: '1.1'
 ---
 
 # Side Letter Term Extractor
@@ -16,7 +38,7 @@ This skill **extracts and flags**; it does not give legal advice, draw legal con
 These guardrails exist because the cost of getting a side letter review wrong is real — a missed obligation becomes an operational failure, an overstated risk wastes legal time, and an invented term is worse than no answer at all. Hold to them:
 
 - **No legal advice and no legal conclusions.** Describe what a term says and why it may matter; do not opine on enforceability, validity, or what the firm "should" agree to legally. Where a judgment call belongs to counsel, route it there.
-- **Quote the source language for every extracted term.** The value of the memo is the translation, but the reader must be able to check it against the document. A term without a supporting quote is unverifiable and must not appear.
+- **Quote the source language for every extracted term.** The value of the memo is the translation, but the reader must be able to check it against the document. A term without a supporting quote is unverifiable, so leave it out.
 - **Never infer missing terms.** Analyze only the language in the document. If a category isn't addressed, the honest and correct answer is "Not found" — not a guess about what's "probably" there.
 - **Preserve defined terms exactly as written.** If the letter defines "Eligible Investor" or "Quarterly Report," use that capitalized term verbatim; do not paraphrase defined terms into something that reads similar but isn't.
 - **Flag conflicts as conflicts, not verdicts.** If a provision may collide with fund governing documents, say: *"Potential conflict item. Cannot fully assess without reviewing the LPA, PPM, subscription documents and related governing documents."* That's the honest ceiling of what can be assessed from the side letter alone.
@@ -25,7 +47,7 @@ These guardrails exist because the cost of getting a side letter review wrong is
 
 ## Workflow
 
-1. **Read the whole letter first.** It usually arrives as an uploaded PDF or .docx in `/mnt/user-data/uploads/`, or pasted inline. Read it in full before extracting anything — side letters lean heavily on defined terms and cross-references, so a clause means what its definitions make it mean. If a defined term is used but its definition lives in the LPA/PPM (not the letter), note that the definition is external.
+1. **Read the whole letter first.** It usually arrives as an attached PDF or .docx, or pasted inline; it can also be pulled from connected file storage (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local folder) if the user names where it lives. If that storage can't be reached, say so and ask for the file. Read it in full before extracting anything — side letters lean heavily on defined terms and cross-references, so a clause means what its definitions make it mean. If a defined term is used but its definition lives in the LPA/PPM (not the letter), note that the definition is external.
 2. **Establish the header facts.** Investor name, fund / vehicle name, date or effective date, and execution status (signed, draft, unsigned, unclear). These frame everything else and belong at the top of the memo.
 3. **Walk the five term categories.** Go through `references/term-categories.md` and extract every term that falls under Economics, Liquidity, MFN, Capacity, and Transparency/Reporting. For each: capture what right or obligation it creates, the short source quote, and an initial risk read.
 4. **Score risk** with the rubric below. Reserve High for terms that genuinely constrain the firm, create preferential treatment, may conflict with fund documents, or impose hard/recurring operational burden. Don't inflate — a memo where everything is High is as useless as one where nothing is.
@@ -46,6 +68,8 @@ Apply consistently. The point of three tiers is triage: High demands review befo
 ## Memo structure
 
 Produce the .docx with these sections, in this order. The title carries the key identifiers so the file is self-describing when it lands in someone's inbox.
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 ```
 # Side Letter Review: [Investor / Fund / Date]
@@ -105,7 +129,7 @@ End with a single operational line: *First-pass manager-side screen — route Hi
 
 ## Quoting discipline
 
-Keep quotes short and surgical — the operative phrase, not the whole clause. The reader has the document; the memo's value is the translation and the flagging, not transcription. But every extracted term needs its quote, because an extraction the reader can't verify against the source is worse than useless.
+Keep quotes short and surgical — the operative phrase, not the whole clause. The reader has the document; the memo's value is the translation and the flagging, not transcription.
 
 ## When facts are missing
 
@@ -113,12 +137,12 @@ If the document doesn't give you something you'd want (no execution date, an ext
 
 ## Multiple side letters
 
-The default and best-supported workflow is **one side letter at a time** — it produces the cleanest, most verifiable memo. If the user points at a folder or asks to compare letters across funds, vintages, or vehicles, still analyze each letter individually and faithfully first, then add a short comparison layer on top (e.g., which investors hold MFN, where economics diverge, which obligations recur). Never blend letters together in a way that loses which term came from which document — the source-attribution discipline matters even more across a set.
+The default and best-supported workflow is **one side letter at a time** — it produces the cleanest, most verifiable memo. If the user points at a folder or asks to compare letters across funds, vintages, or vehicles, still analyze each letter individually and faithfully first, then add a short comparison layer on top (e.g., which investors hold MFN, where economics diverge, which obligations recur). Keep every term tied to the letter it came from; blending letters loses that, and source attribution matters even more across a set.
 
 ## Generating the .docx
 
-This skill owns the analysis; the **docx skill owns the rendering**. Before writing the file, read `/mnt/skills/public/docx/SKILL.md` and follow it. Make the output genuinely scannable: a real heading hierarchy; real tables for sections 2, 3, 4, and 6 (not pipe-delimited text); and risk shown as a labeled tag ("HIGH" / "MEDIUM" / "LOW") plus the color/emoji so it survives if color is stripped. Save the finished file to `/mnt/user-data/outputs/` and present it.
+This skill owns the analysis. For the rendering, use a Word document skill or tool if one is available in the environment and follow its instructions; if none is, deliver the memo as Markdown with the same sections and say that the Word file could not be produced. Make the output genuinely scannable: a real heading hierarchy; real tables for sections 2, 3, 4, and 6 (not pipe-delimited text); and risk shown as a labeled tag ("HIGH" / "MEDIUM" / "LOW") plus the color/emoji so it survives if color is stripped. Save the finished file where the user asked, or to the session's output folder, and present it.
 
 ## Reference
 
-`references/term-categories.md` is the working map of what to look for in each of the five categories, with the specific kinds of terms that show up under each. Read it on every run — it's what keeps the extraction complete instead of catching only the obvious fee break.
+`references/term-categories.md` is the working map of what to look for in each of the five categories, with the specific kinds of terms that show up under each. Read it before extracting; it's what keeps the extraction complete instead of catching only the obvious fee break.

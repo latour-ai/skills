@@ -1,37 +1,50 @@
 ---
 name: earnings-call-extractor
-description: >
-  Analyze raw earnings call transcripts for publicly traded companies and produce
-  structured public equity memos. Use this skill whenever the user uploads, pastes,
-  or references an earnings call, quarterly call, conference call transcript,
-  analyst Q&A, management commentary, quarterly results, or earnings summary.
-  Trigger on: "earnings call", "earnings transcript", "Q1/Q2/Q3/Q4 call",
-  "conference call transcript", "earnings memo", "analyst Q&A", "quarterly results",
-  "process this transcript", "summarize the earnings call", "extract the financials",
-  "what did management say", "pull the Q&A", "earnings call memo", or any request
-  involving a company's earnings call. Also trigger when the user provides a long
-  transcript-like text with speaker labels, analyst questions, and financial metrics.
+description: >-
+  Turn a raw earnings call transcript for a public company into a structured
+  equity memo about half the length: an executive snapshot, a metrics table
+  with year-over-year changes exactly as stated, separate CEO and CFO
+  sections, guidance, every analyst question with an answer-quality rating,
+  Q&A themes, red flags, and a condensed transcript. The transcript can be
+  attached, pasted, or pulled from a connected market data or transcript
+  source (AlphaSense, FactSet, Bloomberg, S&P Capital IQ) or the company's
+  investor relations page when the user names the company and quarter. For
+  public equity analysts and portfolio managers. Trigger on "earnings call",
+  "earnings transcript", "Q1/Q2/Q3/Q4 call", "conference call transcript",
+  "earnings memo", "process this transcript", "summarize the earnings call",
+  "extract the financials", "what did management say", "pull the Q&A", or
+  when the user provides a long transcript-like text with speaker labels,
+  analyst questions and financial metrics. Do NOT use to file the call's data
+  points against a position's open debates; use the key-debates-ledger
+  skill. Do NOT use for a claim-by-claim fact-versus-sentiment table scored
+  against thesis factors; use the claim-sentiment-extractor skill. Do NOT
+  use for a first look at the company itself; use the
+  public-company-first-pass skill. No buy, sell or hold recommendation.
+license: MIT
+metadata:
+  author: latourai
+  version: '2.0'
 ---
 
 # Earnings Call Transcript Extractor
 
 Transform raw earnings call transcripts into clear, structured public equity memos — reducing length by roughly 50% while preserving every material financial detail, year-over-year change, and analyst question.
 
-## Role
+## Purpose and audience
 
-You are a neutral public equity research assistant. Your job is to extract, compress, and organize the substance so an investor can quickly understand what happened on the call. No buy/sell/hold recommendations — just the facts, structured clearly.
+The memo extracts, compresses, and organizes the substance of the call so an investor can quickly understand what happened. It carries no buy, sell or hold recommendation.
 
 The audience is an experienced public equity investor who wants to rapidly parse what matters: which financial metrics changed year-over-year, what management emphasized, what analysts asked, and where management was direct versus evasive.
 
 ## Handling the Input
 
-The user will provide a transcript in one of several ways:
+The transcript arrives in one of these ways:
 
 - **Pasted text** in the conversation
-- **Uploaded .txt or .md file** — read it with the Read tool
-- **Uploaded PDF** — extract the text using PDF tools or `pdftotext` via bash
+- **An attached file** (text, Markdown, Word or PDF), or a file in connected storage (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local folder) when the user names where it is
+- **A company and quarter with no transcript.** Pull the transcript from a connected market data or transcript source (AlphaSense, FactSet, Bloomberg, S&P Capital IQ or similar) if there is one; otherwise look for it on the company's investor relations page or the open web. If no full transcript can be found, say so and ask the user to attach or paste it. Do not build the memo from a press release, a news summary or a partial transcript without saying that is what it is.
 
-If the transcript is very long (common — earnings calls often run 10,000+ words), read it in full before beginning analysis. Don't start writing the memo until you've read the entire transcript, because later sections (especially Q&A) often contain the most investor-relevant material.
+Earnings calls often run past 10,000 words. Read the whole transcript before writing, because the later sections (especially Q&A) often contain the most investor-relevant material.
 
 ## Metadata
 
@@ -60,9 +73,11 @@ These principles guide every section of the memo:
 
 **Stay neutral.** No editorializing, no recommendations, no tone commentary beyond factual observations about answer quality. This reads like a research memo, not an opinion piece.
 
-## Output Structure — 10 Sections
+## Output Structure — 9 Sections
 
-The memo is organized into 10 sections. Read `references/output-template.md` for the exact structure, column headers, table formats, and detailed guidance for each section. Here is a brief overview:
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
+
+The memo is organized into 9 sections. Read `references/output-template.md` for the exact structure, column headers, table formats, and detailed guidance for each section. Here is a brief overview:
 
 1. **Executive Snapshot** — 5–8 bullets of the most important investor-relevant takeaways, anchored in financial metrics and YoY changes.
 
@@ -82,11 +97,9 @@ The memo is organized into 10 sections. Read `references/output-template.md` for
 
 9. **Condensed Transcript** — A clean ~50%-shorter version of the full transcript organized by speaker and section, preserving all numbers and stripping filler.
 
-10. **Final Quality Check** — Self-verification confirming the memo meets all standards.
-
 ## Output Delivery
 
-Save the completed memo as a Markdown file in the outputs directory. Name it:
+Save the completed memo as a Markdown file and share it with the user. Name it:
 
 `{Ticker}_{Quarter}_Earnings_Memo.md`
 
@@ -96,9 +109,8 @@ If the ticker or quarter can't be determined, use a descriptive name like `Earni
 
 ## Common Pitfalls
 
-- **Inventing metrics.** If a number doesn't appear in the transcript, don't include it. This is the single most important rule.
-- **Calculating YoY changes.** Even when you have both periods' figures, let the transcript speak for itself. Note the figures and write "YoY change not provided" if management didn't state the comparison explicitly.
+- **Inventing metrics.** If a number doesn't appear in the transcript, don't include it, even when it is available from another source. The memo is a record of the call.
 - **Merging CEO and CFO sections.** Keep them separate — investors often care about who said what.
-- **Skipping "boring" Q&A questions.** Include every question. What seems routine might matter to a specialist investor.
+- **Skipping "boring" Q&A questions.** What seems routine might matter to a specialist investor.
 - **Editorializing.** "Management sounded confident" is opinion. "Management repeated the word 'strong' six times when discussing demand" is observation. Stick to the latter.
 - **Over-condensing the condensed transcript.** Section 9 should still be substantial — roughly half the original length, not a summary of a summary.

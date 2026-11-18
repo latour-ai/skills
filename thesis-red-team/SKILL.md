@@ -18,7 +18,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '2.0'
 ---
 
 # Thesis Red Team
@@ -37,15 +37,15 @@ Nobody on an investment team is truly incentivized to kill the analyst's idea �
 **Optional:**
 - Position context: sizing, horizon, what's already priced in per the user
 - What the user thinks the bear (or bull) case is — the red team should beat it
-- Supporting materials the thesis relies on (model, expert-call notes, filings)
-- Permission to use your AI's web search to check claims against public sources (recommended; otherwise the red team attacks logic and structure only and says so)
+- Supporting materials the thesis relies on (model, expert-call notes, filings), attached, pasted, or pulled from connected file storage if the user names where they live
+- Permission to check claims against outside sources: a connected market and company data source (Bloomberg, FactSet, S&P Capital IQ, AlphaSense or similar) if there is one, otherwise public filings and the open web. Recommended; without it, or if no source is reachable, the red team attacks logic and structure only and says so.
 
 **Missing-input behavior:** Proceed with the write-up alone. Label every assumption the red team has to make ("Assuming a 2–3 year horizon since none was stated"). If the user is short, flip the protocol: steelman the bull case.
 
 ## How it works
 
 1. **Restate the thesis fairly.** Two or three sentences the user would endorse, plus the implicit claims the write-up depends on but never states — those are usually where it dies.
-2. **Steelman the other side.** Write the strongest opposing case as if managed by a sharp fund on the other side of the trade: their best 3–5 arguments, their strongest evidence (sourced where web access permits, labeled as unverified-logic otherwise), and their answer to the user's best point. No strawmen — the test is whether the user finds the opposing case uncomfortably persuasive.
+2. **Steelman the other side.** Write the strongest opposing case as if managed by a sharp fund on the other side of the trade: their best 3–5 arguments, their strongest evidence (sourced where outside verification is permitted and available, labeled as unverified-logic otherwise), and their answer to the user's best point. No strawmen — the test is whether the user finds the opposing case uncomfortably persuasive.
 3. **Extract and rank assumptions by fragility.** List every assumption the thesis needs (stated and unstated). Score each: how load-bearing (does the thesis survive without it?) × how supported (verified fact / reasonable inference / hope). The fragile quadrant — load-bearing and weakly supported — gets named explicitly.
 4. **Falsifiability pass.** For each major assumption: is it falsifiable at all, what specific evidence would falsify it, when and where would that evidence show up (a filing line item, a quarterly KPI, a churn number, a competitor launch)? Assumptions nothing could ever disprove are flagged as faith, not analysis.
 5. **Define kill criteria.** Convert the most fragile assumptions into 3–5 pre-committed, observable exit conditions: "If [observable event/threshold] by [timeframe], the thesis is broken regardless of price." Distinguish thesis-kill (the reasoning failed) from drawdown (the price moved) — the criteria must be about evidence, not P&L.
@@ -58,7 +58,7 @@ Length follows the substance: cover what the task needs and leave out filler sec
 
 ```
 # Red Team — [Name / Thesis] | [Long/Short] | [Date]
-Materials reviewed: [list] | Web verification: [used / not used]
+Materials reviewed: [list] | Outside verification: [source used / not used]
 
 ## The thesis, restated fairly
 [2–3 sentences + unstated assumptions it quietly depends on.]

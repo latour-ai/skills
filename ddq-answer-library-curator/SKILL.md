@@ -8,11 +8,17 @@ description: >-
   referencing superseded policies, departed personnel, or prior-fund terms,
   flag answers past their re-approval window, and identify duplicate or
   near-duplicate answers to consolidate — outputting a fix-list grouped by
-  answer owner and ranked by risk. For IR, fundraising, COO, and compliance
+  answer owner and ranked by risk. Where the library and the golden-source
+  documents live (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local
+  folder, or exports attached each run), the re-approval window and the
+  owner roster are set once in a short first-run setup. For IR, fundraising,
+  COO, and compliance
   teams at private equity, private credit, hedge fund, real assets, and
   venture managers. Trigger on phrases like "audit the answer library,"
   "scrub the DDQ library," "staleness check," "quarterly library review,"
-  "are our DDQ answers current," "dedupe the answer library," or when a
+  "are our DDQ answers current," "dedupe the answer library," "set up
+  ddq-answer-library-curator," "change my ddq-answer-library-curator
+  settings," or when a
   user uploads an answer library export alongside current fund documents.
   Do NOT use for drafting responses to an incoming DDQ or consultant RFP —
   use the ddq-response-drafter skill. Never rewrites an approved answer
@@ -20,7 +26,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '2.0'
 ---
 
 # DDQ Answer Library Curator
@@ -38,7 +44,7 @@ The third failure is treating staleness as a calendar problem. A twelve-month re
 ## Inputs
 
 **Required:**
-- **The answer library export** — per entry, ideally: answer text, topic or question, source document, approval or as-of date, and owner. A prior completed DDQ can stand in as a rough library, with the caveat that it carries no approval metadata.
+- **The answer library export** — per entry, ideally: answer text, topic or question, source document, approval or as-of date, and owner. Read from the location saved in setup, or attached with the request. A prior completed DDQ can stand in as a rough library, with the caveat that it carries no approval metadata.
 - At least one current golden-source document to reconcile against — the more, the better the audit.
 
 **Optional but high-value:**
@@ -49,9 +55,31 @@ The third failure is treating staleness as a calendar problem. A twelve-month re
 - The date and output of the last library audit, for a what-changed comparison
 - Owner roster mapping answer categories to responsible people, for routing
 
-**Missing-input behavior:** The library alone supports the internal checks — duplicates, aging against a stated or assumed re-approval window, internal contradictions between answers — and that pass is worth running on its own; label it as a partial audit. Each reconciliation check runs only against the source documents actually provided: no ADV means no ADV reconciliation, said explicitly in the output, not silently skipped. Never assert that an answer is current merely because no provided source contradicts it — the honest status is "not verifiable against provided sources." And never draft the corrected answer as if approved: the skill recommends the fix and routes it; re-approval belongs to the owner.
+**Set once in setup (step 0):** where the answer library and the golden-source documents live, the re-approval window, the owner roster, and where audits are saved.
+
+**Missing-input behavior:** If a saved location isn't connected or can't be read, say which system was unavailable and ask for the export or document to be attached. The library alone supports the internal checks — duplicates, aging against a stated or assumed re-approval window, internal contradictions between answers — and that pass is worth running on its own; label it as a partial audit. Each reconciliation check runs only against the source documents actually provided: no ADV means no ADV reconciliation, said explicitly in the output, not silently skipped. Never assert that an answer is current merely because no provided source contradicts it — the honest status is "not verifiable against provided sources." And never draft the corrected answer as if approved: the skill recommends the fix and routes it; re-approval belongs to the owner.
 
 ## How it works
+
+### 0. First-run setup (once, then only when asked)
+
+Run setup the first time the skill is used, or when the user says "set up ddq-answer-library-curator" or "change my ddq-answer-library-curator settings". Look for a saved settings file first (`ddq-answer-library-curator-settings.md`, in the project's files or beside the answer library). If one exists, read it and skip setup. If `ddq-response-drafter-settings.md` exists, pre-fill the library and document locations from it.
+
+Setup is one short round of questions, each with a default the user can accept:
+
+1. **Detect before asking.** Check which file storage is connected (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local folder) and what came attached. Pre-fill what detection settles.
+2. **Ask, in one message:**
+   - **Answer library:** the folder or file it lives in, an export from the firm's DDQ or RFP platform, or "I'll attach it each time" (default).
+   - **Golden-source documents:** where the current PPM or LPA, Form ADV, compliance manual, latest fund report and team page are kept. Default: attached with each audit.
+   - **Re-approval window:** the firm's policy, overall or per category. Default: 12 months, stated in the audit as an assumption.
+   - **Owner roster:** who owns which answer categories, for grouping the fix-list. Default: owners as recorded in the library, with the rest listed as orphaned.
+   - **Where audits are saved,** so the next run can find the last one for the what-changed comparison, or "just send me the file" (default).
+3. **Save the settings** to `ddq-answer-library-curator-settings.md` in plain language the user can edit. If nothing persistent can be written, show the settings as a short block and tell the user to paste it into their project instructions.
+4. **Continue straight into the audit** if the user asked for one.
+
+On later runs, read the settings and don't re-ask. Setup never blocks a first run: if the user says "skip setup", work from what is attached, use the defaults, and say which were used.
+
+### Steps for each audit
 
 1. **Inventory the library first.** Count entries, map coverage by topic (organization, strategy, performance, valuation, compliance, operations, ESG, terms), and note which entries carry full metadata — source, approval date, owner — and which are orphans. The metadata gaps are themselves findings: an answer with no owner has no one accountable for its accuracy.
 2. **Extract every checkable fact from the library:** figures (AUM, returns, fund sizes, headcounts, dates), named people and roles, named policies and their described mechanics, fund terms, service providers. This fact ledger is what gets reconciled; narrative style is not the audit's business.
@@ -121,7 +149,7 @@ The principles that separate a library that compounds from one that rots — wor
 
 ## Guardrails
 
-- **The curator flags; owners approve.** It never rewrites an approved answer and presents the rewrite as approved. Recommended language, where offered, is clearly marked as a draft for the owner's re-approval.
+- **The curator flags; owners approve.** It never rewrites an approved answer and presents the rewrite as approved, and it never edits, retires or deletes entries in the library itself; the audit is a separate document, saved only to the location chosen in setup or returned as a file. Recommended language, where offered, is clearly marked as a draft for the owner's re-approval.
 - **Every flag carries evidence.** A staleness flag shows the library value and the current source value side by side, with both documents' as-of dates. Unsupported flags waste owner time and erode trust in the audit.
 - **Absence of contradiction is not verification.** An answer no provided source speaks to is marked "not verifiable against provided sources" — never "current."
 - **Vintage is distinguished from error.** An answer honestly dated to an earlier period is aging, not wrong; an answer presenting an old figure as current is a mismatch. The two get different flags and different urgency.
@@ -133,6 +161,8 @@ The principles that separate a library that compounds from one that rots — wor
 ## Example prompts
 
 > "Quarterly scrub. Attached: our answer library export (answer, source, approval date, owner) and the current golden sources — ADV dated [March], the [Fund IV] PPM, compliance manual, Q[2] fund report, and the team page. Full audit: figure mismatches side by side, superseded references, anything older than 12 months without re-approval, and duplicates to consolidate. Fix-list by owner, performance items first."
+
+> "Set up ddq-answer-library-curator. The library is the 'DDQ Answer Library' workbook in our IR Google Drive, golden sources are in the 'Current fund documents' folder, re-approval is 12 months but 6 for anything with performance in it, and save audits to 'Library audits'."
 
 > "We just had [a partner departure and a final close on Fund V]. Before the next DDQ goes out, sweep the attached library for every answer those two events touch — key person, team, succession, fund sizes, AUM, track record presentation — and tell me exactly what needs updating and who owns each."
 

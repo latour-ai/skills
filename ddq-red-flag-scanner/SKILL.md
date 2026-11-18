@@ -10,12 +10,13 @@ description: >-
   "what's missing from this DDQ," or when the user uploads a completed due
   diligence questionnaire or RFP response. Do NOT use for a general first
   pass on a manager — use the hedge-fund-diligence skill. Do NOT use for
-  ongoing quarterly review of an existing manager. Do NOT use for NDAs or contracts — use the
-  pe-nda-review skill.
+  ongoing quarterly review of an existing manager. Do NOT use for NDAs or
+  contracts — use the pe-nda-review skill. Do NOT use to draft your own
+  firm's DDQ answers — use the ddq-response-drafter skill.
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '1.1'
 ---
 
 # DDQ Red-Flag Scanner
@@ -29,11 +30,11 @@ DDQs are written by the manager's IR team and counsel, and they are very good at
 ## Inputs
 
 **Required:**
-- A completed DDQ or RFP response (PDF, document, or pasted text)
+- A completed DDQ or RFP response (PDF, document, or pasted text). It can be attached, pasted, or pulled from connected file storage if the user names where it lives.
 
 **Optional (enables the cross-document consistency check — the highest-value finding type):**
 - The manager's pitch deck, investor letters, tear sheet, or website copy
-- Form ADV (or tell the skill to pull the public ADV via your AI's web search)
+- Form ADV (attached, or ask the skill to look up the public filing on the SEC's adviser search site)
 - A prior version of the same DDQ — enables a "what changed" diff
 - The user's own DDQ standard or pet questions
 
@@ -99,4 +100,4 @@ Severity scale — **HIGH:** missing or evasive on compliance history, valuation
 
 ## Example prompt
 
-> "Attached: Crestline Partners' completed DDQ and their pitch deck. Scan the DDQ for red flags — especially valuation policy and compliance history — and check whether anything in it contradicts the deck. Rank findings by severity and give me the follow-up questions for the ODD call."
+> "Attached: Northbridge Capital Partners' completed DDQ and their pitch deck. Scan the DDQ for red flags — especially valuation policy and compliance history — and check whether anything in it contradicts the deck. Rank findings by severity and give me the follow-up questions for the ODD call."

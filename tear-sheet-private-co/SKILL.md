@@ -1,20 +1,29 @@
 ---
 name: tear-sheet-private-co
 description: >-
-  Generate investor-grade tear sheets on venture-backed private companies.
-  Produces a structured, sourced markdown brief covering company snapshot,
-  business model, funding history, operating metrics, management, competitive
-  landscape, and investor perspective. Use this skill whenever the user asks
-  for a "tear sheet," "company overview," "company profile," "investor brief,"
-  "due diligence summary," "company research," "private company analysis,"
-  "investment memo," or says things like "pull up a tear sheet on [company],"
-  "research [company] for me," "what do we know about [company]," "give me
-  the rundown on [company]," "prep a company overview," or "diligence
-  [company]." Also trigger when the user names a specific startup or
-  venture-backed company and asks for a summary, profile, or overview in an
-  investment context. Do NOT use for public-company equity research (10-K
-  analysis, DCF models) or for simple news lookups — this is for structured
-  private-company tear sheets.
+  Generate an investor-grade tear sheet on a venture-backed private company:
+  a structured, sourced markdown brief covering company snapshot, business
+  model, funding history, operating metrics, management, competitive
+  landscape, and investor perspective, with every key claim labeled
+  Confirmed, Reported, Estimated or Rumored. Researches from a connected
+  private-market data source (PitchBook, S&P Capital IQ, Preqin, AlphaSense
+  or similar) where there is one, plus public filings and the open web, plus
+  anything the user attaches. For venture, growth, crossover and private
+  equity investors screening a deal, monitoring a portfolio or preparing for
+  a meeting. Trigger on "tear sheet", "company overview", "company profile",
+  "investor brief", "private company analysis", "pull up a tear sheet on
+  [company]", "research [company] for me", "what do we know about
+  [company]", "give me the rundown on [company]", "diligence [company]", or
+  when the user names a startup or venture-backed company and asks for a
+  summary or overview in an investment context. Do NOT use for a listed
+  company; use the public-company-first-pass skill. Do NOT use to map all
+  the players in a sector; use the market-map-builder skill. Do NOT use for
+  a brief on a person; use the professional-profile-brief or
+  principal-background-brief skill. Do NOT use for simple news lookups.
+license: MIT
+metadata:
+  author: latourai
+  version: '2.0'
 ---
 
 # Private Company Tear Sheet Generator
@@ -27,13 +36,23 @@ Investment professionals constantly need quick, structured overviews of private 
 
 ## How It Works
 
-1. The user provides a company name (and optionally context like "pre-IPO" or "Series C stage").
-2. You research the company extensively using WebSearch.
-3. You produce a structured markdown tear sheet saved to the outputs directory.
+1. The user provides a company name (and optionally context like "pre-IPO" or "Series C stage", or material of their own: a deck, a data-room export, notes from a call).
+2. Research the company in whatever sources are available (see Research Phase).
+3. Produce a structured markdown tear sheet, saved as a file and shared with the user.
+
+If the name could refer to more than one company, ask which. Otherwise proceed without questions and state any assumption (for example, which entity or which round is the latest) at the top of the tear sheet.
 
 ## Research Phase
 
-Use WebSearch aggressively. Run at least 8–12 searches to cover:
+Use every source that is available, and say in Section 11 which ones were used:
+
+- **A connected private-market or company data source** (PitchBook, S&P Capital IQ, Preqin, AlphaSense or similar), if there is one: funding rounds, investors, valuations, headcount, executives. Cite it by name with the as-of date of the record.
+- **Public filings and the open web**, always. Database records lag and are often estimates, so check them against primary sources.
+- **Material the user attaches or pastes**, or files in connected storage (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local folder) when the user names where they are. Label it "Provided by user" and keep confidential figures out of any search query.
+
+If a data source is not connected or fails, carry on with the web and attached material, and note in Section 11 that the tear sheet was built without it.
+
+On the web, search broadly. A thorough pass usually takes eight to twelve searches covering:
 
 - Company name + "funding" / "valuation" / "Series [A/B/C/D/E]"
 - Company name + "revenue" / "ARR" / "customers"
@@ -59,7 +78,7 @@ Fetch the most promising URLs to get detailed data. Don't stop at search snippet
 
 These matter because investors make decisions based on this information:
 
-- **Hyperlink every important claim.** Valuation, funding amounts, revenue, headcount, customer counts, investor names — all need a source link.
+- **Hyperlink every important claim.** Valuation, funding amounts, revenue, headcount, customer counts, investor names — all need a source link. Where the source is a connected database or a user-provided document with no public link, name it and give its date.
 - **Distinguish confidence levels.** Use these labels consistently:
   - **Confirmed** — from the company itself, SEC filings, or official investor announcements
   - **Reported** — from reputable media citing named sources
@@ -71,9 +90,11 @@ These matter because investors make decisions based on this information:
 
 ## Output Format
 
-Save as a `.md` file to the outputs directory. Name it `[company-name]-tear-sheet.md` (lowercase, hyphens).
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
-The tear sheet follows this exact 11-section structure:
+Save as a `.md` file named `[company-name]-tear-sheet.md` (lowercase, hyphens).
+
+The tear sheet follows the 11-section structure below. Keep all 11 sections: where a section has no data, write "Not disclosed" in it, because the absence is itself information for an investor. The whole document should read in five to seven minutes, so prefer density to length and cut anything that does not help the reader judge the company.
 
 ---
 
@@ -246,20 +267,9 @@ Prefer articles from the last 12 months. If fewer than five recent articles exis
 
 ---
 
-## Quality Checklist
-
-Before delivering the tear sheet, verify:
-
-- Every section is present (all 11). If a section has no data, include it with "Not disclosed" rather than omitting it.
-- Valuation, funding, and revenue claims all have hyperlinked sources.
-- Confidence labels (Confirmed / Reported / Estimated / Rumored) are used for key financial claims.
-- Tables are well-formed markdown that will render cleanly.
-- The document reads in 5–7 minutes — cut ruthlessly if it's running long. Investors skim; density beats length.
-- No invented facts. If you're uncertain about something, say so. The reader is making investment decisions.
-
 ## Edge Cases
 
 - **Very early-stage companies** (seed/Series A): Many sections will be thin. That's fine — use "Not disclosed" liberally and focus on what's available (founders, product, early traction, investors).
-- **Companies with minimal press coverage**: Note the coverage gap in Section 11. Lean harder on Crunchbase/PitchBook references, company website, and LinkedIn for management data.
+- **Companies with minimal press coverage**: Note the coverage gap in Section 11. Lean harder on private-market database records, the company website, and LinkedIn for management data.
 - **Recently acquired companies**: Note the acquisition in the Company Snapshot. Still complete the full tear sheet — the historical data is useful context.
 - **Companies with conflicting data**: Present both figures with their sources and flag the contradiction in Section 11.

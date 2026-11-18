@@ -7,12 +7,14 @@ description: >-
   portfolio company attribution, term length, definition breadth, residuals,
   employee and customer contact restrictions, financing tree exclusivity, and
   return-or-destroy obligations — ending in a sign-as-is / sign-with-markups /
-  send-to-counsel call. For private equity, growth equity, credit, and
+  send-to-counsel call. The firm's house positions, fund structure, and
+  signing rules are saved once in a short first-run setup, so every NDA is
+  judged against the same playbook. For private equity, growth equity, credit, and
   corporate development teams turning routine process NDAs; associates, VPs,
   and in-house counsel. Trigger on phrases like "review this NDA," "can we
   sign this," "check this confi," "what's wrong with this NDA," "mark up this
   confidentiality agreement," "is this standstill a problem," "banker sent an
-  NDA," or when a user uploads an NDA, confidentiality agreement, or CA from a
+  NDA," "set up pe-nda-review," "change my pe-nda-review settings," or when a user uploads an NDA, confidentiality agreement, or CA from a
   sell-side process. Do NOT use for a hedge fund side letter — use the
   side-letter-term-extractor skill. Do NOT use for a credit agreement — use
   the credit-agreement-covenant-extractor skill. This is a commercial screen,
@@ -20,7 +22,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '2.0'
 ---
 
 # PE NDA Review
@@ -36,19 +38,37 @@ The buy-side issues are also specific and repetitive in a way that suits systema
 ## Inputs
 
 **Required:**
-- The NDA, confidentiality agreement, or CA (uploaded or pasted)
+- The NDA, confidentiality agreement, or CA. It can be attached, pasted, or pulled from connected file storage (SharePoint / OneDrive, Google Drive, Box, Dropbox) if the user names where it lives.
 
 **Optional but high-value:**
-- **Your firm's house positions** — the things you never accept and the fallbacks you will take. Without these the review runs against general market convention and says so.
 - Deal context: who sent it, the target and sector, process stage, whether the process is competitive, how much you want the book
 - Whether you own or are looking at competing or adjacent assets in the sector — this changes how much the non-solicit and non-use provisions cost you
-- Your fund's structure: number of portfolio companies, whether they hire in this sector, and whether your affiliates include an operating group or a credit arm
 - Any prior NDA with the same counterparty or banker, for a precedent comparison
-- Who has signing authority and whether counsel review is required above a threshold
 
-**Missing-input behavior:** The NDA alone is enough to run. Without house positions, judge against general market convention for buy-side confidentiality agreements and label the recommendation section accordingly — "assessed against typical market positions; substitute your house standards." Ask once for house positions if the user seems likely to have them, but do not block on it. If the document is partial or has unreadable exhibits, say which sections are missing rather than reviewing around the gap silently.
+**Set once in setup (step 0):** the firm's house positions (what it never accepts and the fallbacks it will take), the fund's structure (portfolio companies, the sectors they hire in, affiliates such as an operating group or a credit arm), who can sign and when counsel review is required, and where reviews are saved.
+
+**Missing-input behavior:** The NDA alone is enough to run. Without saved or supplied house positions, judge against general market convention for buy-side confidentiality agreements and label the recommendation section accordingly — "assessed against typical market positions; substitute your house standards." If the document is partial or has unreadable exhibits, say which sections are missing rather than reviewing around the gap silently.
 
 ## How it works
+
+### 0. First-run setup (once, then only when asked)
+
+Run setup the first time the skill is used, or when the user says "set up pe-nda-review" or "change my pe-nda-review settings". Look for a saved settings file first (`pe-nda-review-settings.md`, in the project's files or the folder where NDA reviews are saved). If one exists, read it and skip setup.
+
+Setup is one short round of questions, each with a default the user can accept:
+
+1. **Detect before asking.** If an NDA playbook, a form NDA, or a previously negotiated NDA is attached, or is findable in connected file storage under the name the user gives, read it and pre-fill the house positions for confirmation.
+2. **Ask, in one message:**
+   - **House positions:** what the firm never accepts, its preferred position, and the fallback it will take, for the main provisions: non-solicit scope and duration, standstill, affiliate and portfolio company reach, term, governing law, remedies. A playbook document or the firm's own form NDA answers this. Default if skipped: general market convention, labeled as such in every review.
+   - **Fund structure:** roughly how many portfolio companies, the sectors they hire in, and whether affiliates include an operating group, a credit arm, or other funds. "Not relevant" is valid for a corporate development team.
+   - **Signing and escalation:** who can sign, and what always goes to counsel (for example any standstill, any non-standard governing law, anything above a set term). Default: the skill makes the call provision by provision.
+   - **Where to save reviews**, or "just send them to me" (default).
+3. **Save the settings** to `pe-nda-review-settings.md` in plain language the user can edit. If nothing persistent can be written, show the settings as a short block and tell the user to paste it into their project instructions.
+4. **Continue straight into the review** if the user gave an NDA with the setup request.
+
+On every later run: read the settings and never re-ask. Positions stated in a request override the saved ones for that NDA only. Setup never blocks a first run: if the user says "skip setup", review against market convention and say so. If the save location isn't reachable, return the review in the conversation and say so.
+
+### Steps for each NDA
 
 1. **Identify the document type and posture.** One-way or mutual, who the disclosing party is, governing law, term, and whether this is the banker's standard form or something bespoke. A bespoke form deserves more attention.
 2. **Read the definitions first.** "Confidential Information," "Representatives," "Affiliates," and "Person" determine the reach of everything else. The affiliate definition in particular decides whether this agreement binds your portfolio companies.
@@ -56,7 +76,7 @@ The buy-side issues are also specific and repetitive in a way that suits systema
 4. **Assess each issue on two axes:** how much it constrains the fund, and how likely the counterparty is to concede it. A deal-blocker they will never move on is a different problem from a deal-blocker that is standard to negotiate away.
 5. **Draft markup language for everything rated negotiate or worse** — actual replacement text, not a description of what you want. Include the fallback position where a clean win is unlikely.
 6. **Check for the buy-side-specific traps** — portfolio company attribution, restrictions on looking at competing deals, non-use provisions broad enough to constrain ordinary investing, and financing tree exclusivity that limits your lender options.
-7. **Give the bottom line:** sign as-is, sign with the attached markups, or send to counsel — and when it is counsel, say specifically which provisions need a lawyer rather than sending the whole document.
+7. **Give the bottom line:** sign as-is, sign with the attached markups, or send to counsel, applying the saved escalation rules — and when it is counsel, say specifically which provisions need a lawyer rather than sending the whole document.
 
 ## Output format
 
@@ -146,7 +166,9 @@ The recurring issues, roughly in order of how much damage they do:
 
 ## Example prompts
 
-> "NDA from the banker on Project Cardinal, attached. Standard mid-market services process, we want the book. Our house positions: no non-solicit past 12 months, never accept anything covering non-management employees, never accept a standstill on a sell-side process. Can we sign it today?"
+> "Set up pe-nda-review. Our house positions: no non-solicit past 12 months, never accept anything covering non-management employees, never accept a standstill on a sell-side process, portfolio companies carved out unless they actually receive information. We have eleven portfolio companies, mostly healthcare services, plus a credit fund. Anything with a standstill or non-New York, non-Delaware law goes to outside counsel."
+
+> "NDA from the banker on Project Cardinal, attached. Standard mid-market services process, we want the book. Can we sign it today?"
 
 > "Mutual NDA for a proprietary conversation with a founder. Attached. We own two companies in the adjacent space — flag anything that constrains what we can do with them."
 

@@ -1,53 +1,67 @@
 ---
 name: inbox-triage
-description: Pre-market inbox triage for hedge fund executives. Scans Gmail and surfaces only the emails that matter before the trading day starts. Use this skill whenever the user asks to triage their inbox for trading day prep, says "pre-market inbox", "morning email scan", "what's urgent before the open", "check my email", "inbox triage", "morning briefing", "email priorities", "what needs my attention", "any urgent emails", "what did I miss overnight", "catch me up on email", "what's waiting for me", "pre-market check", "morning triage", or any variation of wanting to see what emails need attention before markets open. Also trigger when the user says "trading day prep", "what came in overnight", "anything from investors", "LP emails", "compliance emails", "risk alerts", or mentions needing to scan email before the bell. This skill is purpose-built for hedge fund and investment management executives who receive hundreds of emails daily and need a ruthlessly filtered view of what actually matters.
+description: >-
+  Pre-market inbox triage for hedge fund and investment management
+  executives. Scans the user's unread email in Microsoft 365 (Outlook) or
+  Google Workspace (Gmail), or a pasted or exported message list when no
+  mailbox is connected, and surfaces only the messages that matter before the
+  trading day starts, sorted into high, medium and low priority with a
+  suggested action for each. The VIP sender list, market-open time and any
+  extra senders to ignore are set once in a short first-run setup. For
+  executives who receive hundreds of emails a day and need a strictly
+  filtered view. Trigger on "pre-market inbox", "morning email scan", "what's
+  urgent before the open", "check my email", "inbox triage", "morning
+  briefing", "email priorities", "what needs my attention", "any urgent
+  emails", "what did I miss overnight", "catch me up on email", "trading day
+  prep", "anything from investors", "LP emails", "compliance emails", "risk
+  alerts", "set up inbox-triage", or "change my inbox-triage settings". Do
+  NOT use to review the history of one relationship; use the
+  relationship-status-summarizer skill. Do NOT use to work through sell-side
+  research; use the sellside-research-triage skill. The skill reads mail
+  only: it never sends, replies, archives, deletes or marks anything as read.
+license: MIT
+metadata:
+  author: latourai
+  version: '2.0'
 ---
 
 # Inbox Triage
 
-Ruthlessly filter a hedge fund executive's inbox down to what matters before markets open. This person gets hundreds of emails a day — the bar for surfacing something is HIGH.
+Filter a hedge fund executive's inbox down to what matters before markets open. This person gets hundreds of emails a day, so the bar for surfacing something is high.
 
 ## Why this exists
 
-A hedge fund executive's morning is not like a normal morning. Before 9:30 AM ET, they need to know: Is there anything in my inbox that could affect my positions, my investors, my compliance posture, or my team? Everything else is noise. This skill applies that lens mercilessly.
+A hedge fund executive's morning is not like a normal morning. Before the open, they need to know: is there anything in my inbox that could affect my positions, my investors, my compliance posture, or my team? Everything else is noise. This skill applies that lens strictly.
 
-## VIP Stakeholders (customize this list)
+## Inputs
 
-Messages from anyone on this list are automatically flagged 🔴 HIGH regardless of content. Update these names and emails to match the actual people in your orbit.
+- **The mailbox.** Read from the user's connected mail system: Microsoft 365 (Outlook) or Google Workspace (Gmail). If no mailbox is connected, or the connection fails, say so and ask the user to paste or export the unread messages (sender, To or CC, subject, time, and the first lines of each); the triage then runs on that list.
+- **Optional scope from the request:** a time window, a sender, or a topic ("anything from our prime broker?", "LP emails this week").
+- **Set once in setup (step 0):** mail system, VIP sender list, market-open time and time zone, default look-back window, and extra senders to ignore.
 
-### Direct Reports To
+## Step 0 — First-run setup (once, then only when asked)
 
-- [Your CIO / Managing Partner name]
-- [Fund principal / founder]
+Run setup the first time the skill is used, or when the user says "set up inbox-triage" or "change my inbox-triage settings". Look first for a saved `inbox-triage-settings.md` in the project's files or the skill's working folder. If it exists, read it and skip setup.
 
-### Portfolio Managers
+Setup is one short round of questions, each with a default the user can accept:
 
-- [PM 1 name]
-- [PM 2 name]
+1. **Detect before asking.** Check which mail system is connected and pre-fill it.
+2. **Ask, in one message:**
+   - **Mail system:** Microsoft 365 (Outlook), Google Workspace (Gmail), or neither (the user will paste messages).
+   - **VIP senders:** names, email addresses or domains whose messages are always high priority. Offer the groups below as a prompt; "none" is valid, and the list can be filled in over time.
+     - People the user reports to: CIO, managing partner, fund principal or founder
+     - Portfolio managers
+     - Investors and LPs: key LP contacts, placement agents
+     - Risk and compliance: chief risk officer, chief compliance officer, risk committee members, outside regulatory counsel
+     - Prime brokerage and key counterparties
+     - Others: board members, fund administrator, auditor, legal
+   - **Market open and time zone:** default 9:30 AM Eastern.
+   - **Default look-back window:** default the last 12 hours.
+   - **Extra senders to ignore:** newsletters, digests or internal lists specific to this inbox. Default none.
+3. **Save the settings** to `inbox-triage-settings.md` in plain language the user can edit by hand. If nothing persistent can be written, show the settings as a short block and tell the user to paste it into their project instructions.
+4. **Continue straight into the triage** if the user asked for one.
 
-### Investors / LPs
-
-- [Key LP contact 1]
-- [Key LP contact 2]
-- [Placement agent contacts]
-
-### Risk & Compliance
-
-- [Chief Risk Officer]
-- [Chief Compliance Officer]
-- [Risk committee members]
-- [Outside counsel — regulatory matters]
-
-### Prime Brokerage & Counterparties
-
-- [Prime broker contact]
-- [Key counterparty contacts]
-
-### Other VIPs
-
-- [Board members]
-- [Fund administrators]
-- [Key service providers — auditor, legal]
+On later runs, read the settings and do not re-ask. Setup never blocks a run: if the user says "skip setup", triage with the defaults and an empty VIP list, and say so in the briefing.
 
 ---
 
@@ -55,145 +69,123 @@ Messages from anyone on this list are automatically flagged 🔴 HIGH regardless
 
 ### 🔴 HIGH — Action required before market open
 
-These are emails that could affect positions, capital, compliance, or key relationships. If it's 🔴, the executive should see it before they look at anything else.
+These are emails that could affect positions, capital, compliance, or key relationships. The executive should see them before anything else.
 
-**Auto-HIGH triggers (regardless of content):**
+**Automatically high, whatever the content:**
 
-- Sender is on the VIP Stakeholders list above
-- Someone is following up on something you owe them ("circling back", "any update", "following up", "checking in")
+- The sender is on the VIP list from setup
+- Someone is following up on something the user owes them ("circling back", "any update", "following up", "checking in")
 
-**Content-based HIGH triggers:**
+**High based on content:**
 
 - Trade-related communications: execution issues, settlement fails, margin calls, position inquiries, NAV discrepancies
 - Investor/LP communications: capital calls, redemption notices, reporting requests, due diligence questions, investor meeting follow-ups
-- Regulatory and compliance: SEC notices, compliance alerts, regulatory filings deadlines, audit requests, suspicious activity flags
+- Regulatory and compliance: SEC notices, compliance alerts, regulatory filing deadlines, audit requests, suspicious activity flags
 - Risk alerts: limit breaches, drawdown notifications, counterparty credit issues, liquidity concerns
-- Urgent operational: fund administrator issues, prime brokerage communications, wire transfer confirmations/issues, legal matters with deadlines
+- Urgent operational: fund administrator issues, prime brokerage communications, wire transfer confirmations or issues, legal matters with deadlines
 - Client escalations: unhappy investors, service complaints, performance questions with urgent tone
 - Time-sensitive language: "before the open", "EOD", "ASAP", "urgent", "immediately", "deadline today", "time-sensitive", "waiting on you", "need this by"
 
 ### 🟡 MEDIUM — Important but can wait until mid-day
 
-These matter, but the fund won't blow up if they wait a few hours.
+These matter, but nothing breaks if they wait a few hours.
 
-**Content-based MEDIUM triggers:**
-
-- Meeting prep for today's calendar (board meetings, investor calls, PM reviews) — especially if there are materials to review
+- Meeting prep for today's calendar (board meetings, investor calls, PM reviews), especially if there are materials to review
 - Non-urgent colleague requests: research asks, process questions, team coordination
 - Counterparty communications without urgency: documentation requests, standard confirms, relationship check-ins
 - Operational items with deadlines this week but not today
-- New business / fundraising threads that aren't time-critical
-- Warm introductions and referrals — these are relationship-valuable but can wait
-- Legal documents for review (not deadline-imminent)
+- New business and fundraising threads that aren't time-critical
+- Warm introductions and referrals: valuable for the relationship, but they can wait
+- Legal documents for review (no imminent deadline)
 - HR and compensation matters
 
 ### 🟢 LOW — Worth knowing, no action needed today
 
-Good to be aware of, but zero urgency.
-
-**Content-based LOW triggers:**
-
-- Industry news that's genuinely relevant to the fund's strategy (not generic market commentary)
+- Industry news that is relevant to the fund's strategy (not generic market commentary)
 - Conference and event invitations
-- Completed document signatures (DocuSign, etc.) — confirmation only
+- Completed document signatures (confirmation only)
 - Internal announcements that are informational
-- Professional network updates that are actually substantive
-- Building/office logistics (visitor passes, facility notices)
+- Professional network updates with real substance
+- Building and office logistics (visitor passes, facility notices)
 
 ---
 
-## What to IGNORE entirely
+## What to ignore entirely
 
-These never appear in the output. Don't even count them in the filtered total — they're invisible.
+These do not appear in the output except as counts in the footer.
 
-**Newsletters & digests:**
+**Newsletters and digests:**
 
 - Any sender containing "substack", "newsletter", "digest", "noreply", "no-reply", "mailer", "notify", "updates@", "news@"
-- Domains: beehiiv.com, substack.com, mailchimp.com, hubspot.com, intercom.io
-- Market commentary blasts, research distribution lists, morning notes from sell-side
-- AI newsletters (The Rundown, Ben's Bites, TLDR, etc.)
-- Pebblr daily digests ([noreply@pebblr.io](mailto:noreply@pebblr.io))
-- Substack notification emails and own-post delivery copies
+- Mail sent through newsletter and marketing platforms (for example beehiiv.com, substack.com, mailchimp.com, hubspot.com, intercom.io)
+- Market commentary blasts, research distribution lists, morning notes from the sell side
+- Topic newsletters and daily digests of any kind
+- Any sender on the ignore list from setup
 
-**Research & market blasts:**
+**Research and market blasts:**
 
-- Sell-side research distribution (Goldman, JPM, Morgan Stanley morning notes, etc.)
-- Market data service alerts (Bloomberg, Refinitiv, FactSet automated emails)
+- Sell-side research distribution (Goldman, JPM, Morgan Stanley morning notes and the like)
+- Market data service alerts (automated emails from Bloomberg, Refinitiv, FactSet)
 - Generic market commentary and "daily wrap" emails from brokers
-- Bulk research reports — unless from a PM or analyst on the VIP list forwarding something specific
+- Bulk research reports, unless a PM or analyst on the VIP list forwarded something specific
 
-**Promotional & transactional:**
+**Promotional and transactional:**
 
 - SaaS product emails, billing receipts, welcome emails
 - Vendor pitches, demo requests, cold sales outreach
-- Google Workspace notifications, product updates
+- Product-update and admin notifications from the mail or office suite
 - Subscription confirmations, order receipts
 
 **Calendar noise:**
 
-- "Accepted:", "Declined:", "Tentative:" auto-responses (unless they contain a personal note)
-- Google Calendar notification sender ([calendar-notification@google.com](mailto:calendar-notification@google.com))
+- "Accepted:", "Declined:", "Tentative:" auto-responses, unless they contain a personal note
+- Automated calendar notification senders
 
 **Low-signal social:**
 
-- LinkedIn notifications, Twitter/X notifications
-- Social media digests
+- LinkedIn and X notifications, social media digests
 - Group threads that are clearly social banter (short messages, jokes, emojis)
-- "Thread closed" replies — short acknowledgments like "Thanks!", "Got it", "Sounds good!" that signal a conversation is resolved
+- Short acknowledgments such as "Thanks!", "Got it", "Sounds good!" that show a conversation is resolved
 
 **Automated system alerts:**
 
 - CI/CD notifications, deployment alerts
-- IT system monitoring (unless it's a trading system outage — use judgment)
-- Password reset emails, 2FA codes (these are ephemeral)
+- IT system monitoring, unless it reports a trading system outage (use judgement)
+- Password reset emails and one-time codes
 
 ---
 
 ## Workflow
 
-### Step 1 — Fetch recent inbox messages
+### Step 1 — Fetch recent unread messages
 
-Run two targeted Gmail searches. Default time window: overnight (last 12 hours). Adjust based on what the user asks — "what did I miss this week" = 7 days, "anything urgent" = last 6 hours.
+Search the connected mailbox twice. The default window is the look-back window from setup (12 hours unless changed). Adjust to the request: "what did I miss this week" means 7 days; "anything urgent" means the last 6 hours.
 
-**Search 1 — Direct emails:**
+- **Search 1, direct mail:** unread messages in the window, leaving out anything the mail system has already sorted as promotional, social, junk or low-priority (Gmail's Promotions and Social categories; Outlook's Junk folder and "Other" tab). Up to 75 results.
+- **Search 2, CC'd mail:** unread messages in the window where the user is on the CC line, with the same exclusions. Up to 30 results.
 
-```
-Query: "is:unread -category:promotions -category:social newer_than:1d"
-maxResults: 75
-```
+Use the mail system's own search syntax. Deduplicate by thread or conversation across both searches. Track whether the user was in the To field or only CC'd.
 
-**Search 2 — CC'd emails (shorter leash):**
-
-```
-Query: "is:unread cc:me -category:promotions -category:social newer_than:1d"
-maxResults: 30
-```
-
-Use the Gmail MCP tools (prefixed `mcp__6c627729-09a2-40da-97c1-850fb310e12e__`) for all email operations:
-
-- `search_threads` to run the queries above
-- `get_thread` to read full message content for emails that survive first-pass filtering
-
-Deduplicate results by thread ID across both searches. Track which emails had the user in the To field vs. CC — To-field emails get priority over CC in borderline cases.
+If the user pasted or exported a message list, treat that list as the search result and continue.
 
 ### Step 2 — First-pass filtering (metadata only)
 
-Using only sender, subject line, and snippet from search results, immediately discard anything matching the IGNORE patterns above. No need to read full messages for obvious noise.
-
-Be aggressive here. The goal is to cut the list from potentially 75+ emails down to the 10-20 that deserve a closer look.
+Using only sender, subject line and preview text, discard anything matching the ignore patterns above. There is no need to open obvious noise. This pass should cut 75 or more messages down to the 10 to 20 that deserve a closer look.
 
 ### Step 3 — Read and classify surviving emails
 
-For each email that survived the first pass, use `get_thread` to read the full content. Apply the priority tier rules:
+Open each surviving thread and read the full content. Apply the tier rules in this order:
 
-1. **Check VIP list first.** If the sender matches anyone in the VIP Stakeholders section, it's automatically 🔴 HIGH.
-2. **Check for "waiting on me" signals.** Follow-ups, unanswered questions, threads where the user was last asked something — these are 🔴 HIGH regardless of sender.
-3. **Apply content-based classification** using the tier definitions above.
-4. **CC vs. To tiebreaker.** If an email is borderline between two tiers and the user is only CC'd (not in the To field), drop it to the lower tier.
+1. **VIP list first.** A sender on the VIP list is 🔴 HIGH.
+2. **"Waiting on me" signals.** Follow-ups, unanswered questions, and threads where the user was last asked something are 🔴 HIGH whoever sent them.
+3. **Content-based classification** using the tier definitions above. Read before classifying: an email from compliance that says "annual training reminder" is noise, and one that says "urgent: position limit breach" is 🔴.
+4. **To versus CC.** If an email is borderline between two tiers and the user is only CC'd, put it in the lower tier. CC-only emails need a strong signal (VIP sender, urgent language, trade-related content) to reach 🔴.
 
-If an email still looks like noise after reading the full content, drop it silently.
+If an email still looks like noise after reading it, drop it. When unsure between surfacing and dropping, keep the item as 🟢: missing a real issue is worse than showing one extra low-priority line.
 
 ### Step 4 — Present the briefing
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 **Header line with counts:**
 
@@ -238,13 +230,19 @@ Filtered out: ~N newsletters, ~N research blasts, ~N promotional, ~N calendar/sy
 
 ---
 
-## Important Behaviors
+## Behaviors
 
-- **The bar is HIGH.** This is not a general inbox summary. If you're unsure whether something deserves to surface, lean toward filtering it out for 🔴 and 🟡, but keep borderline items as 🟢 rather than dropping them entirely. It's worse to miss a genuine issue than to include one extra low-priority item.
-- **Direct-to beats CC.** If the user is in the To field, the email is more important than if they're CC'd. CC-only emails need strong signals (VIP sender, urgent language, trade-related content) to reach 🔴.
-- **Context matters for compliance and risk.** An email from "compliance@" that says "annual training reminder" is noise. An email from compliance that says "urgent — position limit breach" is 🔴. Read before classifying.
-- **Overnight vs. intraday.** If the user runs this before market open, weight anything that arrived overnight or early morning more heavily — those are things they haven't seen yet. If they run it mid-day, adjust accordingly.
-- **Empty inbox is a good sign.** If there's nothing urgent, say so: "Your inbox is clean — nothing requiring attention before the open." Don't manufacture urgency.
-- **Adapt to specificity.** If the user asks about a specific sender, topic, or timeframe ("anything from our prime broker?", "LP emails this week"), narrow the search instead of running the full triage.
-- **Respect the clock.** Keep the output tight and scannable. This person has 15 minutes before the open, not 15 minutes to read your email summary.
+- **Read only.** The skill reads mail. It does not send, reply, forward, archive, delete, label or mark anything as read. The actions in the briefing are suggestions for the user to take.
+- **Overnight versus intraday.** If the user runs this before the market open set in setup, weight anything that arrived overnight or early morning more heavily, since they haven't seen it yet. If they run it mid-day, adjust accordingly.
+- **A quiet inbox is a valid result.** If nothing is urgent, say so: "Your inbox is clean. Nothing requires attention before the open." Don't manufacture urgency.
+- **Adapt to specificity.** If the user asks about a specific sender, topic or timeframe, narrow the search instead of running the full triage.
+- **Keep it scannable.** The user has a few minutes before the open; one line of summary per email is enough.
+- **Confidential content.** Assume a firm-approved AI environment. Summarize what an email needs from the user; do not copy position details, investor names or account numbers into the briefing beyond what is needed to identify the item.
 
+## Example prompts
+
+> "Pre-market inbox. What needs me before the open?"
+
+> "Set up inbox-triage. We're on Outlook. VIPs are our CIO, the two PMs, our CCO, anyone at our prime broker's domain and our three anchor LPs. Market open is 9:30 Eastern, look back 14 hours, and ignore the internal ops-digest list."
+
+> "Anything from investors or the fund administrator this week?"

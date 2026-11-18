@@ -1,11 +1,32 @@
 ---
 name: professional-profile-brief
-description: "Prepare a busy executive for a meeting, introduction, networking conversation, or professional interaction by quickly explaining who a person is and how to open the conversation well. Use this skill whenever the user says things like 'brief me on [Name]', 'I'm meeting [Name] tomorrow', 'prep me for a meeting/intro with this person', 'help me understand this person's background', 'profile brief', 'pre-meeting prep', or pastes a LinkedIn profile, bio, company page, article, podcast page, calendar invite, meeting notes, or email and wants to understand the person before talking to them. Trigger even if the user just drops a name or a LinkedIn URL plus a meeting context. This is for understanding an individual person, not for fund-manager diligence calls or company research — those belong to the diligence and company-research skills. It is NOT a sales-automation, scraping, or bulk-prospecting tool and does NOT draft outreach by default."
+description: >-
+  Prepare a busy executive for a meeting, introduction, networking
+  conversation, or professional interaction by quickly explaining who a
+  person is and how to open the conversation well. Works from a name or
+  LinkedIn URL plus public sources, from pasted material (a profile, bio,
+  company page, article, podcast page, meeting notes), and from the calendar
+  invite and prior email threads in Microsoft 365 (Outlook) or Google
+  Workspace (Gmail) when those are connected. Trigger on "brief me on
+  [Name]", "I'm meeting [Name] tomorrow", "prep me for a meeting/intro with
+  this person", "help me understand this person's background", "profile
+  brief", "pre-meeting prep", or when the user drops a name or a LinkedIn URL
+  plus a meeting context. This is for understanding an individual person. Do
+  NOT use for diligence on a fund manager; use the hedge-fund-diligence or
+  principal-background-brief skill. Do NOT use for company research; use the
+  public-company-first-pass or tear-sheet-private-co skill. Do NOT use to
+  prepare a full LP meeting; use the lp-meeting-prep-brief skill. It is not a
+  sales-automation, scraping, or bulk-prospecting tool and does not draft
+  outreach by default.
+license: MIT
+metadata:
+  author: latourai
+  version: '2.0'
 ---
 
 # Professional Profile Brief
 
-Produce a concise, relationship-aware prep note that helps a busy executive walk into a meeting understanding who the other person is, why they matter, and how to open the conversation naturally. The output should read like an executive assistant's pre-meeting brief — specific, useful, and professionally appropriate — not a sales script and not a dossier.
+Produce a concise, relationship-aware prep note that helps a busy executive walk into a meeting understanding who the other person is, why they matter, and how to open the conversation naturally. The output should read like an executive assistant's pre-meeting brief (specific, useful, and professionally appropriate), not a sales script and not a dossier.
 
 ## Inputs
 
@@ -16,7 +37,9 @@ Accept any of the following, in any combination:
 - A calendar invite, email thread, or prior meeting notes
 - Any user-provided background
 
-The meeting context (what the meeting is for) makes the brief sharper. If it's missing and not obvious, you can still produce the brief — just note in the relevant sections what context would tighten it.
+The invite, email thread or notes can be pasted or attached. If the user's email and calendar are connected (Microsoft 365 / Outlook, or Google Workspace / Gmail) and the user names the meeting, read the invite and the most recent threads with this person from there. If nothing is connected, work from what was pasted.
+
+The meeting context (what the meeting is for) makes the brief sharper. If it's missing and not obvious, still produce the brief, and note in the relevant sections what context would tighten it.
 
 ## Sourcing
 
@@ -29,29 +52,31 @@ Use any relevant source available to you, prioritizing primary and authoritative
 - Public professional databases
 - User-provided notes, emails, prior meeting notes, calendar invites
 
-If browser, Chrome, or MCP tools are available, use them to review **public** information. If `web_search` is available, use it to confirm current role, company, and any notable recent activity rather than relying on memory.
+Where a browser or web search is available, use it to review public information and to confirm the person's current role, company, and any notable recent activity instead of relying on memory.
 
-**Only include a fact if it is sourced.** Do not guess URLs, titles, or affiliations. If you can't confirm something, it belongs in "Unknowns / Things to Confirm," not in the body.
+Include a fact only if it is sourced. Do not guess URLs, titles, or affiliations. If you can't confirm something, it belongs in "Unknowns / Things to Confirm," not in the body.
 
-## Hard Rules (non-negotiable)
+## Rules
 
 These protect the user's reputation and the subject's privacy. A brief that crosses these lines is worse than no brief.
 
-- Use **public information only**.
-- Do **not** scrape LinkedIn or any site in bulk; do not collect or export contact lists.
-- Do **not** automate connection requests or messages.
-- Do **not** fabricate mutual connections. If you can't verify a shared connection, don't claim one.
-- Do **not** infer sensitive personal attributes (e.g., health, religion, ethnicity, sexual orientation, political affiliation, family status).
-- Do **not** include private personal details unless the user provided them and they are professionally relevant.
-- Do **not** use creepy personalization, manufactured familiarity, or flattery.
-- Do **not** guess about someone's personal life or overconfidently psychologize them.
-- Do **not** write "I saw on LinkedIn..." unless the information was actually sourced from LinkedIn. Attribute honestly.
+- Use public information about the person, plus what the user provided or holds in their own email and calendar.
+- Do not scrape LinkedIn or any site in bulk, and do not collect or export contact lists.
+- Do not automate connection requests or messages.
+- Do not fabricate mutual connections. If a shared connection can't be verified, don't claim one.
+- Do not infer sensitive personal attributes (e.g., health, religion, ethnicity, sexual orientation, political affiliation, family status).
+- Do not include private personal details unless the user provided them and they are professionally relevant.
+- Do not use intrusive personalization, manufactured familiarity, or flattery.
+- Do not guess about someone's personal life or psychologize them.
+- Attribute honestly: write "I saw on LinkedIn..." only when the information came from LinkedIn.
 
 ## Output
 
-Keep the final brief to **500 words maximum** unless the user explicitly asks for more depth. Use a neutral, executive-assistant voice: concise, specific, free of filler, no hype. Do **not** include an outreach draft unless the user explicitly asks for one.
+Keep the final brief to **500 words maximum** unless the user explicitly asks for more depth. Use a neutral, executive-assistant voice: concise, specific, free of filler, no hype. Do not include an outreach draft unless the user explicitly asks for one.
 
-ALWAYS use this exact section structure:
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
+
+Use this section structure:
 
 ```markdown
 # Professional Profile Brief: [Person Name]
@@ -91,32 +116,18 @@ ALWAYS use this exact section structure:
 
 ### Section guidance
 
-- **Section 5 must be clearly labeled as inference.** Tie every inference to something observable (a role, a post, an interview), and phrase it as a possibility, not a finding.
-- **Section 6 (Relationship Hooks)** — useful, verifiable connection points such as: shared companies, schools, cities, investors, or industries; mutual connections (only if real); similar career transitions; recent posts or ideas; public professional interests. Include a personal detail only if it is professionally appropriate **and** publicly available or user-provided. When in doubt, leave it out.
-- **Section 7 vs. Section 8** — angles are openers and threads to pull on; questions are specific things to actually ask. Both should be impossible to copy-paste into a brief for a different person.
+- **Section 5 is labeled as inference.** Tie every inference to something observable (a role, a post, an interview), and phrase it as a possibility, not a finding.
+- **Section 6 (Relationship Hooks):** useful, verifiable connection points such as: shared companies, schools, cities, investors, or industries; mutual connections (only if real); similar career transitions; recent posts or ideas; public professional interests. Include a personal detail only if it is professionally appropriate **and** publicly available or user-provided. When in doubt, leave it out.
+- **Section 7 vs. Section 8:** angles are openers and threads to pull on; questions are specific things to actually ask. Both should be impossible to copy-paste into a brief for a different person.
 
 ## No-Access Mode
 
-If you cannot reach LinkedIn or browser tools, still help — don't stall.
+If LinkedIn or a browser can't be reached, still produce a brief.
 
 1. Use whatever other public sources you can reach.
 2. Use all user-provided context.
 3. Produce a **lightweight** version of the brief using the same structure, filling what you can and being explicit about thin sections.
-4. Close by inviting the user to paste the LinkedIn profile, bio, company page, recent article, or calendar invite for a stronger brief — name the specific input that would help most.
-
-## Quality Checks
-
-Before returning the brief, confirm:
-- [ ] 500 words or fewer (unless the user asked for more).
-- [ ] It actually helps the user open the meeting well.
-- [ ] It reads like an executive-assistant prep note — neutral, specific, no filler or flattery.
-- [ ] Relationship hooks are specific and professionally appropriate.
-- [ ] Inferences (esp. Section 5) are labeled as inferences, not stated as fact.
-- [ ] No sensitive personal attributes are inferred.
-- [ ] No private or creepy details included.
-- [ ] No mutual connections fabricated.
-- [ ] No outreach draft unless explicitly requested.
-- [ ] Sources are listed; unknowns are clearly separated from facts.
+4. Close by inviting the user to paste the LinkedIn profile, bio, company page, recent article, or calendar invite for a stronger brief, naming the specific input that would help most.
 
 ## Example User Prompts
 

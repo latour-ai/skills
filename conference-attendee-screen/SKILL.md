@@ -16,8 +16,11 @@ description: >-
   professionals working a conference for deal flow. Trigger on phrases like
   "screen this attendee list," "who should we meet at [conference]," "run
   the delegate list against our themes," "conference target list," "who's
-  worth meeting here," "sort this exhibitor list," or when a user uploads an
-  attendee list alongside investment themes. Do NOT use for preparing an LP
+  worth meeting here," "sort this exhibitor list," "set up
+  conference-attendee-screen," "change my conference-attendee-screen
+  settings," or when a user uploads an attendee list alongside investment
+  themes. The firm's themes, CRM and default meeting cap are saved in a short
+  first-run setup so they are not re-entered for every conference. Do NOT use for preparing an LP
   or fundraising conference schedule — use the conference-prep-planner
   skill. Do NOT use for a deep brief on one individual before a meeting —
   use the professional-profile-brief skill. Attendee lists and CRM exports
@@ -25,7 +28,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '2.0'
 ---
 
 # Conference Attendee Screen
@@ -44,7 +47,7 @@ The CRM cross-reference is the third leg, and it prevents two embarrassments tha
 
 **Required:**
 - The attendee, delegate, or exhibitor list, in whatever form the organizer provides — export, PDF, or pasted
-- The firm's live investment themes, described concretely enough to screen against: sector, size range, ownership preference, and what makes a company interesting within the theme
+- The firm's live investment themes, described concretely enough to screen against: sector, size range, ownership preference, and what makes a company interesting within the theme. Given with the request, or read from the saved settings
 
 **Optional but high-value:**
 - **A CRM export of companies and contacts the firm tracks** — this enables the coverage cross-reference, which is the difference between a target list and a collision map; a spreadsheet of names and owners is enough
@@ -52,19 +55,22 @@ The CRM cross-reference is the third leg, and it prevents two embarrassments tha
 - Prior screens of the same conference, so returning no-fits carry forward instead of being re-worked
 - The conference agenda, since a target speaking on a panel is easier to meet than one to find on a floor
 - Who from the firm is attending, so targets can be matched to the right person
-- Live connected sources (CRM, email) as an upgrade path — the baseline runs entirely from the exported and pasted materials
+- A connected CRM (Salesforce, HubSpot, Dynamics 365, DealCloud, Affinity) in place of an export, and connected file storage (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local folder) for prior screens. These are an upgrade: the baseline runs entirely from exported and pasted materials, and if a connected system fails the screen continues from those and says which system was unavailable
+
+**Set once in setup (step 0):** the firm's live themes, the CRM and how to reach it, where screens are saved, the default tier-1 cap, and who usually sends outreach.
 
 **Missing-input behavior:** List plus themes runs the screen; without a CRM export, skip the coverage cross-reference and say so — never guess at who owns a relationship. Where public information on a company is thin or ambiguous, say "could not reliably determine" and park the name on an unresolved list rather than scoring a guess; a wrong enrichment silently propagates into a wasted meeting or a skipped gem. Individuals who attend without a company affiliation are listed separately, not force-matched to same-named companies.
 
 ## How it works
 
+0. **First-run setup (once, then only when asked).** Run it the first time the skill is used, or when the user says "set up conference-attendee-screen" or "change my conference-attendee-screen settings". Look first for a saved `conference-attendee-screen-settings.md` in the project's files or the folder where screens are kept; if it exists, read it and skip setup. Otherwise check which CRM and file storage are connected, pre-fill those, and ask in one message, each with a default: the live investment themes (sector, size range, ownership preference, what makes a company interesting; no default, but themes given with the current request are saved as the answer); the CRM, or "none, I'll attach an export" (default); where finished screens and no-fit lists are saved, so next year's run can find them (default: files returned to the user); the usual tier-1 cap (default 10); and who usually attends and sends outreach (default: the user). Save the answers to `conference-attendee-screen-settings.md` in plain language the user can edit, or show the block to paste into project instructions if nothing persistent can be written, then continue into the screen. On later runs read the settings and do not re-ask; themes or a cap given in a request override the saved ones for that run. If the user says "skip setup", screen with the themes in the request and the defaults.
 1. **Parse and de-duplicate the list.** Multiple attendees from one company collapse into one company entry with its people attached — the unit of screening is the company; the unit of outreach is the person, and seniority among the attendees changes who to approach.
 2. **Enrich each company from public sources:** what it actually does in one concrete sentence (not its tagline), size signals (disclosed revenue, headcount, locations, fleet — whatever the sector's honest proxy is), ownership status (founder or family, sponsor-backed and which vintage, subsidiary, public), and recent news — financings, acquisitions, leadership changes. Distinguish found facts from inference, and mark every company where reliable information could not be found rather than papering over it.
 3. **Score against the themes** — strong fit, adjacent, or no fit — with a one-line reason naming the specific theme and the specific evidence. "Strong fit: route-based commercial services theme — 400-tech HVAC servicer, family-owned, ~$12M EBITDA by headcount proxy" earns its tier; "fits logistics" does not. The scoring discipline lives in the fit-versus-noise section below.
 4. **Cross-reference the CRM:** already covered and by whom, contacted before and what happened (a passed deal, a dormant thread, a banker relationship), or genuinely new. Prior contact is not disqualifying — a company passed on two years ago at a silly price may be the best meeting at the show — but it changes who reaches out and what the note says.
 5. **Flag conflicts between public information and the CRM** — the CRM says founder-owned, the news says a sponsor bought it last spring — explicitly, because a stale CRM record walking into a meeting is worse than no record.
 6. **Tier the targets:** tier 1 must-meet, capped at what the calendar can actually hold and ordered by fit; tier 2 opportunistic, worth a floor conversation if paths cross. Resist tier inflation — a 40-name tier 1 for a two-day conference is a skimmed list wearing a ranking.
-7. **Draft the tier-1 outreach notes** — short, specific, and referencing something real about their business (per the note anatomy below), written for the named firm attendee to send in their own voice. Adjust where a relationship owner exists: the note routes through them or references them, never around them.
+7. **Draft the tier-1 outreach notes** — short, specific, and referencing something real about their business (per the note anatomy below), written for the named firm attendee to send in their own voice and returned as text; nothing is sent. Adjust where a relationship owner exists: the note routes through them or references them, never around them.
 8. **Assemble the no-fit list with reasons,** one line each, so next year's screen of the same conference starts from a decision log instead of a blank sheet — and so a colleague can audit whether a no-fit call was right.
 9. **Package for the trip:** the tiered list ordered by fit, people to approach per company, agenda intersections where the agenda was provided, and the unresolved list as its own short section — names worth a hallway question precisely because the public record was thin.
 
@@ -136,6 +142,8 @@ The screen's value is the gap between what a company is and what its name and ba
 > "Attendee list for [conference, dates] attached — about 550 names. Our themes: route-based commercial services, specialty distribution with fragmented supply, and healthcare compliance software, all $3–20M EBITDA, founder or family owned. CRM export attached too. Tier-1 cap of 12; [partner] and I are attending. Full screen, notes for tier 1, and flag anything where the CRM looks stale."
 
 > "Same trade show as last year — last year's screen attached, this year's exhibitor list attached. Carry forward the no-fits, screen only what's new or changed, and tell me which of last year's tier-1 companies are back."
+
+> "Set up conference-attendee-screen. Themes: route-based commercial services and specialty distribution, $3–20M EBITDA, founder or family owned. We use DealCloud but I'll attach exports for now. Save screens to the 'Conferences' folder on SharePoint, tier-1 cap of 12, and I send the outreach."
 
 > "No CRM export for this one — just the delegate list and our themes: [describe]. Screen and tier, skip the coverage check, and give me the unresolved list separately; thin public record is a good sign for what we hunt."
 

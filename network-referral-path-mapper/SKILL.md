@@ -32,7 +32,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '1.1'
 ---
 
 # Network Referral Path Mapper
@@ -62,7 +62,7 @@ The third is etiquette. Relationships inside a firm belong to the people who bui
 - Any recent outreach to the target or their organization by anyone at the firm, to avoid a collision
 - The firm's internal norms on relationship ownership — who must be asked before a partner's contact is used
 
-**Missing-input behavior:** The baseline run works from whatever was pasted or exported: a CRM export alone yields direct paths with recency and owner; a contact list alone yields candidate paths with no strength score beyond "in the database." Say which level of evidence each path rests on. Never fabricate a relationship, a shared history, or an interaction that is not in the material — a plausible-sounding path ("they were likely at the same conference") is not a path. If the material shows no route to the target, the answer is "no known path," stated plainly, followed by the nearest adjacent route (someone at a peer organization, a former colleague of the target found on a public profile) labeled as a lead to develop rather than a connection the firm holds. Connected email and CRM systems make the traversal complete and current; they are an upgrade, not a precondition.
+**Missing-input behavior:** The baseline run works from whatever was pasted or exported: a CRM export alone yields direct paths with recency and owner; a contact list alone yields candidate paths with no strength score beyond "in the database." Say which level of evidence each path rests on. Never fabricate a relationship, a shared history, or an interaction that is not in the material — a plausible-sounding path ("they were likely at the same conference") is not a path. If the material shows no route to the target, the answer is "no known path," stated plainly, followed by the nearest adjacent route (someone at a peer organization, a former colleague of the target found on a public profile) labeled as a lead to develop rather than a connection the firm holds. Connected systems make the traversal complete and current: email and calendar (Microsoft 365 / Outlook, or Google Workspace / Gmail) and the CRM (Salesforce, HubSpot, Dynamics 365, DealCloud, Affinity). They are an upgrade, not a precondition. If a system isn't connected or fails, continue from the exported and pasted material and say which system was unavailable, since paths that live only there will be missing.
 
 ## How it works
 
@@ -74,7 +74,7 @@ The third is etiquette. Relationships inside a firm belong to the people who bui
 6. **Run the collision check.** Look for any recent or planned outreach to the target or their organization from anyone at the firm, and for any live process — a deal in diligence, a fundraise in progress, a portfolio-company negotiation — that the approach could cut across. Two partners reaching out to the same allocator in the same month reads as disorganization; an associate cold-calling a company the firm is already talking to through a banker is worse. Flag it before the ask is drafted, not after.
 7. **Rank the paths and say why.** Order by the composite of the five signals, but show the reasoning — a path that scores high on recency and low on willingness should be ranked below one that is a year older but held by someone who makes introductions freely. Separate paths into *warm* (a colleague can make the intro this week), *viable* (a colleague could re-open the relationship first), and *visible only* (the name is in the database and nothing more).
 8. **Choose the ask and the asker.** Pick the best path's intermediary and match the ask to the shared context: a former colleague introduces differently from a co-investor, and a board member has obligations neither has. Decide whether the right request is a direct introduction, a mention that the firm will be reaching out, or simply intelligence on how the target prefers to be approached.
-9. **Draft the internal ask first.** Write the note to the colleague who owns the relationship: what the firm wants from the target, why this colleague's connection is the right one, what the colleague is being asked to do, and an explicit out if they would rather not spend the relationship on this. The external introduction text is a draft the colleague can edit, offered alongside, never sent around them.
+9. **Draft the internal ask first.** Write the note to the colleague who owns the relationship: what the firm wants from the target, why this colleague's connection is the right one, what the colleague is being asked to do, and an explicit out if they would rather not spend the relationship on this. The external introduction text is a draft the colleague can edit, offered alongside, never sent around them. Both are returned as text for the user to pass on; the skill sends nothing and writes nothing to the CRM.
 10. **Close with the honest summary:** the recommended path and its weakest signal, the fallback if the intermediary declines, who else at the firm should know before anyone reaches out, and — where the material supports nothing better than a cold approach — say that, and give the most credible cold angle instead of an inflated warm one.
 
 ## Output format

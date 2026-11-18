@@ -1,13 +1,29 @@
 ---
-name: "ambition-upgrade"
-description: "Use when the user wants to make a task or prompt more ambitious, or says 'make this more ambitious', 'think bigger', 'altitude/depth/range'."
+name: ambition-upgrade
+description: >-
+  Take a task, project, deliverable or prompt and make it more ambitious by
+  climbing from the literal task to the outcome it serves, running the work at
+  the highest level a model can own today, and specifying the ongoing workflow
+  that would keep it owned. Follow-up lenses add depth (do it the way the
+  field's best would) and range (borrow methods from other fields). For
+  investment and corporate professionals who suspect they are asking AI for
+  too little. Trigger on "make this more ambitious", "think bigger", "aim
+  higher on this", "altitude", "depth", "range", or "what should I really be
+  asking for here". Do NOT use to stress-test an investment thesis; use the
+  thesis-red-team skill. Do NOT use to find which of a team's workflows to
+  automate; use the ai-workflow-audit skill. Do NOT use to design a new
+  skill; use the investment-skill-creator skill.
+license: MIT
+metadata:
+  author: latourai
+  version: '1.1'
 ---
- 
+
 # Ambition Upgrade
  
 Take an idea, project, task, deliverable or prompt and make it more ambitious. Based on Felix Rieseberg's framework (felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models, Oct 2026). Speed (same work, faster) is assumed and not covered.
  
-**The first response is Altitude only.** Do not include Depth or Range in the first response, not even as prompts. End by asking whether the user wants Depth and/or Range next. Run those only when the user says yes.
+**The first response is Altitude only.** Leave Depth and Range out of it entirely, so the user gets one finished piece of work to react to instead of three half-run lenses. End by asking whether they want Depth, Range or both, and run those only on a yes.
  
 ## Order of operations (first response)
  
@@ -36,7 +52,7 @@ Phrase the rungs as outcomes, not artifacts. Each rung should answer "why does t
  
 ### Step 3: Pick the AI-ownable rung and run it
 - Name the **highest rung a model can realistically own today** given the available inputs and tools, and say in one line why the next rung up is out of reach (missing data, judgment that must stay human, no feedback loop). Felix notes limits exist ("Claude, go make money" doesn't work by itself), but the ceiling rises with model capability, so push up.
-- **Execute the work at that rung**, not just describe it. Gather the inputs: what the user attached, plus connected sources that bear on the task (drive, email, CRM, meeting notes, web). Prefer raw material over summaries.
+- **Execute the work at that rung**, not just describe it. Gather the inputs: what the user attached, plus whichever connected sources bear on the task (file storage, email and calendar, CRM, meeting notes, market data, the web). If a source that would help isn't connected, run on what is available and name it under gaps. Prefer raw material over summaries.
 - At minimum, go past the task: explain what changed, why, and what to do; surface the most urgent decisions with for/against cases.
 - At the goal or end-goal rung, propose a better mechanism than the current artifact. If there's enough history, backtest it (show it would have caught things sooner). If not, specify the backtest and propose running the new mechanism in parallel with the current one for a cycle.
 - If key inputs are missing, run on what's available, label assumptions inline, and note what would let a fuller run climb higher. Never stall waiting for data.
@@ -55,6 +71,8 @@ List concretely:
 Give one copy-paste-ready prompt that asks for the work at the chosen rung, naming inputs, the outcome, and the verification step.
  
 ## Output format (first response)
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
  
 ```
 **Task as I read it:** <one line>

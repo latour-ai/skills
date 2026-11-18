@@ -10,13 +10,19 @@ description: >-
   expansion, or deleveraging. The labelling is calibrated to the analyst's
   own judgment: the analyst keeps a plain file of labelled example claims
   and corrections, the skill reads it on every run, and every run reports
-  how far its labels agree with the analyst's. For research analysts and
+  how far its labels agree with the analyst's. Documents and the
+  calibration file can be attached or read from the firm's file storage
+  (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local folder); where
+  the calibration file, theme list and thesis factors live is saved once in
+  a short first-run setup. For research analysts and
   portfolio managers on long/short, long-only, activist, and credit teams.
   Trigger on phrases like "pull the claims out of this transcript," "fact
   versus sentiment on this note," "score this report against our thesis
   factors," "tag every claim in the semi-annual," "how bullish is this broker
   really, claim by claim," "run the claims table and show agreement with my
-  labels," or when a user attaches a document plus a list of thesis factors.
+  labels," "set up claim-sentiment-extractor," "change my
+  claim-sentiment-extractor settings," or when a user attaches a document
+  plus a list of thesis factors.
   Do NOT use to track how management's language shifts across quarters. Do
   NOT use to file whole items in the incoming flow as bull or bear evidence
   on a position's debates — use the key-debates-ledger skill. Do NOT use
@@ -29,7 +35,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '2.0'
 ---
 
 # Claim Sentiment Extractor
@@ -57,9 +63,30 @@ The last reason is trust. Two analysts reading the same sentence will often disa
 - **Prior claim tables** for the same company, so recurring claims and changed claims can be noted
 - **The speaker roster** for a transcript, so each claim is attributed to a role (CEO, CFO, analyst, expert, operator)
 
-**Missing-input behavior:** If no thesis factors are given, extract and label claims without factor scores, propose three to five factors from the document under `[proposed factors — confirm]`, and do not score against them until confirmed. If there is no calibration file, run on the default rules below, say the run is uncalibrated, and offer a starter file built from twenty claims in this document for the analyst to label. If the calibration file has no `test` rows, report agreement as not measured rather than scoring against guidance rows the skill has already read. If a document is truncated or a page is unreadable, list the gap; never reconstruct missing text.
+Documents can be attached, pasted, or read from connected file storage when the user names where they are. A public filing or earnings transcript the user names without attaching can be pulled from a connected market data source (Bloomberg, FactSet, S&P Capital IQ, AlphaSense or similar) or from public filings and the open web; broker research and expert-network transcripts are read only from what the user supplies.
+
+**Set once in setup (step 0):** where the calibration file, the theme list and the thesis factors for each position are kept, and whether claim tables are saved.
+
+**Missing-input behavior:** If connected storage or a data source is unavailable, say which and ask for the document or file as an attachment. If no thesis factors are given, extract and label claims without factor scores, propose three to five factors from the document under `[proposed factors — confirm]`, and do not score against them until confirmed. If there is no calibration file, run on the default rules below, say the run is uncalibrated, and offer a starter file built from twenty claims in this document for the analyst to label. If the calibration file has no `test` rows, report agreement as not measured rather than scoring against guidance rows the skill has already read. If a document is truncated or a page is unreadable, list the gap; never reconstruct missing text.
 
 ## How it works
+
+### 0. First-run setup (once, then only when asked)
+
+Run setup the first time the skill is used, or when the user says "set up claim-sentiment-extractor" or "change my claim-sentiment-extractor settings". Look for a saved settings file first (`claim-sentiment-extractor-settings.md`, in the project's files or beside the calibration file). If one exists, read it and skip setup. The user can say "skip setup"; the skill then runs on what was attached and the default rules.
+
+1. **Detect before asking.** Check which file storage is connected and whether a calibration file or theme list is already in the project's files. Pre-fill what detection settles.
+2. **Ask, in one message**, each with a default the user can accept:
+   - **Calibration file:** where it is kept, or none yet (default; the first run offers a starter file).
+   - **Theme list:** the team's themes, pasted, or the file that holds them. Default: none, and themes are proposed per document.
+   - **Thesis factors:** the file where factors are kept per position, so a request can name the position and skip retyping them. Default: given with each request.
+   - **Claim tables:** shown in the conversation and sent as a file (default), or also saved to a folder so later runs can note recurring and changed claims.
+3. **Save the settings** to `claim-sentiment-extractor-settings.md` in plain language the user can edit by hand. If nothing persistent can be written, show the settings as a short block and tell the user to paste it into their project instructions.
+4. **Continue straight into the extraction** if the user gave a document with the setup request.
+
+On every later run: read the settings and do not re-ask. Setup records where the calibration file is; it does not change the rule that the skill reads that file and never edits it.
+
+### Each run
 
 1. **Read the calibration file first.** Load the guidance rows and note the analyst's patterns: where they draw the fact/sentiment line, how they treat hedged forward statements, which themes they use, how strict they are on "neutral." Set the `test` rows aside unread until step 7.
 2. **Segment the document into claims.** A claim is the smallest statement that could be true or false, or that expresses a view. Split compound sentences when the parts would get different labels; keep a sentence whole when splitting would lose the qualifier. Skip pleasantries, safe-harbour language, and operator instructions, and count what was skipped.
@@ -126,6 +153,8 @@ Agreement with analyst labels: fact/sentiment [x]% | polarity [x]% | factor scor
 ## Example prompts
 
 > "Semi-annual report for [company] attached. We're long on three factors: buybacks resume next year, operating margin expands at least 150 basis points, net debt below two times by year end. Pull every claim, label fact or sentiment, score against the three factors, and use my calibration file — report agreement on the test rows and show me every disagreement."
+
+> "Set up claim-sentiment-extractor. My calibration file is labels.csv in the 'Claims' folder on our research drive, the theme list is themes.md in the same folder, and factors per position are in thesis-factors.xlsx. Save each claim table to that folder."
 
 > "Here's a broker initiation on [company] and the Q&A section of last week's call. I want to know how much of the broker's bull case is fact and how much is adjective. Claims table for both, factor summary with facts and sentiment kept separate, and attribute every transcript claim to the speaker's role."
 

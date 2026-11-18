@@ -1,8 +1,9 @@
 # Funds to Monitor
 
-Add or remove fund names below — one per line. The skill infers aliases and
-key principals automatically, so just the common name is enough.
+Replace the placeholder lines below with the funds you want monitored, one per
+line. The skill infers aliases and key principals automatically, so the common
+name is enough. Lines still in [brackets] are ignored.
 
-- Millennium Partners
-- Viking Global
-- D.E. Shaw
+- [Fund name 1]
+- [Fund name 2]
+- [Fund name 3]

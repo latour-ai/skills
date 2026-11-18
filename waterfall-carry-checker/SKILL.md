@@ -20,7 +20,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '1.1'
 ---
 
 # Waterfall Carry Checker
@@ -37,6 +37,8 @@ The waterfall is the highest-stakes arithmetic in a fund. It determines what eve
 - The complete cash flow history: capital calls and distributions by date and by investor (or at minimum by class, if LP-level detail is unavailable)
 - The LPA's distribution and carried interest provisions, plus the relevant defined terms — verbatim, not a summary
 - The calculation being checked: the administrator's waterfall schedule, or the internal model's output, for the distribution in question
+
+All three can be attached, pasted, or pulled from connected file storage (SharePoint / OneDrive, Google Drive, Box, Dropbox) if the user names where they live.
 
 **Optional but high-value:**
 - Side letters affecting economics — fee discounts, reduced carry, most-favored-nation elections, special allocations
@@ -124,7 +126,7 @@ the document does not settle.
 The differences are almost never arithmetic. In order of how often they cause a reconciliation break:
 
 - **Pref base** — accrued on unreturned capital only, or on all contributions including management fees and fund expenses? These diverge substantially over a fund's life.
-- **Compounding convention** — annual vs. quarterly, simple vs. compounded, and whether compounding starts at contribution date or period end. A 8% pref compounded quarterly is not an 8% pref.
+- **Compounding convention** — annual vs. quarterly, simple vs. compounded, and whether compounding starts at contribution date or period end. An 8% pref compounded quarterly is not an 8% pref.
 - **Day count** — 30/360 vs. actual/365, and whether the accrual runs to the distribution date or the period end.
 - **Subsequent closings** — true-up interest paid by later investors, and whether equalization amounts are treated as contributions (earning pref) or as income.
 - **Catch-up base** — does the GP catch up on the preferred return only, or on the pref *and* the returned capital? The second is far more GP-favorable and both appear in market documents.

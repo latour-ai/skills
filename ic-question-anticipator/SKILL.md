@@ -23,7 +23,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '1.1'
 ---
 
 # IC Question Anticipator
@@ -41,7 +41,7 @@ There is also a quieter benefit. Forcing every anticipated question through an h
 ## Inputs
 
 **Required:**
-- The draft IC memo (uploaded or pasted)
+- The draft IC memo. It and the other materials below can be attached, pasted, or pulled from connected file storage (SharePoint / OneDrive, Google Drive, Box, Dropbox) if the user names where they live.
 - A model summary or key model outputs — returns by case, leverage, entry and exit assumptions, sensitivities. The full model works; a summary page is enough.
 
 **Optional but high-value:**

@@ -7,20 +7,27 @@ description: >-
   changing any facts, carrying the source and approval date beside every
   answer, and flagging questions with no acceptable match as NEEDS DRAFTING
   rather than improvising. Separately routes every performance, regulatory,
-  and policy answer for compliance review. For IR, fundraising, COO, and
+  and policy answer for compliance review. Where the library and the firm's
+  governing documents live (SharePoint / OneDrive, Google Drive, Box,
+  Dropbox, a local folder, or an export attached each run), the staleness
+  window and the house conventions are set once in a short first-run setup.
+  For IR, fundraising, COO, and
   compliance teams at private equity, private credit, hedge fund, real
   assets, and venture managers. Trigger on phrases like "draft the DDQ,"
   "answer this questionnaire," "RFP from [consultant]," "fill out this DDQ,"
   "we got an ILPA DDQ," "respond to these LP questions," "match this to our
-  answer library," or when a user uploads a due diligence questionnaire, RFP,
-  or investor question list. Do NOT use for scanning someone else's completed
+  answer library," "set up ddq-response-drafter," "change my
+  ddq-response-drafter settings," or when a user uploads a due diligence
+  questionnaire, RFP, or investor question list. Do NOT use for scanning someone else's completed
   DDQ for red flags — use the ddq-red-flag-scanner skill. Do NOT use for
-  drafting a fund one-pager — use the fund-marketing-one-pager skill. Never
+  drafting a fund one-pager — use the fund-marketing-one-pager skill. Do NOT
+  use for auditing or deduplicating the answer library itself — use the
+  ddq-answer-library-curator skill. Never
   invents facts; drafted answers require human and compliance review.
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '2.0'
 ---
 
 # DDQ Response Drafter
@@ -39,7 +46,7 @@ So the discipline this skill enforces is narrow and strict: adapt approved langu
 
 **Required:**
 - The incoming DDQ, RFP, or investor question list (uploaded or pasted)
-- **The firm's approved answer library** — ideally an export with, per entry: the question or topic, the approved answer, the source document, and the approval or as-of date. A prior completed DDQ works as a substitute library, with the caveats noted below.
+- **The firm's approved answer library** — ideally an export with, per entry: the question or topic, the approved answer, the source document, and the approval or as-of date. Read from the location saved in setup, or attached with the request. A prior completed DDQ works as a substitute library, with the caveats noted below.
 
 **Optional but high-value:**
 - The most recent Form ADV, PPM, LPA, and compliance manual, for cross-checking that library answers still match the governing documents
@@ -50,9 +57,33 @@ So the discipline this skill enforces is narrow and strict: adapt approved langu
 - Prior DDQs completed for this same LP or consultant, so answers stay consistent with what they were told before
 - The firm's tone conventions and any language compliance has previously rejected
 
-**Missing-input behavior:** Without an answer library there is nothing to draft *from*, and generating answers about a firm's policies would be fabrication of exactly the kind this skill exists to prevent. Say that plainly and ask once. If the user offers a prior completed DDQ instead of a formal library, use it — but flag that its answers carry no approval dates, so every extracted fact needs re-verification before use, and mark them accordingly throughout. If firm facts with as-of dates are not provided, never carry a figure forward from the library without marking it `[VERIFY AS-OF DATE]`.
+**Set once in setup (step 0):** where the answer library, the governing documents and the current firm facts live; the staleness window; any additions to the compliance routing list; house conventions and default output format; and where drafts are saved.
+
+**Missing-input behavior:** Without an answer library there is nothing to draft *from*, and generating answers about a firm's policies would be fabrication of exactly the kind this skill exists to prevent. Say that plainly and ask once. If the user offers a prior completed DDQ instead of a formal library, use it — but flag that its answers carry no approval dates, so every extracted fact needs re-verification before use, and mark them accordingly throughout. If the saved library location isn't connected or can't be read, say which system was unavailable and ask for the export to be attached. If firm facts with as-of dates are not provided, never carry a figure forward from the library without marking it `[VERIFY AS-OF DATE]`.
 
 ## How it works
+
+### 0. First-run setup (once, then only when asked)
+
+Run setup the first time the skill is used, or when the user says "set up ddq-response-drafter" or "change my ddq-response-drafter settings". Look for a saved settings file first (`ddq-response-drafter-settings.md`, in the project's files or beside the answer library). If one exists, read it and skip setup. If `ddq-answer-library-curator-settings.md` exists, pre-fill the library and document locations from it.
+
+Setup is one short round of questions, each with a default the user can accept:
+
+1. **Detect before asking.** Check which file storage is connected (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local folder) and whether a library export came attached. Pre-fill what detection settles.
+2. **Ask, in one message:**
+   - **Answer library:** the folder or file it lives in, an export from the firm's DDQ or RFP platform, or "I'll attach it each time" (default).
+   - **Governing documents:** where the current Form ADV, PPM or LPA, and compliance manual are kept, for the consistency checks. Default: attached when available.
+   - **Current firm facts:** a file holding AUM, fund sizes and headcount with as-of dates, if the firm keeps one. Default: supplied with each request.
+   - **Staleness window:** how old a fact can be before it is flagged. Default: any figure dated before the most recent quarter end, and any other answer approved more than 12 months ago.
+   - **Compliance routing:** topics to add to the routing list below, and who usually drafts new answers by topic (IR, compliance, CFO, CIO). Default: the list as written.
+   - **House conventions:** tone, terms the firm always or never uses, language compliance has previously rejected, and the default output format. Default: the asker's structure, returned in the chat with the tracker.
+   - **Where drafts are saved,** or "just send me the files" (default).
+3. **Save the settings** to `ddq-response-drafter-settings.md` in plain language the user can edit. If nothing persistent can be written, show the settings as a short block and tell the user to paste it into their project instructions.
+4. **Continue straight into the draft** if the user gave a questionnaire with the setup request.
+
+On later runs, read the settings and don't re-ask. Setup never blocks a first run: if the user says "skip setup", work from what is attached, use the defaults, and say which were used.
+
+### Steps for each questionnaire
 
 1. **Parse the questionnaire into discrete questions,** preserving the asker's numbering and section structure — the response has to go back in their format. Split multi-part questions into their parts; a partially answered compound question reads as evasion.
 2. **Classify each question** by type: firm and organization, strategy and process, track record and performance, team, operations and service providers, valuation, risk, compliance and regulatory, ESG, terms, references. The classification drives routing in step 6.
@@ -61,7 +92,7 @@ So the discipline this skill enforces is narrow and strict: adapt approved langu
 5. **Flag every no-match and partial-match as NEEDS DRAFTING** with a note on what specifically is being asked that the library does not cover. Never improvise the answer. A blank flagged for a human takes five minutes to fill; an invented answer that reaches an LP is a different category of problem.
 6. **Route for review.** Every answer containing a performance figure, a regulatory statement, a policy description, an AUM or headcount figure, or a forward-looking statement goes to compliance review — see the routing list below.
 7. **Run the consistency checks:** answers against each other within this DDQ, against the Form ADV and governing documents where provided, and against any prior DDQ for the same asker.
-8. **Flag every stale-dated fact** — anything where the library's as-of date is old enough that the figure has probably moved.
+8. **Flag every stale-dated fact** — anything whose as-of or approval date falls outside the staleness window in the settings.
 9. **Assemble the deliverable** in the asker's structure, with the internal tracking table alongside it.
 
 ## Output format
@@ -109,7 +140,7 @@ never silently omitted, never filled with plausible text.]
 
 ## Always route to compliance
 
-These answer types go to compliance review without exception, regardless of how well the library matches:
+These answer types go to compliance review however well the library matches, along with any topics added in setup:
 
 - Any performance figure — returns, IRR, MOIC, DPI, TVPI, benchmark comparisons, attribution — including whether gross and net are labeled as required
 - Track record presentation: which funds and deals are included, how realized and unrealized are treated, and whether the selection could read as cherry-picking
@@ -134,6 +165,7 @@ These answer types go to compliance review without exception, regardless of how 
 - **Do not answer questions about individuals' backgrounds, regulatory history, or personal circumstances** from anything other than approved firm records.
 - **Never omit a question.** An unanswered question left out of the response document is worse than one flagged as needing drafting.
 - **This is a draft, not a submission.** Every response requires human review by someone accountable for its accuracy, and compliance review for the routed items, before it goes to the LP.
+- **The library is read, never edited.** The skill does not change, add to, or reorder the answer library, and it does not submit anything to an LP, a consultant, or a questionnaire portal. Drafts are saved only to the location chosen in setup; otherwise they are returned as files or text.
 - **Confidentiality:** DDQs, answer libraries, and fund documents are confidential. Assume a firm-approved AI environment.
 
 ## Example prompts
@@ -141,6 +173,8 @@ These answer types go to compliance review without exception, regardless of how 
 > "ILPA DDQ from [consultant] attached, due in ten days. Our approved answer library export is the second file — it has question, answer, source doc, and approval date. Draft what you can, flag what needs real drafting, and route anything compliance has to see. AUM as of quarter end was $3.4B, headcount 41."
 
 > "This LP sent a bespoke 90-question list, no standard format. We don't have a formal library but here's our last completed DDQ from March. Draft from it, but flag everything that needs re-verification since we don't have approval dates."
+
+> "Set up ddq-response-drafter. The approved library is the 'DDQ Answer Library' workbook in our IR SharePoint site, the ADV and PPM are in the 'Fund docs' folder next to it, flag anything older than six months, and save drafts to 'DDQs in progress'."
 
 > "Short-form DDQ, 200-character limit per answer. Library attached. Adapt our standard answers to fit the limit without dropping anything compliance requires."
 

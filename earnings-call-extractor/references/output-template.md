@@ -1,6 +1,6 @@
 # Earnings Call Memo — Output Template
 
-This document defines the exact structure and formatting for each of the 10 sections in the earnings call memo. Follow these specifications precisely.
+This document defines the structure and formatting for each of the 9 sections in the earnings call memo.
 
 ---
 
@@ -15,7 +15,6 @@ This document defines the exact structure and formatting for each of the 10 sect
 7. [Q&A Theme Summary](#7-qa-theme-summary)
 8. [Red Flags, Soft Spots and Open Questions](#8-red-flags-soft-spots-and-open-questions)
 9. [Condensed Transcript](#9-condensed-transcript)
-10. [Final Quality Check](#10-final-quality-check)
 
 ---
 
@@ -142,7 +141,7 @@ If no formal guidance was provided, state that clearly: "No formal quantitative 
 
 ## 6. Analyst Q&A
 
-This is often the most valuable section. For EVERY analyst question, use this exact structure:
+This is often the most valuable section. For every analyst question, use this structure:
 
 ---
 
@@ -259,20 +258,3 @@ A clean, condensed version of the full transcript, targeting roughly 50% of the 
 - Flag vague or evasive answers with bracketed notes
 - Remove: filler words, pleasantries, "great question" responses, operator instructions, safe harbor language, repeated information
 - Do not add any information that wasn't in the original transcript
-
----
-
-## 10. Final Quality Check
-
-Before delivering the memo, verify each of these items. Include this checklist at the end of the memo with a checkmark or note for each:
-
-- [ ] Memo is materially shorter than the original transcript (~50% reduction target)
-- [ ] CEO and CFO sections are clearly separated
-- [ ] Every analyst question from the Q&A is included
-- [ ] Analyst names and firms are included where the transcript provided them
-- [ ] All explicitly stated YoY changes are captured accurately
-- [ ] No YoY changes were calculated — only transcript-stated comparisons appear
-- [ ] No metrics were invented or sourced from outside the transcript
-- [ ] Vague or evasive answers are flagged with quality ratings
-- [ ] Tone is neutral throughout — no buy/sell/hold language, no editorializing
-- [ ] The memo reads like a professional public equity research document

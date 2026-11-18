@@ -1,22 +1,28 @@
 ---
 name: fund-marketing-one-pager
 description: >-
-  Draft a fund marketing one-pager in polished markdown from whatever inputs
-  the user provides. Use this skill whenever a fund manager, GP, or IR
-  professional wants to create or improve a fund overview document for LP
-  outreach. Trigger on phrases like "fund one-pager," "fund overview,"
-  "marketing doc," "fund summary," "LP marketing materials," "fund pitch
-  summary," "write up our fund," "draft our fund overview," "fund description
-  for LPs," "what do I send prospective LPs," or any request to produce a
-  top-of-funnel document that describes a fund to prospective investors.
-  Also trigger when the user uploads or pastes a pitch deck, DDQ, investor
-  letter, prior marketing document, or strategy description and asks to turn
-  it into a fund overview. This skill is input-agnostic — it works from a
-  few sentences or from a full document upload.
+  Draft a fund marketing one-pager in polished markdown from whatever the
+  user provides: a few sentences, pasted bullets, or a pitch deck, DDQ,
+  investor letter or prior marketing document. The fund's standing facts,
+  house voice, required disclaimer and contact block are recorded once in a
+  short first-run setup, so later drafts and refreshes start from them. For
+  fund managers, GPs and IR professionals who need a top-of-funnel overview
+  for prospective LPs, especially emerging managers without a dedicated IR
+  team. Trigger on "fund one-pager," "fund overview," "marketing doc," "fund
+  summary," "LP marketing materials," "fund pitch summary," "write up our
+  fund," "draft our fund overview," "fund description for LPs," "what do I
+  send prospective LPs," "set up fund-marketing-one-pager," "change my
+  fund-marketing-one-pager settings," or when the user uploads or pastes a
+  pitch deck, DDQ, investor letter, prior marketing document or strategy
+  description and asks to turn it into a fund overview. Do NOT use to check
+  finished marketing material against the SEC Marketing Rule; use the
+  marketing-compliance-prescreen skill. Do NOT use for a quarterly letter to
+  existing investors; use the lp-update-generator skill. Do NOT use to build
+  slides; use the idea-to-slide skill.
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '2.0'
 ---
 
 # Fund Marketing One-Pager
@@ -33,7 +39,7 @@ The output is polished markdown — structured cleanly enough to drop into a tem
 
 - It does not invent strategy, performance, team backgrounds, or differentiators. Everything in the output comes from what the user provides.
 - It does not calculate or derive performance metrics. If numbers are provided, they are presented as given.
-- It does not make compliance or regulatory determinations. Fund marketing materials may be subject to legal review requirements — that is the user's responsibility.
+- It does not make compliance or regulatory determinations. The output is a draft. Fund marketing materials are often subject to regulatory requirements (SEC, FINRA or CFTC rules, depending on fund type and how the document is distributed), and compliance review before it goes to prospective investors is the user's responsibility.
 - It does not produce a designed PDF or formatted document. The output is markdown intended as a draft for further editing or design work.
 
 ## Inputs
@@ -55,7 +61,30 @@ The skill works on a spectrum. More context produces a tighter, more specific dr
 - A sentence or two on what makes the fund different
 - Manager background in any form
 
+Source materials can be attached, pasted, or pulled from connected file storage (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local folder) if the user names where they live. If that storage isn't connected or can't be reached, say so and work from what is attached or pasted.
+
+**Set once in setup (see First-run setup):** firm and fund name, where the fund's source materials live, the voice to match, the usual target investor, any required disclaimer or review rule, and the contact block.
+
 If the user provides only minimal inputs, produce a clean template with `[INSERT ...]` placeholders and append a list of what would strengthen the draft. Do not refuse to proceed because inputs are limited.
+
+## First-run setup (once, then only when asked)
+
+Run setup the first time the skill is used, or when the user says "set up fund-marketing-one-pager" or "change my fund-marketing-one-pager settings". Look first for a saved `fund-marketing-one-pager-settings.md` in the project's files or the skill's working folder. If one exists, read it and skip setup.
+
+Setup is one short round of questions, each with a default the user can accept; "none" is a valid answer.
+
+1. **Detect before asking.** Check whether file storage is connected, and pre-fill anything the user's request or attached materials already settle (the fund name on a deck cover, a disclaimer on a prior one-pager). Show what was pre-filled for confirmation.
+2. **Ask, in one message:**
+   - **Firm and fund:** the firm name, the fund name or names, and the strategy type in a line.
+   - **Source materials:** the folder where the current deck, DDQ and prior marketing documents live, or "I'll attach them each time" (default).
+   - **Voice:** a prior marketing document or letter to match, or the default (precise, professional, understated).
+   - **Usual target investor:** institutional LPs, family offices, endowments, HNWIs, or "varies" (default; the section is then filled per draft or omitted).
+   - **Required disclaimer and review rule:** the firm's standard legend for marketing material, and any rule such as "compliance reviews every external document". Default: none; the draft then carries no legend.
+   - **Contact block:** the name, firm, website and contact details that close the document.
+3. **Save the settings** to `fund-marketing-one-pager-settings.md` in plain language the user can edit. If nothing persistent can be written, show the settings as a short block and tell the user to paste it into their project instructions.
+4. **Continue straight into the draft** if the user gave fund material with the setup request.
+
+On later runs, read the settings and don't re-ask. Setup never blocks a first run: if the user says "skip setup", draft with the defaults and placeholders. Facts saved in setup count as provided by the user; everything else in the draft still comes only from the materials supplied for that run.
 
 ## Core Principles
 
@@ -67,11 +96,13 @@ If the user provides only minimal inputs, produce a clean template with `[INSERT
 
 **Write for a sophisticated LP audience.** Prospective LPs — institutional allocators, family offices, fund-of-funds — are professionals. The tone should be confident and direct without being promotional or overselling.
 
-**Shorter is better.** A genuine one-pager is 400–600 words. Resist the urge to fill space. LPs skim; every sentence should earn its place.
+**Shorter is better.** A genuine one-pager is 400–600 words, not counting placeholders and the closing list of missing inputs. Resist the urge to fill space. LPs skim; every sentence should earn its place.
 
 ## Output Format
 
-Produce the one-pager in the structure below. Omit sections where no information is available and there is no meaningful placeholder to offer. Tailor the headers and emphasis based on the fund type — a venture fund and a macro hedge fund have different priorities.
+Produce the one-pager in the structure below. Omit sections where no information is available and there is no meaningful placeholder to offer. Tailor the headers and emphasis based on the fund type — a venture fund and a macro hedge fund have different priorities. If setup recorded a required disclaimer, place it below the contact block, word for word.
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 ---
 
@@ -157,19 +188,12 @@ Append the following at the end of any draft where meaningful inputs are missing
 - [Prioritized list of missing inputs, starting with the most impactful]
 ```
 
-Always list the Edge section first if it's missing or thin — that is the section prospective LPs most scrutinize.
+List the Edge section first if it's missing or thin; that is the section prospective LPs most scrutinize. If the Edge the user supplied reads as generic, say so explicitly in this list.
 
-## Quality Checks
+## Example prompts
 
-Before delivering the draft, verify:
+> "Set up fund-marketing-one-pager. We're Harborline Capital, the fund is Harborline Credit Opportunities II, private credit. The deck and DDQ are in the 'Fundraising' folder on SharePoint, match the voice of last year's overview, and every external document carries our standard confidentiality legend."
 
-- No invented facts, credentials, or performance figures
-- All missing data marked with `[INSERT ...]` placeholders
-- Length is 400–600 words (excluding placeholders and the completion checklist)
-- The Edge section is specific — if it reads as generic, flag it explicitly
-- Tone is consistent: professional, direct, not promotional
-- The document reads like something a GP would hand to a serious allocator
+> "Draft our fund overview from the attached pitch deck. It's going to family offices, so lead with the edge and keep the terms section short."
 
-## Important Reminder
-
-This is a draft. Fund marketing materials are often subject to regulatory requirements (e.g., SEC, FINRA, CFTC depending on fund type and distribution context). The user is responsible for compliance review before distributing to prospective investors.
+> "We're an early-stage venture fund, first fund, two partners who were operators at software companies. Give me a one-pager template I can fill in."

@@ -2,18 +2,25 @@
 name: sellside-research-triage
 description: >-
   Triage a batch of sell-side research — a morning's notes pasted or
-  attached, a folder of PDFs, or a forwarded-email export — against a
+  attached, a folder of PDFs, a forwarded-email export, or the research
+  mailbox or shared folder itself when one is connected — against a
   coverage list and the desk's current key debates: rating and estimate
   changes on covered names flagged first with the analyst's stated reason,
   notes carrying a genuinely new argument or data point summarized in two
   sentences with a "why you care" line, and everything else dismissed in one
   line as maintenance, duplicative, or off-coverage. Ends with a verdict on
   the two or three notes actually worth opening today, in priority order.
-  For research analysts and PMs at any fund drowning in broker flow. Trigger
+  Reads research from Microsoft 365 (Outlook) or Google Workspace (Gmail),
+  from file storage (SharePoint / OneDrive, Google Drive, Box, Dropbox, a
+  local folder), or from what the user attaches; the coverage list, debates
+  and research location are saved once in a short first-run setup. For
+  research analysts and PMs at any fund drowning in broker flow. Trigger
   on phrases like "triage this morning's research," "what's in the broker
   notes," "anything worth reading in this pile," "any estimate changes on
-  our names," "sort my research inbox," "which of these notes matter," or
-  when a user drops a stack of sell-side notes with a coverage list. Do NOT
+  our names," "sort my research inbox," "which of these notes matter,"
+  "set up sellside-research-triage," "change my sellside-research-triage
+  settings," or when a user drops a stack of sell-side notes with a
+  coverage list. Do NOT
   use for triaging a general email inbox for action items — use the
   inbox-triage skill. Do NOT use for a mixed reading pile of newsletters,
   memos, and alerts; this skill is built for broker research. Do NOT use for
@@ -23,7 +30,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '2.0'
 ---
 
 # Sell-Side Research Triage
@@ -41,19 +48,39 @@ The debates dimension is what elevates triage from filtering to research. A note
 ## Inputs
 
 **Required:**
-- The batch of research: pasted notes, attached PDFs, a folder of files, or a forwarded-email export. Baseline mode works entirely from this material — no inbox connection required.
-- The coverage list: the tickers the desk owns or actively follows
+- The batch of research: pasted notes, attached PDFs, a folder of files, or a forwarded-email export. The skill works entirely from this material when nothing is connected. Where the research mailbox or folder named in setup is connected, the skill pulls the batch itself (by default, everything since the last triage or the last 24 hours, whichever is shorter).
+- The coverage list: the tickers the desk owns or actively follows, from setup or given with the request
 
 **Optional but high-value:**
 - **The desk's current key debates on its most important names** — a sentence or two per name on what is contested; this is what separates "new argument" from "rehash," and without it that judgment falls back to a weaker novelty heuristic
 - A watchlist distinct from the coverage list, triaged at lower priority
 - Broker or analyst notes-to-self ("this analyst's channel work is good, ignore their target prices"), which sharpen the differentiated-work call
 - Yesterday's triage or recent notes on the same names, so repetition across days gets caught
-- A live research inbox or shared drive connection, where available, as an upgrade path — the skill then pulls the morning's flow itself instead of receiving it; the triage logic is identical
 
-**Missing-input behavior:** Notes plus a coverage list are enough to run. Without stated debates, run the triage on changes-and-novelty alone and say prominently that the "new argument" filter is operating without knowledge of what the desk already believes — expect some false positives. Without a coverage list at all, ask once; triaging flow against no names is not triage. Never fabricate the content of a note that was listed but not provided (an email export with subject lines only): such items are triaged by metadata and explicitly marked "not read — subject line only."
+**Set once in setup (step 0):** where the broker flow arrives, the coverage list, the watchlist, where the desk's debates are kept, standing notes on brokers and analysts, and where triage output is saved.
+
+**Missing-input behavior:** If the configured mailbox or folder is not connected or fails, say which one and ask for the batch as attachments or pasted text; the triage logic is identical. Notes plus a coverage list are enough to run. Without stated debates, run the triage on changes-and-novelty alone and say prominently that the "new argument" filter is operating without knowledge of what the desk already believes — expect some false positives. Without a coverage list at all, ask once; triaging flow against no names is not triage. Never fabricate the content of a note that was listed but not provided (an email export with subject lines only): such items are triaged by metadata and explicitly marked "not read — subject line only."
 
 ## How it works
+
+### 0. First-run setup (once, then only when asked)
+
+Run setup the first time the skill is used, or when the user says "set up sellside-research-triage" or "change my sellside-research-triage settings". Look for a saved settings file first (`sellside-research-triage-settings.md`, in the project's files or the skill's working folder). If one exists, read it and skip setup. The user can say "skip setup"; the skill then triages the batch it was given against the coverage list in the request.
+
+1. **Detect before asking.** Check what is connected: Microsoft 365 (Outlook) or Google Workspace (Gmail), file storage (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local folder). Pre-fill what detection settles.
+2. **Ask, in one message**, each with a default the user can accept:
+   - **Where the broker flow arrives:** a mailbox folder or label, a shared folder, or "I'll attach it each time" (default).
+   - **Coverage list:** the tickers, pasted, or the file where the list is kept so it is read fresh each run.
+   - **Watchlist:** names triaged at lower priority. Default: none.
+   - **Debates:** where the desk's current debates live (for example the folder of key-debates-ledger files, or a debates document), or one or two lines per name pasted here. Default: none, and the novelty filter says it is running without them.
+   - **Standing notes on brokers and analysts:** whose channel work to weight, whose target prices to ignore. Default: none.
+   - **Triage output:** shown in the conversation only (default), or also saved as a dated file to a folder, which lets the next run catch repetition across days.
+3. **Save the settings** to `sellside-research-triage-settings.md` in plain language the user can edit by hand. If nothing persistent can be written, show the settings as a short block and tell the user to paste it into their project instructions.
+4. **Continue straight into the triage** if the user gave a batch with the setup request.
+
+On every later run: read the settings and do not re-ask. A coverage list, debate or note given in a request applies to that run and overrides the saved one.
+
+### Each run
 
 1. **Inventory the batch before judging it:** count the notes, identify broker, analyst, ticker(s), and note type for each, and flag any items that are metadata-only (subject line without body). The verdict at the end should account for every item — a triage that silently drops notes reproduces the original problem.
 2. **Separate covered names from everything else immediately.** Coverage-list items get full treatment; watchlist items get a lighter pass; off-coverage items get one line unless they carry read-across to a covered name — and read-across is the one reason an off-coverage note ever survives triage.
@@ -122,11 +149,14 @@ The filter, made explicit — where the value hides and what the noise looks lik
 - **Novelty judgments are only as good as the debates provided.** When debates are absent, the output says its "new argument" filter is running blind and calibrates its confidence accordingly.
 - **Sell-side research is licensed content.** Summaries stay at triage depth — two sentences and a reason to read — and do not reproduce notes or substitute for them. Redistribution of broker research outside its license is the user's compliance problem to avoid, and the output is built not to create it.
 - **Not investment advice.** The output prioritizes reading, and nothing else. Estimate changes are reported as what an analyst said, not endorsed.
-- **Confidentiality:** the coverage list, the desk's debates, and its positions are sensitive. Assume a firm-approved AI environment.
+- **The mailbox and folders are read, not managed.** The skill does not move, delete, mark, forward or reply to anything in the research mailbox or shared folder. The only thing it writes is its own triage file, and only if setup asked for one.
+- **Confidentiality:** the coverage list, the desk's debates, and its positions are sensitive. Assume a firm-approved AI environment. The settings file holds the coverage list, so keep it where the desk's other position information is kept.
 
 ## Example prompts
 
 > "This morning's broker flow attached — [N] PDFs. Coverage list: [tickers]. Our live debates: [name]: [one line]; [name]: [one line]. Triage it. I have twenty minutes before the open and I want changes first, then anything genuinely new, then the verdict."
+
+> "Set up sellside-research-triage. Broker notes land in the 'Sell-side' folder of my Outlook mailbox. Coverage list is the first tab of coverage.xlsx in our team SharePoint; watchlist is the second tab. Debates are in the debates-ledger folder next to it. Save each day's triage there too. Then run this morning's."
 
 > "Here's an export of the research inbox from the past week — some full notes, some subject-line-only. Same coverage list as usual: [tickers]. No debates doc this time, just tell me what I actually missed while I was traveling, and mark anything you're judging from subject lines alone."
 

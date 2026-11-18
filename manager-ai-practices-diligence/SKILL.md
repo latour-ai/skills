@@ -14,12 +14,18 @@ description: >-
   missing and evasive answers are flagged, and the output is a one-page
   summary for the diligence file plus the follow-up question set for the
   manager call. Run on every name in the pipeline and at re-underwriting.
+  The allocator's own AI expectations and the location of its manager files
+  (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local folder) are
+  set once in a short first-run setup, so every module is built the same
+  way.
   For ODD analysts, research analysts, and compliance staff at
   fund-of-funds, OCIOs, endowments, foundations, pensions, and family
   offices. Trigger on phrases like "diligence their AI use," "how is this
   manager using AI," "AI-enabled strategy diligence," "add the AI module to
   the ODD file," "what are they sending to model vendors," "build the AI
-  questions for the manager call," or when a user attaches a manager's DDQ
+  questions for the manager call," "set up manager-ai-practices-diligence,"
+  "change my manager-ai-practices-diligence settings," or when a user
+  attaches a manager's DDQ
   and asks about AI, machine learning, or model governance. Do NOT use for
   the full first look at a new manager — use the hedge-fund-diligence
   skill. Do NOT use as the complete operational review and findings memo —
@@ -34,7 +40,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '2.0'
 ---
 
 # Manager AI Practices Diligence
@@ -61,14 +67,35 @@ Finally, the module has to be repeatable. An AI-practices view built differently
 - **The ODD questionnaire and supporting documents** — compliance manual, information security policy, research and data-use policy, any AI or acceptable-use policy the manager has written
 - **The vendor and service-provider list**, ideally with what each vendor does and what data it receives
 - **Pitch deck and investor letters**, where AI claims tend to appear in marketing language
-- **Notes from manager calls or on-site visits**
+- **Notes from manager calls or on-site visits** — typed notes, a pasted transcript, or notes pulled from a connected meeting-notes tool (Zoom, Teams, Fireflies, Granola, Otter) if the user names the meeting
 - **Prior DDQ versions or a prior AI module on the same manager**, so changes can be shown
-- **The allocator's own AI questions or policy expectations**, which take precedence over the default categories below
+- **The allocator's own AI questions or policy expectations**, which take precedence over the default categories below; normally read from the settings
 - **Strategy context** — for a systematic or quantitative manager, model use is the strategy, and the module should go deeper on model governance; for a discretionary manager, the focus is usually research and operations workflows
 
-**Missing-input behavior:** The module runs on whatever is provided and states which categories it could and could not assess. If the DDQ does not address AI at all, that absence is the first finding, and the follow-up set does the work the DDQ did not. If no vendor list is supplied, data-flow findings are marked as based on the manager's description only. Gaps are never filled with assumptions about what a manager of this type typically does.
+**Set once in setup (step 0):** the allocator's AI expectations or question set, where manager diligence files live, and where finished modules are saved.
+
+**Missing-input behavior:** Documents can be attached, pasted, or pulled from the manager's folder in connected file storage; if that storage isn't connected or can't be read, say which system was unavailable and work from what is attached. The module runs on whatever is provided and states which categories it could and could not assess. If the DDQ does not address AI at all, that absence is the first finding, and the follow-up set does the work the DDQ did not. If no vendor list is supplied, data-flow findings are marked as based on the manager's description only. Gaps are never filled with assumptions about what a manager of this type typically does.
 
 ## How it works
+
+### 0. First-run setup (once, then only when asked)
+
+Run setup the first time the skill is used, or when the user says "set up manager-ai-practices-diligence" or "change my manager-ai-practices-diligence settings". Look for a saved settings file first (`manager-ai-practices-diligence-settings.md`, in the project's files or the diligence folder). If one exists, read it and skip setup.
+
+Setup is one short round of questions, each with a default the user can accept:
+
+1. **Detect before asking.** Check which file storage and meeting-notes tools are connected, and pre-fill what detection settles.
+2. **Ask, in one message:**
+   - **AI expectations:** the allocator's own AI policy expectations or standard question set for managers, pasted or as a file location. Default: none; the default categories in this skill apply.
+   - **Manager files:** where diligence files are kept and how they are organized (for example one folder per manager), so the DDQ, vendor list, policies and any prior module can be found by manager name. Default: attached with each request.
+   - **Where modules are saved,** so the prior module can be found at re-underwriting, or "just send me the file" (default).
+   - **Firm rules (optional):** for example a required header on diligence documents, or materials that must not be quoted at length.
+3. **Save the settings** to `manager-ai-practices-diligence-settings.md` in plain language the user can edit. If nothing persistent can be written, show the settings as a short block and tell the user to paste it into their project instructions.
+4. **Continue straight into the module** if the user named a manager with the setup request.
+
+On later runs, read the settings and don't re-ask. Setup never blocks a first run: if the user says "skip setup", work from what is attached, use the defaults, and say which were used.
+
+### Steps for each manager
 
 1. **Collect every reference to AI, models, and automation across the file.** Search beyond the obvious section: technology, research process, risk, compliance, vendor list, marketing materials, and call notes. Record each reference with its source document and location.
 2. **Build the workflow inventory.** For each workflow where the manager uses a model or AI tool, record what it does, where it sits (research, signal generation, portfolio construction, trading, risk, operations, investor reporting, compliance), and whether its output can reach an investment decision or an investor-facing document. Workflows the manager mentions but does not describe are listed as incomplete.
@@ -152,6 +179,8 @@ and tested] — [label per point]
 ## Example prompts
 
 > "Attached are [manager]'s DDQ, their ODD questionnaire, the service-provider list, and the deck from last week's meeting. It's a discretionary long/short equity fund. Build the AI practices module and the follow-up questions for Thursday's call — I especially want to know whether any of our position-level or investor data could end up with an outside model vendor."
+
+> "Set up manager-ai-practices-diligence. Our AI expectations for managers are in 'Manager AI standards.docx' in the ODD SharePoint library, manager files are one folder per manager under 'Managers', and save each module into that manager's folder."
 
 > "This one is a systematic macro manager, so model use is the strategy. Go deep on change control and validation: who can change a model, how changes are tested before they trade, and what their incident history looks like. Flag every answer that describes a control without showing it."
 
