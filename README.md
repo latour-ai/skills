@@ -1,6 +1,6 @@
 # LaTour AI Skills Library
 
-**58 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
+**60 skills** — practical AI workflows for investment firms created by [LaTour AI](https://www.latourai.com).
 
 These skills are reusable instruction files you can copy into ChatGPT, Claude, Gemini, or any AI assistant that supports custom instructions or skill-style workflows.
 
@@ -50,6 +50,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Performance Attribution Narrator](performance-attribution-narrator/SKILL.md) | Turn raw attribution output into the month-end narrative — alpha vs. factor beta, contributors assessed against the thesis that justified them, "right for the wrong reasons" flagged, and a drafted investor-letter commentary |
 | [FOMC Statement Diff](fomc-statement-diff/SKILL.md) | Word-level redline of a central bank statement against the prior meeting, with every change classified hawkish/dovish, dot-plot shifts, and a read on whether the market is trading the text or something else |
 | [Key Debates Ledger](key-debates-ledger/SKILL.md) | Keep an explicit bull/bear ledger for each position — the two to four decidable questions that will determine the outcome, the evidence on each side, and what would settle them |
+| [Thesis Evidence Monitor](thesis-evidence-monitor/SKILL.md) | Read each position's incoming flow (expert transcripts, filings, sell-side notes, podcasts) against its key debates, classify every item as confirming or disconfirming with the passage quoted, and lead the weekly digest with the evidence against the position. |
 | [Claim Sentiment Extractor](claim-sentiment-extractor/SKILL.md) | Turn any research document into a table of verbatim claims — fact or sentiment, tone, theme, and a score against your thesis factors — calibrated to your own labelled examples |
 | [Sell-Side Research Triage](sellside-research-triage/SKILL.md) | Triage a morning's sell-side notes against your coverage list and positions — what changed, what matters to the book, and what can be skipped |
 | [Market Sizing Builder](market-sizing-builder/SKILL.md) | Size a market two ways — top-down from industry and government data, bottom-up from units — reconciled into a range, every input sourced or labelled as an assumption |
@@ -90,6 +91,7 @@ These skills are reusable instruction files you can copy into ChatGPT, Claude, G
 | [Waterfall Carry Checker](waterfall-carry-checker/SKILL.md) | Independently recompute the distribution waterfall and carry from raw cash flows and the LPA, reconcile against the administrator line by line, and compute the current clawback position |
 | [Regulatory Exam Binder](regulatory-exam-binder/SKILL.md) | Turn an SEC document request list into an indexed production and an honest gap list — including the policy-with-no-testing-evidence gaps — or run it as a mock exam before any letter arrives |
 | [Fund Doc Consistency Checker](fund-doc-consistency-checker/SKILL.md) | Cross-check the PPM, LPA, Form ADV, DDQ, pitch deck, and website against each other — every contradiction in fees, capacity, strategy limits, key-person and redemption terms, with the conflicting passages side by side |
+| [SOP Documenter](sop-documenter/SKILL.md) | Turn a narrated walkthrough of a process into a formal SOP a new hire could follow — numbered steps with expected results, every control point marked, exception handling, and a list of open questions for the process owner. |
 
 ## How to use
 
