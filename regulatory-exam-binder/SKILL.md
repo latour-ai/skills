@@ -2,25 +2,29 @@
 name: regulatory-exam-binder
 description: >-
   Turn an SEC examination document request list into an organized, indexed
-  production — mapping each request item to responsive firm records, surfacing
-  the gaps where a policy exists but testing evidence does not, drafting
-  narrative responses to examiner interview questions from the firm's actual
-  policies, and producing a prioritized remediation list. Also runs as a mock
-  exam against current exam priorities before any letter arrives. For chief
-  compliance officers, compliance analysts, and COOs at registered investment
-  advisers, private fund managers, and broker-dealers. Trigger on phrases like
-  "we got an exam letter," "SEC document request," "prep for the exam," "run a
-  mock exam," "map this request list," "what are we missing for the exam,"
-  "deficiency letter prep," "examiner interview questions," or when a user
-  uploads an examination request list, compliance manual, or annual review
-  document. Do NOT use for screening marketing material against the Marketing
-  Rule — use the marketing-compliance-prescreen skill. Do NOT use for
-  evaluating an external manager's compliance program — use the
-  ddq-red-flag-scanner skill. Not legal advice; involve counsel.
+  production — mapping each request item to responsive firm records,
+  surfacing the gaps where a policy exists but testing evidence does not,
+  drafting narrative responses to examiner interview questions from the
+  firm's actual policies, and producing a prioritized remediation list. Also
+  runs as a mock exam against current exam priorities before any letter
+  arrives. The firm profile and the locations of the compliance manual,
+  records inventory and filings are recorded once in a short first-run
+  setup. For chief compliance officers, compliance analysts, and COOs at
+  registered investment advisers, private fund managers, and broker-dealers.
+  Trigger on phrases like "we got an exam letter," "SEC document request,"
+  "prep for the exam," "run a mock exam," "map this request list," "what are
+  we missing for the exam," "deficiency letter prep," "examiner interview
+  questions," "set up regulatory-exam-binder," "change my
+  regulatory-exam-binder settings," or when a user uploads an examination
+  request list, compliance manual, or annual review document. Do NOT use for
+  screening marketing material against the Marketing Rule — use the
+  marketing-compliance-prescreen skill. Do NOT use for evaluating an
+  external manager's compliance program — use the ddq-red-flag-scanner
+  skill. Not legal advice; involve counsel.
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '2.0'
 ---
 
 # Regulatory Exam Binder
@@ -49,9 +53,29 @@ The gap that causes real problems is specific and predictable: a written policy 
 - The specific interview questions the examiners have flagged, or the topics the exam letter emphasizes
 - Firm profile: AUM, strategies, client types, custody arrangements, affiliates, number of employees, whether the firm has been examined before
 
-**Missing-input behavior:** The record inventory is the input people most often skip, and the output is nearly worthless without it — a mapping table with no records to map to is just the request list retyped. Ask once for the inventory, and accept an approximate one. If the compliance manual is unavailable, the narrative responses cannot be drafted from firm policy; produce the mapping and gap analysis, and say clearly that the narrative section was skipped rather than writing generic answers that misdescribe the firm.
+Documents can be attached, pasted, or pulled from connected file storage (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local folder) at the locations saved in setup or named in the request.
+
+**Set once in setup (step 0):** the firm profile, where the compliance manual, code of ethics, records inventory and Form ADV live, where the binder is saved, and who reviews before anything is produced.
+
+**Missing-input behavior:** If file storage isn't connected or a saved location can't be read, say which document could not be fetched and ask for it as an attachment. The record inventory is the input people most often skip, and the output is nearly worthless without it — a mapping table with no records to map to is just the request list retyped. Ask once for the inventory, and accept an approximate one. If the compliance manual is unavailable, the narrative responses cannot be drafted from firm policy; produce the mapping and gap analysis, and say clearly that the narrative section was skipped rather than writing generic answers that misdescribe the firm.
 
 ## How it works
+
+**0. First-run setup (once, then only when asked).** Run setup the first time the skill is used, or when the user says "set up regulatory-exam-binder" or "change my regulatory-exam-binder settings". Look first for a saved `regulatory-exam-binder-settings.md` in the project's files or the binder folder. If one exists, read it and skip setup.
+
+Setup is one short round of questions, each with a default the user can accept; "none" is a valid answer.
+
+- **Detect before asking.** Check whether file storage is connected, and pre-fill the firm profile from a Form ADV or compliance manual if one is attached. Show what was pre-filled for confirmation.
+- **Ask, in one message:**
+  - **Firm profile:** registration type (registered investment adviser, private fund adviser, broker-dealer, or dual registrant), approximate AUM, strategies, client types, custody arrangements, affiliates, headcount, and whether the firm has been examined before.
+  - **Core documents:** where the compliance manual, code of ethics, most recent annual review and Form ADV live, or "I'll attach them each time" (default).
+  - **Records inventory:** where the inventory is kept if one exists, or "none yet"; the first run then builds a rough one with the user.
+  - **Binder location:** where the binder and production index are saved, or "just send me the files" (default).
+  - **Review routing:** who sees the gap analysis before it circulates, for example outside counsel first. Default: every output is marked for counsel review.
+- **Save the settings** to `regulatory-exam-binder-settings.md` in plain language the user can edit. If nothing persistent can be written, show the settings as a short block and tell the user to paste it into their project instructions.
+- **Continue straight into the mapping** if the user gave a request list or asked for a mock exam with the setup request.
+
+On later runs, read the settings and don't re-ask. Setup never blocks a first run: if the user says "skip setup", work from the documents attached to the request. The skill reads the firm's records where they are; it never moves, renames or edits a compliance record.
 
 1. **Parse the request list into discrete items.** Exam requests bundle several asks into one numbered paragraph. Split them — each distinct document type and date range becomes its own row, retaining the original item number for the response index.
 2. **Map each item to responsive records** from the inventory: document name, custodian, format, and the date range actually available versus the date range requested. A partial date range is a finding, not a match.
@@ -156,6 +180,8 @@ Use as the checklist when building a mock request list, and as a completeness te
 > "We received an SEC exam letter Friday — request list attached, review period is the last 24 months. Our compliance manual, code of ethics, and a rough inventory of what we've got are also attached. Map it, tell me where we're exposed, and draft responses to the interview questions in items 14–18."
 
 > "No exam pending. Build a mock request list for a $900M private fund adviser with no custody, three funds, and 14 employees, run our manual and records inventory against it, and tell me what we'd fail on today."
+
+> "Set up regulatory-exam-binder. We're an SEC-registered private fund adviser, about $900M, three funds, no custody, 14 employees, never examined. The manual, code of ethics and last annual review are in 'Compliance / Program' on SharePoint, the records inventory is the spreadsheet in the same folder, and outside counsel sees the gap analysis first."
 
 > "Prior deficiency letter attached along with our remediation memo. Build the binder for this exam and specifically show me whether we can evidence that each prior deficiency was actually fixed."
 

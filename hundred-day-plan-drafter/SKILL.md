@@ -19,7 +19,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '1.1'
 ---
 
 # Hundred Day Plan Drafter
@@ -37,7 +37,7 @@ This drafts from the primary record, forces the model-to-workstream reconciliati
 ## Inputs
 
 **Required:**
-- At least one of: the investment thesis or IC memo, the diligence readouts, or the deal model's value-creation summary. More is better; all three is the intended case.
+- At least one of: the investment thesis or IC memo, the diligence readouts, or the deal model's value-creation summary. More is better; all three is the intended case. Materials can be attached, pasted, or pulled from the deal folder in connected file storage (SharePoint / OneDrive, Google Drive, Box, Dropbox) if the user names where it lives.
 
 **Optional, in rough order of value:**
 - **The deal model's value-creation bridge** — how the underwriting gets from entry EBITDA to exit EBITDA, broken into its drivers. This is what makes the traceability check possible and it is the input most worth chasing down.

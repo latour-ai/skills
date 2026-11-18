@@ -1,30 +1,34 @@
 ---
 name: fund-doc-consistency-checker
 description: >-
-  Cross-check the firm's governing and disclosure documents — PPM, LPA,
-  Form ADV Parts 1 and 2A, DDQ, pitch deck, website disclosures — against
-  each other whenever any of them changes, and surface every contradiction
-  with the exact conflicting passages side by side, cited to document, page,
-  and section: fee terms and offsets, capacity, strategy and concentration
+  Cross-check the firm's governing and disclosure documents — PPM, LPA, Form
+  ADV Parts 1 and 2A, DDQ, pitch deck, website disclosures — against each
+  other whenever any of them changes, and surface every contradiction with
+  the exact conflicting passages side by side, cited to document, page, and
+  section: fee terms and offsets, capacity, strategy and concentration
   limits, key-person provisions, expense allocation, redemption terms. Rates
   each conflict as direct contradiction, material inconsistency, or wording
   drift, recommends conforming edits with a view on which document governs,
-  and summarizes what must change before the revised document is used. For
-  CCOs, compliance teams, and fund counsel liaisons at investment advisers
-  and fund managers. Trigger on phrases like "check the revised PPM against
-  everything," "does the deck match the ADV," "consistency sweep before the
-  amendment," "cross-check our fund docs," "did the fee language drift,"
-  "compare the DDQ to the LPA," or when a user uploads multiple fund
-  documents with one revised. Do NOT use for prescreening a single marketing
-  piece against the Marketing Rule — use the marketing-compliance-prescreen
-  skill. Do NOT use for extracting side letter terms — use the
-  side-letter-term-extractor skill. Surfaces conflicts for the compliance
-  officer and counsel to resolve; never rewrites a governing document on its
-  own, and never invents a passage or citation.
+  and summarizes what must change before the revised document is used. Where
+  the current document set lives, the firm's settled document hierarchy and
+  its extra standing topics are recorded once in a short first-run setup.
+  For CCOs, compliance teams, and fund counsel liaisons at investment
+  advisers and fund managers. Trigger on phrases like "check the revised PPM
+  against everything," "does the deck match the ADV," "consistency sweep
+  before the amendment," "cross-check our fund docs," "did the fee language
+  drift," "compare the DDQ to the LPA," "set up
+  fund-doc-consistency-checker," "change my fund-doc-consistency-checker
+  settings," or when a user uploads multiple fund documents with one
+  revised. Do NOT use for prescreening a single marketing piece against the
+  Marketing Rule — use the marketing-compliance-prescreen skill. Do NOT use
+  for extracting side letter terms — use the side-letter-term-extractor
+  skill. Surfaces conflicts for the compliance officer and counsel to
+  resolve; never rewrites a governing document on its own, and never invents
+  a passage or citation.
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '2.0'
 ---
 
 # Fund Doc Consistency Checker
@@ -42,7 +46,7 @@ Manual cross-checking fails on combinatorics. Six documents is fifteen pairs, ea
 ## Inputs
 
 **Required:**
-- Two or more of the firm's governing or disclosure documents (uploaded or pasted). The intended set: PPM/OM, LPA (or equivalent governing agreement), Form ADV Parts 1 and 2A, most recent completed DDQ, pitch deck, website disclosure pages. Any subset of two or more works; the more of the set provided, the more pairs get checked.
+- Two or more of the firm's governing or disclosure documents, attached, pasted, or pulled from connected file storage (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local folder) at the location saved in setup or named in the request. The intended set: PPM/OM, LPA (or equivalent governing agreement), Form ADV Parts 1 and 2A, most recent completed DDQ, pitch deck, website disclosure pages. Any subset of two or more works; the more of the set provided, the more pairs get checked.
 - **Which document changed and what changed in it** — a redline, an amendment, or a plain description ("we revised the management fee breakpoints and the capacity language"). This scopes the primary sweep.
 
 **Optional but high-value:**
@@ -52,15 +56,32 @@ Manual cross-checking fails on combinatorics. Six documents is fifteen pairs, ea
 - Any known open items from prior consistency reviews, so resolved-vs.-still-open is tracked
 - Recent regulatory correspondence touching disclosure language, so known sensitivities get swept harder
 
-**Missing-input behavior:** With no change identified, run a full-set consistency sweep across the standing topics rather than a change-scoped one, and say that's what happened. With only two documents, check that pair and list the pairs that couldn't be checked — an unchecked pair is never reported as consistent. Without the prior version, conflicts can't be sorted into new-vs.-pre-existing; label them undated rather than guessing. Never fill a missing document from memory of what such documents usually say, and never quote a passage that isn't in the provided text.
+**Set once in setup (step 0):** where the current version of each document lives, the firm's document hierarchy if it has one settled, extra standing topics to sweep, and where consistency reports and their open items are kept.
+
+**Missing-input behavior:** If file storage isn't connected or a saved location can't be read, say which document could not be fetched, ask for it as an attachment, and treat it as not provided until it arrives. With no change identified, run a full-set consistency sweep across the standing topics rather than a change-scoped one, and say that's what happened. With only two documents, check that pair and list the pairs that couldn't be checked — an unchecked pair is never reported as consistent. Without the prior version, conflicts can't be sorted into new-vs.-pre-existing; label them undated rather than guessing. Never fill a missing document from memory of what such documents usually say, and never quote a passage that isn't in the provided text.
 
 ## How it works
+
+**0. First-run setup (once, then only when asked).** Run setup the first time the skill is used, or when the user says "set up fund-doc-consistency-checker" or "change my fund-doc-consistency-checker settings". Look first for a saved `fund-doc-consistency-checker-settings.md` in the project's files or the reports folder. If one exists, read it and skip setup.
+
+Setup is one short round of questions, each with a default the user can accept; "none" is a valid answer.
+
+- **Detect before asking.** Check whether file storage is connected, and pre-fill the document list from whatever the user attached with the request.
+- **Ask, in one message:**
+  - **The document set and where it lives:** for each of PPM/OM, governing agreement, Form ADV Parts 1 and 2A, latest DDQ, pitch deck and website disclosure pages, the folder or file holding the current version, or "I'll attach it each time" (default).
+  - **Document hierarchy:** the firm's settled view on which document governs, if it has one. Default: the logic in step 7, with every governing call marked for counsel.
+  - **Extra standing topics:** anything the firm wants swept on every run beyond the standard list in step 4, for example ESG representations or a co-investment allocation policy.
+  - **Reports and open items:** where past consistency reports are kept, so resolved and still-open conflicts carry forward, or "just send me the report" (default).
+- **Save the settings** to `fund-doc-consistency-checker-settings.md` in plain language the user can edit. If nothing persistent can be written, show the settings as a short block and tell the user to paste it into their project instructions.
+- **Continue straight into the check** if the user gave documents with the setup request.
+
+On later runs, read the settings and don't re-ask. Setup never blocks a first run: if the user says "skip setup", check the documents attached to the request with the defaults. The skill only reads the document locations; it never saves over or edits a governing or disclosure document.
 
 1. **Establish the set and the trigger.** List the documents provided with their versions and dates, identify the revised document and the specific changes, and enumerate the document pairs in scope — including the pairs that *cannot* be checked because a document wasn't provided. The unchecked list is part of the deliverable.
 2. **Extract the changed statements** from the revised document — each discrete assertion the revision added, deleted, or altered, cited to its page and section. A single redline sentence often carries several assertions (a fee rate, its base, its timing); split them, because they can each conflict independently.
 3. **Sweep every other document for statements on the same subjects,** matching by meaning, not vocabulary. The fee offset, the fee credit, and the "reduction of the management fee" are one topic wearing three names; the sweep has to catch paraphrase, summary, and rounding, which is where real drift lives.
 4. **Run the standing-topics sweep even where nothing changed** — fees and offsets, capacity, strategy and concentration limits, key person, expense allocation, redemption/withdrawal and transfer terms, valuation, conflicts disclosures. Amendments have a way of making pre-existing drift newly material, and the standing sweep is what catches the conflict nobody's edit caused.
-5. **For each candidate conflict, quote both passages exactly,** cited to document, page, and section. Exact quotation is non-negotiable: the reader must be able to verify the conflict without opening either document, and a paraphrased "conflict" that evaporates on checking the source destroys the report's credibility.
+5. **For each candidate conflict, quote both passages exactly,** cited to document, page, and section. The reader must be able to verify the conflict without opening either document, and a paraphrased "conflict" that evaporates on checking the source destroys the report's credibility.
 6. **Rate severity honestly** on the three-tier scale: direct contradiction (the statements cannot both be true), material inconsistency (reconcilable, but an investor or examiner would fairly read them differently), wording drift (same substance, divergent language that will become a conflict at the next unsynchronized edit). Resist grade inflation in both directions — a report that cries contradiction at every rounding difference gets ignored, and one that soft-pedals a fee conflict as "drift" fails at its one job.
 7. **Recommend the conforming edit for each conflict,** with a view on which document should govern. The default logic: the governing agreement controls economic and legal terms; regulatory filings control what was represented to the regulator; offering and marketing documents conform to both. But say when the fix should run the other way — sometimes the LPA has the typo — and mark that call for counsel.
 8. **Sort conflicts by origin where the prior version allows:** introduced by this revision (fix before the document is used) versus pre-existing (fix on a managed timeline). This sorting is what turns the report into a work plan instead of an indictment.
@@ -133,6 +154,8 @@ The severity heuristic: anything touching what investors pay, what they can rely
 ## Example prompts
 
 > "Attached: revised PPM (redline included), current LPA, ADV Parts 1 and 2A, our March DDQ, the current deck, and the website disclosure pages. The revision changed the management fee breakpoints and the capacity language. Full cross-check — everything affected by the changes plus the standing sweep, severity-rated, with what has to change before we can use the new PPM."
+
+> "Set up fund-doc-consistency-checker. Current versions of the PPM, LPA and ADV are in the 'Fund Docs / Current' folder on Box, the deck and DDQ are in 'IR / Live', our position is that the LPA governs economic terms, and add our ESG policy statements as a standing topic."
 
 > "No revision — I just don't trust the set. Here are the deck, the DDQ, and ADV Part 2A. Sweep fees, strategy limits, key person, and liquidity terms across all three and show me every divergence side by side, even the cosmetic ones."
 

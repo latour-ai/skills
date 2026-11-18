@@ -18,8 +18,8 @@ Why this exists:
 
 Usage:
   python fetch_youtube_transcript.py <url-or-id> [--json] [--languages en es ..]
-  python fetch_youtube_transcript.py https://youtu.be/zRh0KTutZis
-  python fetch_youtube_transcript.py zRh0KTutZis --json > transcript.json
+  python fetch_youtube_transcript.py https://youtu.be/<video-id>
+  python fetch_youtube_transcript.py <video-id> --json > transcript.json
 
 Exit codes:
   0  transcript printed (stdout)

@@ -1,27 +1,42 @@
 ---
 name: public-company-first-pass
-description: >
-  Create a first-pass tear sheet on a US-listed public company from public sources. Trigger on:
-  "tear sheet", "first pass", "company overview", "equity research", "stock analysis",
-  "company profile", "investment overview", "what does [company] do", "tell me about [ticker]",
-  "quick look at [company]", "pull up [ticker]", "company summary", "how does [company] make money",
-  "who competes with [company]", "bull/bear case for [ticker]", "break down [company]",
-  "is [ticker] interesting", "run me through [company]", or any request to understand a
-  US-listed public company's business, financials, valuation, or competitive landscape.
-  Also trigger when the user provides a ticker and expects research, or uploads SEC filings
-  for synthesis. NOT for private companies, crypto, mutual funds, ETFs, or non-US securities.
+description: >-
+  Create a first-pass tear sheet on a US-listed public company: what it does,
+  how it makes money, a financial snapshot, valuation context, competitors,
+  recent developments, bull and bear cases, and the questions to diligence
+  next. Researches from a connected market data source (Bloomberg, FactSet,
+  S&P Capital IQ, AlphaSense, Daloopa) where there is one, otherwise SEC
+  filings and the open web, otherwise filings the user attaches. For equity
+  analysts, portfolio managers and allocators deciding whether a name
+  deserves more work. Trigger on "tear sheet", "first pass", "company
+  overview", "company profile", "what does [company] do", "tell me about
+  [ticker]", "quick look at [company]", "pull up [ticker]", "who competes
+  with [company]", "bull/bear case for [ticker]", "is [ticker] interesting",
+  "run me through [company]", or when the user gives a ticker and expects
+  research, or uploads SEC filings for synthesis. Do NOT use for private
+  companies; use the tear-sheet-private-co skill. Do NOT use for a focused
+  memo on the revenue build and unit of analysis; use the
+  public-co-unit-economics skill. Do NOT use to digest one earnings call;
+  use the earnings-call-extractor skill. Do NOT use to attack a thesis the
+  user has already written; use the thesis-red-team skill. Not for crypto,
+  mutual funds, ETFs or non-US securities. No rating, price target or
+  recommendation.
+license: MIT
+metadata:
+  author: latourai
+  version: '2.0'
 ---
 
 # Public Company First Pass
 
 Generate a concise (~3 page) first-pass tear sheet on a US-listed public company. The output is a `.md` file covering 11 sections: TL;DR, business overview, revenue breakdown, financials, valuation context, competitive landscape, recent developments, bull/bear cases, and an initial investment view with sources.
 
-This is NOT a full initiation report, financial model, price target, or buy/sell/hold recommendation. It is a structured first look — the kind of thing an analyst prepares before deciding whether to dig deeper.
+This is not a full initiation report, financial model, price target, or buy/sell/hold recommendation. It is a structured first look — the kind of thing an analyst prepares before deciding whether to dig deeper.
 
 ## Workflow
 
-1. **Identify the company.** Confirm name, ticker, and exchange. If the user only gives a name or ticker, confirm the right entity before proceeding.
-2. **Research using WebSearch.** Pull data from public sources following the Source Rules below. Search for SEC filings (10-K, 10-Q), latest earnings results, investor presentations, and reputable financial data.
+1. **Identify the company.** Resolve the name, ticker, and exchange and state them at the top of the tear sheet. Ask only if a name could refer to more than one listed company.
+2. **Research.** Use a connected market and company data source (Bloomberg, FactSet, S&P Capital IQ, AlphaSense, Daloopa or similar) if there is one; otherwise search SEC filings and the open web; otherwise work from filings the user attaches, pastes, or points to in connected file storage. If a source is not connected or fails, move to the next and say in the Sources section which was used. Pull the 10-K, 10-Q, latest earnings results, investor presentations, and reputable financial data, following the Source Rules below.
 3. **Build the tear sheet** following the 11-section output format below.
 4. **Save as `[TICKER]-first-pass.md`** (e.g., `CRM-first-pass.md`) and share with the user.
 
@@ -39,7 +54,7 @@ Use the best available public information in this order:
 8. Reputable news sources (WSJ, FT, Reuters, Bloomberg News)
 9. Public competitor information
 
-Do NOT use blogs, anonymous commentary, message boards, promotional stock-picking sites, social media posts, or unsourced claims. If data is unavailable, say so clearly — never fabricate numbers, market share, competitors, or valuation metrics.
+Do not use blogs, anonymous commentary, message boards, promotional stock-picking sites, social media posts, or unsourced claims. If data is unavailable, say so clearly; do not fabricate numbers, market share, competitors, or valuation metrics.
 
 ## Time Period
 
@@ -51,13 +66,14 @@ These matter because the tear sheet needs to be trustworthy enough for a profess
 
 - Be neutral and concise. Separate facts from interpretation.
 - Prefer specific numbers over vague descriptions ("revenue grew 12% YoY" not "revenue grew nicely").
-- Do not invent financials, market share, competitors, or valuation metrics.
 - No buy/sell/hold recommendation. No price target. Do not overstate precision in valuation.
 - Include a balanced bull and bear case — don't softball either one.
 - Flag missing, stale, or inconsistent information explicitly.
 - Use bullets and tables to keep it scannable.
 
 ## Output Format — 11 Sections
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 ### Section 1: TL;DR
 
@@ -94,7 +110,7 @@ Table format breaking down revenue streams. This answers "where do the dollars a
 
 ### Section 4: Key Financial Snapshot
 
-Table of core financial metrics. Only include what's actually available — do not estimate or fabricate.
+Table of core financial metrics. Only include what's actually available.
 
 **Example:**
 
@@ -184,7 +200,7 @@ Synthesize Sections 8 and 9 into a framework for further work:
 - **What needs to be true for the bear case:** 2-3 specific, falsifiable conditions
 - **Key variables to diligence next:** What would you study before forming a stronger view?
 
-No price target. No rating. No recommendation. Just a clear-eyed framing of what matters.
+Keep this a framing of what matters, without a view on the stock.
 
 ### Section 11: Sources Used
 
@@ -210,21 +226,3 @@ If information isn't available, say so directly:
 - "Consensus estimates not available; using trailing metrics only"
 
 If the source set is incomplete (e.g., couldn't access the 10-K or latest transcript), add a note at the end explaining what's missing and how it affects the analysis.
-
-## Quality Checklist
-
-Before delivering, verify:
-
-- Total length ~3 pages (rendered markdown)
-- Neutral, professional tone throughout
-- Every financial figure is sourced or caveated
-- Valuation metrics are current or explicitly flagged as stale
-- Bull and bear cases are balanced and grounded
-- No buy/sell/hold recommendation or price target anywhere
-- Missing information is flagged, not fabricated
-- Sources section is complete
-- Tables are properly formatted
-
-## Output
-
-Save as `[TICKER]-first-pass.md` and share with the user.

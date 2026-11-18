@@ -7,12 +7,14 @@ description: >-
   thesis, business and market overview, financial summary, risks and
   mitigants, valuation and returns, and recommendation. Every claim is tagged
   by evidence quality, so management assertions never read as verified facts.
-  For private equity, growth equity, and private credit deal teams;
+  The firm's memo template, investment criteria, and the committee's standing
+  concerns are saved once in a short first-run setup. For private equity, growth equity, and private credit deal teams;
   associates, VPs, and principals writing for an investment or credit
   committee. Trigger on phrases like "draft the IC memo," "write the
   investment memo," "first draft for committee," "turn our diligence into a
   memo," "IC deck narrative," "credit committee memo," "we're going to
-  committee on Thursday," or when a user provides a stack of deal materials
+  committee on Thursday," "set up ic-memo-drafter," "change my
+  ic-memo-drafter settings," or when a user provides a stack of deal materials
   and asks for a memo. Do NOT use for a first-pass screen of an unread CIM —
   use the cim-first-pass skill. Do NOT use for writing up the committee's
   decision afterward — use the ic-minutes-generator skill. Do NOT use for
@@ -20,7 +22,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '2.0'
 ---
 
 # IC Memo Drafter
@@ -36,7 +38,7 @@ The first is the risk section. It is written last, when the author is exhausted 
 ## Inputs
 
 **Required:**
-- At least one substantive deal document — the CIM, management presentation, or a diligence readout. A memo cannot be drafted from a description of the deal.
+- At least one substantive deal document — the CIM, management presentation, or a diligence readout. A memo cannot be drafted from a description of the deal. Materials can be attached, pasted, or pulled from the deal folder in connected file storage (SharePoint / OneDrive, Google Drive, Box, Dropbox) if the user names where it lives.
 
 **Optional, and each one materially improves the draft:**
 - The financial model output: base and downside cases, returns, entry and exit assumptions, debt structure and quantum
@@ -44,25 +46,45 @@ The first is the risk section. It is written last, when the author is exhausted 
 - Diligence readouts by workstream: commercial, financial, legal, tax, IT, insurance, environmental
 - Management meeting and expert call notes
 - Market and competitive research
-- The firm's mandate and investment criteria
-- **The firm's own memo template or a prior approved memo** — this is the single highest-value optional input, because committees read for structure and a memo in the wrong shape gets rejected on form
-- Known committee concerns, or the objections a specific partner always raises
 - Deal context: process stage, competitive dynamics, timeline, bid range
+- Concerns the committee has already raised about this deal
+
+**Set once in setup (step 0):** the firm's memo template or a prior approved memo, the mandate and investment criteria, the committee's standing concerns, and where drafts are saved. The template is the highest-value of these, because committees read for structure and a memo in the wrong shape gets rejected on form.
 
 **Missing-input behavior:** Draft from what exists and be explicit about what is missing. Where a standard memo section cannot be supported — no model means no returns section, no QoE means the EBITDA bridge is unverified — write the section header with an explicit `[NOT PROVIDED: ...]` placeholder rather than filling it with plausible-sounding content. A committee memo with a labeled hole is honest; a committee memo with an invented paragraph is dangerous. Never infer a financial figure that was not supplied.
 
 ## How it works
 
+### 0. First-run setup (once, then only when asked)
+
+Run setup the first time the skill is used, or when the user says "set up ic-memo-drafter" or "change my ic-memo-drafter settings". Look for a saved settings file first (`ic-memo-drafter-settings.md`, in the project's files or the folder where memo drafts are saved). If one exists, read it and skip setup.
+
+Setup is one short round of questions, each with a default the user can accept:
+
+1. **Detect before asking.** If a memo template, a prior approved memo, or an investment criteria document is attached, or is findable in connected file storage under the name the user gives, read it and pre-fill the answers for confirmation.
+2. **Ask, in one message:**
+   - **Memo structure:** the firm's template or a prior approved memo to match (attach it or say where it lives), or the default structure below (default).
+   - **Committee type:** investment committee or credit committee, and any section the committee always expects (for example a downside case page, an ESG section, a covenant summary). Default: investment committee, no additions.
+   - **Mandate and investment criteria:** in a few lines or as a document. "None" is valid; the memo then makes no fit statement.
+   - **Standing committee concerns:** the questions this committee asks on every deal. "None" is valid.
+   - **Where to save drafts**, and the file format (Markdown by default; Word if a document tool is available). Default: return the draft in the conversation.
+3. **Save the settings** to `ic-memo-drafter-settings.md` in plain language the user can edit, recording the template as an outline of its section headings and order plus where the original lives. If nothing persistent can be written, show the settings as a short block and tell the user to paste it into their project instructions.
+4. **Continue straight into the draft** if the user gave deal materials with the setup request.
+
+On every later run: read the settings and never re-ask. A template or instruction given with a request overrides the saved one for that memo. Setup never blocks a first run: if the user says "skip setup", draft in the default structure and say so. If the save location isn't reachable, return the draft in the conversation and say so.
+
+### Steps for each memo
+
 1. **Read everything before writing anything,** noting the source document and page for every material fact as you go. The tagging in step 3 depends on this and cannot be reconstructed later.
-2. **Establish the structure.** Use the firm's template if provided. If not, use the default structure in the output format below and say at the top that a generic structure was used.
-3. **Tag every material claim by evidence quality** as you draft — see the evidence tiers below. This tagging is the core discipline of the skill and is not optional.
+2. **Establish the structure.** Use the firm's template if one is saved or provided. If not, use the default structure in the output format below and say at the top that a generic structure was used.
+3. **Tag every material claim by evidence quality** as you draft — see the evidence tiers below. This tagging is the core discipline of the skill.
 4. **Write the thesis as three or four pillars,** each stated as a proposition that could be false, with the evidence supporting it and the evidence that would undermine it. A pillar that cannot be falsified is a platitude, not a thesis.
 5. **Build the financial summary strictly from provided figures,** with reported and adjusted EBITDA shown separately and the bridge itemized. Never present adjusted EBITDA alone.
 6. **Write the risks section first among the analytical sections, not last** — and write it before the author's advocacy sets. Each risk gets: what it is, how likely, what it costs if it happens, what mitigates it, and honestly whether the mitigant is real or aspirational. A mitigant that amounts to "we will monitor this" should say so.
 7. **Reconcile the model to the thesis.** Every value-creation assumption in the returns should map to a thesis pillar and to a diligence finding. Flag any assumption that appears in the model but is supported nowhere in the diligence record — this is one of the most useful outputs and it takes a machine to catch reliably.
 8. **List open diligence items** with what each would change, so the committee can weigh conditionality rather than being told everything is resolved.
 9. **Write the executive summary last,** to one page, readable standalone by a partner who reads nothing else.
-10. **Anticipate committee questions** — the five to eight that will actually be asked, ordered by how much they would change the decision.
+10. **Anticipate committee questions** — the five to eight that will actually be asked, starting from the committee's standing concerns where they apply to this deal, ordered by how much they would change the decision.
 
 ## Output format
 
@@ -156,9 +178,11 @@ Two rules that follow: a thesis pillar supported only by [M] and [B] evidence mu
 
 ## Example prompts
 
-> "IC is Thursday. Attached: the CIM, our QoE, commercial and legal DD readouts, the model output with base and downside, and my notes from two management sessions. Firm memo template is the last file. Draft it — and be genuinely tough in the risks section, the partners will be."
+> "IC is Thursday. Attached: the CIM, our QoE, commercial and legal DD readouts, the model output with base and downside, and my notes from two management sessions. Draft it — and be genuinely tough in the risks section, the partners will be."
 
-> "Credit committee memo for a $60M unitranche. Attached are the lender presentation, our credit analysis, and the covenant abstract. Use our template. Flag anything in the model that our diligence doesn't actually support."
+> "Set up ic-memo-drafter. Our template is the attached Word file — match its section order exactly. We're a lower-mid-market buyout fund, control deals, $10–30M EBITDA. The committee always asks about customer concentration and what happens to the returns if the exit multiple is two turns lower. Save drafts as Word files in the deal folder I name each time."
+
+> "Credit committee memo for a $60M unitranche. Attached are the lender presentation, our credit analysis, and the covenant abstract. Flag anything in the model that our diligence doesn't actually support."
 
 > "Early draft — we only have the CIM and one round of management calls, no QoE and no model yet. Draft what you can and mark clearly what's missing, so the partners see how thin the evidence base still is."
 

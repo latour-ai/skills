@@ -1,28 +1,41 @@
 ---
 name: public-co-unit-economics
-description: >
-  Create a public-source unit economics memo for a US-listed public company, focused on
-  understanding how the business actually makes money using only web-accessible filings and
-  disclosures. Use this skill whenever the user wants to understand a public company's
-  business model, economic engine, revenue build, or "unit economics" — e.g. "how does
-  [company/ticker] make money", "what's the unit economics of [ticker]", "break down
-  [company]'s business model", "what drives revenue/margin for [ticker]", "build me a unit
-  economics memo", "what's the right unit of analysis for [company]", or pastes/links an
-  investor presentation, earnings release, or 10-Q and wants the model explained. Trigger
-  even when the user only gives a ticker plus a model question. Produces a neutral, sourced,
-  two-page HTML memo — NOT a full financial model or an investment recommendation. For private
-  companies, ask for a public ticker instead.
+description: >-
+  Create a public-source unit economics memo for a US-listed public company:
+  how the business makes money, the best available unit of analysis, the
+  latest quarter against the same quarter a year earlier, and what public
+  disclosure does not reveal. Works from company filings and disclosures,
+  found through a connected market data source (Bloomberg, FactSet, S&P
+  Capital IQ, AlphaSense, Daloopa) where there is one, otherwise SEC filings
+  and the open web, otherwise documents the user attaches. For public equity
+  analysts and portfolio managers getting up to speed on a business model.
+  Trigger on "how does [company/ticker] make money", "what's the unit
+  economics of [ticker]", "break down [company]'s business model", "what
+  drives revenue/margin for [ticker]", "build me a unit economics memo",
+  "what's the right unit of analysis for [company]", or when the user gives a
+  ticker plus a business-model question, or pastes or links an investor
+  presentation, earnings release or 10-Q and wants the model explained.
+  Produces a neutral, sourced, two-page HTML memo, not a financial model or
+  an investment recommendation. Do NOT use for a broad first look covering
+  valuation, competitors and bull/bear cases; use the
+  public-company-first-pass skill. Do NOT use to digest a single earnings
+  call; use the earnings-call-extractor skill. Do NOT use for private
+  companies; use the tear-sheet-private-co skill.
+license: MIT
+metadata:
+  author: latourai
+  version: '2.0'
 ---
 
 # Public Company Unit Economics Memo
 
-Create a concise, HTML-formatted unit economics memo for the public company the user specifies (a company name or ticker, optionally with a segment, investor-presentation URL, earnings-transcript URL, or the current browser page).
+Create a concise, HTML-formatted unit economics memo for the public company the user specifies (a company name or ticker, optionally with a segment, an investor-presentation or earnings-transcript link, attached filings, or the page open in the user's browser if the environment can read it).
 
-This skill is designed for a public equity analyst who wants to understand how a business makes money using only public sources. The goal is not to build a full financial model or produce an investment recommendation. The goal is to identify the best available unit of analysis, explain the company's economic engine, and clearly flag what public disclosure does not reveal.
+This skill is designed for a public equity analyst who wants to understand how a business makes money from what the company itself has disclosed. The goal is not to build a full financial model or produce an investment recommendation. The goal is to identify the best available unit of analysis, explain the company's economic engine, and clearly flag what public disclosure does not reveal.
 
 ## Available Sources
 
-Use only public, web-accessible sources, including:
+The memo rests on the company's own public disclosures, so a reader can check every figure:
 
 * SEC filings: 10-K, 10-Q, 8-K, S-1 if relevant
 * Company investor relations pages
@@ -32,9 +45,16 @@ Use only public, web-accessible sources, including:
 * Shareholder letters
 * Press releases
 * Public company websites
-* Current browser page, if available through a Chrome extension or browsing context
 
-Do not assume access to proprietary datasets, paid terminals, private databases, Daloopa, FactSet, Bloomberg, CapIQ, PitchBook, Tegus, AlphaSense, visible APIs, or local files unless the user explicitly provides them.
+Get them from whatever is available, in this order:
+
+1. A connected market and company data source (Bloomberg, FactSet, S&P Capital IQ, AlphaSense, Daloopa or similar), used to find and pull the company's filings, transcripts and reported figures. Cite the underlying company document, not only the data source.
+2. Public filings and the open web: SEC EDGAR and the company's investor relations site.
+3. Documents the user attaches or pastes, or files in connected storage (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local folder) when the user names where they are.
+
+If a data source is not connected or fails, move to the next option and carry on. If none of the three yields the latest quarter's disclosures, say which documents are missing and ask the user to attach them.
+
+Keep to what the company has disclosed. Leave out consensus estimates, third-party derived metrics, broker research and expert-network content unless the user provides them and asks for them, and label them as non-company sources if used.
 
 ## Core Standard
 
@@ -48,7 +68,7 @@ Every numerical claim and every company-specific business model claim must be so
 
 Analyze public companies only.
 
-If the user provides a private company, explain that this skill is designed for public companies and ask for a public ticker or company with public filings.
+If the user provides a private company, explain that this skill is designed for companies with public filings and ask for a public ticker.
 
 ## Default Time Period
 
@@ -71,6 +91,8 @@ Determine:
 * Latest reported quarter
 * Fiscal year convention
 * Whether the user specified a segment or business line
+
+If a name could refer to more than one listed company, ask which. Otherwise proceed and state the company, ticker and period at the top of the memo.
 
 Prioritize sources in this order:
 
@@ -199,6 +221,8 @@ Use language like:
 
 ## Step 7: Produce a Two-Page HTML Memo
 
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
+
 Generate a standalone HTML document.
 
 Requirements:
@@ -213,8 +237,7 @@ Requirements:
 * Keep the memo approximately two printed pages
 * Include source links as footnotes or inline links
 * Use clear analyst-style headings
-* Use concise prose
-* Avoid generic filler
+* Use concise prose, in plain English over jargon
 
 If the environment allows file creation, save the memo as:
 
@@ -386,21 +409,6 @@ Use this structure:
 </body>
 </html>
 ```
-
-## Analytical Standards
-
-Follow these standards:
-
-1. Use public sources only.
-2. Source every numerical claim.
-3. Source every company-specific business model claim.
-4. Label all calculated metrics.
-5. Do not fabricate missing KPIs.
-6. Do not pad with generic filler.
-7. Prefer plain English over jargon.
-8. Keep the memo neutral.
-9. Keep the memo to approximately two printed pages.
-10. Produce HTML as the final deliverable.
 
 ## Final Response to User
 

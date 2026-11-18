@@ -12,11 +12,14 @@ description: >-
   this process into a skill," "what should we add to our skills library," or any
   request to brainstorm, prioritize or design new reusable AI skills for
   investment, fundraising, IR, diligence, research, outreach, monitoring,
-  reporting or internal productivity.
+  reporting or internal productivity. Do NOT use for a full interview-based
+  review of how a team works with a prioritized adoption roadmap; use the
+  ai-workflow-audit skill. Do NOT use to learn what AI can do in general; use
+  the teach-me skill.
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '1.1'
 ---
 
 # Investment Skill Creator
@@ -51,7 +54,7 @@ A good skill idea should have:
 3. Clear inputs
 4. A useful output
 5. A repeatable process
-6. A quality bar
+6. A clear picture of what a good output contains
 7. Known risks and controls
 8. A strong reason to exist
 
@@ -154,22 +157,28 @@ The skill idea should sound like something that belongs in a professional workfl
 
 ## First Step: Determine User Context
 
-Begin by identifying the user's role and workflow setting.
+Begin by establishing the user's role and workflow setting. Take it from the
+request and anything the user attached or pasted (a process description, a
+list of pain points, an existing skills list) before asking for it.
 
-Ask only the questions needed. If the user already provides enough context,
-proceed with reasonable assumptions.
+Generate ideas on the first reply whenever the request gives the role or the
+firm type. Fill the remaining gaps with reasonable assumptions and state them
+in the diagnosis, so the user can correct them in one line. Ask first, in a
+single short message of at most three questions, only when neither the role
+nor the firm type can be inferred, because ideas for the wrong audience waste
+the whole run.
 
 ### Role Router
 
-Ask:
+The context that shapes the ideas:
 
-1. Are you focused on investing, fundraising / capital formation, investor relations, or both?
-2. What type of firm is this for? Examples: hedge fund, PE fund, VC fund, credit fund, allocator, OCIO, family office, RIA, investment bank, placement agent.
-3. What asset class or strategy matters most?
-4. What recurring workflow feels slow, annoying, inconsistent or too dependent on one person's judgment?
-5. What materials do you usually work with? Examples: filings, transcripts, decks, DDQs, CRM notes, call transcripts, investor letters, pitch books, websites, emails, research reports.
-6. What would a useful output look like? Examples: memo, checklist, email, table, scorecard, brief, diligence questions, summary, one-pager.
-7. Is the goal better investment judgment, faster execution, better fundraising, better communication, better monitoring or internal productivity?
+1. Focus: investing, fundraising / capital formation, investor relations, or both.
+2. Firm type. Examples: hedge fund, PE fund, VC fund, credit fund, allocator, OCIO, family office, RIA, investment bank, placement agent.
+3. Asset class or strategy.
+4. The recurring workflow that feels slow, annoying, inconsistent or too dependent on one person's judgment.
+5. The materials the team usually works with. Examples: filings, transcripts, decks, DDQs, CRM notes, call transcripts, investor letters, pitch books, websites, emails, research reports.
+6. What a useful output looks like. Examples: memo, checklist, email, table, scorecard, brief, diligence questions, summary, one-pager.
+7. The goal: better investment judgment, faster execution, better fundraising, better communication, better monitoring or internal productivity.
 
 If the user says "both investment professionals and fundraisers," design ideas
 that either:
@@ -281,8 +290,9 @@ For each workflow, work through the following sequence:
 8. Identify the smallest useful version of the skill.
 9. Decide whether the idea belongs in the library.
 
-Do not assume AI replaces professional judgment. Frame skills as leverage for
-expert professionals.
+Frame every skill as leverage for expert professionals. AI does not replace
+investor, GP, LP, IR or compliance judgment, and an idea that depends on it
+doing so does not belong in the library.
 
 ## Scoring Rubric
 
@@ -320,7 +330,13 @@ When generating skill ideas, produce:
 3. A ranked top 3
 4. One recommended first skill to build
 5. A short explanation of why that skill is the best starting point
-6. Optional: a starter `SKILL.md` outline for the top idea
+6. Optional: a starter `SKILL.md` outline for the top idea (see Starter
+   `SKILL.md` Outline below)
+
+At least one of the ideas should be simple enough to build straight away as a
+`SKILL.md`, with inputs the user already has.
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 ## Skill Idea Card Format
 
@@ -352,8 +368,8 @@ Meeting and Inbox Prep / Investment Research / Investor Relations and Outreach /
 3. [Step three]
 4. [Step four]
 
-**Quality bar:**  
-[What a good output must include.]
+**What a good output contains:**  
+[The elements the deliverable must include to be useful.]
 
 **Risks / controls:**  
 [Where the model could hallucinate, overstate, misclassify or create compliance risk. Include practical controls.]
@@ -374,7 +390,84 @@ After presenting all ideas, rank the top 3 using this format:
 | 2 | [Skill name] | [User] | [Reason] | [Risk] |
 | 3 | [Skill name] | [User] | [Reason] | [Risk] |
 
+The ranking is a real prioritization: apply the scoring rubric, and say in
+"Why It Ranks Highly" what puts each idea ahead of the one below it.
+
 Then recommend one first build.
+
+## Starter `SKILL.md` Outline
+
+When the user wants the top idea drafted, use this outline. It follows the
+house style of a professional skill library.
+
+```markdown
+---
+name: [folder-name-in-kebab-case]
+description: >-
+  [What the skill does and what it produces.] [Who it is for.] Trigger on
+  "[phrase]", "[phrase]", "[phrase]". Do NOT use for [nearby job]; use the
+  [other-skill] skill.
+license: MIT
+metadata:
+  author: [your firm]
+  version: '1.0'
+---
+
+# [Skill Name]
+
+[Two or three sentences: the job, the input, the deliverable.]
+
+## Why this skill exists
+[The workflow pain, and why doing it badly is costly.]
+
+## Inputs
+**Required:** [what the user must supply]
+**Optional:** [what improves the result]
+**Missing-input behavior:** [what the skill does when something is absent:
+proceed with a stated assumption, mark a placeholder, or ask one question]
+
+## How it works
+1. [Step]
+2. [Step]
+3. [Step]
+
+## Output format
+Length follows the substance: cover what the task needs and leave out filler
+sections, restated summaries, and boilerplate.
+
+[The template of the deliverable.]
+
+## Guardrails
+- **[Rule].** [The reason it matters.]
+
+## Example prompts
+> "[A realistic request]"
+```
+
+Guidance to give the user when drafting or reviewing a skill:
+
+- State each rule once, in the step where it applies, in plain words, with the
+  reason. Capital letters, "always/never" stacks and repeated warnings make
+  current models over-apply a rule, so leave them out.
+- Describe what a good output contains inside the instructions and the output
+  template. Leave out end-of-run self-check lists ("quality checks", "before
+  delivering, confirm..."); the model already checks its work, and a checklist
+  only restates the rules.
+- Leave out role-play openers ("You are a world-class analyst") and "think
+  step by step" prompts. Describe the task and the reader instead.
+- Have the skill proceed on stated defaults and ask only when a wrong guess
+  would be costly. Each question it asks should carry a default.
+- Name systems by category with the common options (email and calendar, file
+  storage, CRM, meeting transcripts, market data), so the skill runs at any
+  firm, and give every connected system a fallback to pasted or attached
+  material.
+- Keep outward-facing actions conservative: emails are drafts, and shared
+  records such as a CRM are written only after the user confirms.
+- Put facts that stay the same from run to run (house style, a watchlist,
+  where a tracker lives) in a one-time setup the skill saves and reads, and
+  leave setup out of one-shot analysis skills.
+- Use invented names in examples. Keep client names and personal details out
+  of the skill file.
 
 ## Guidance for Investment-Focused Ideas
 
@@ -475,16 +568,14 @@ For these, explicitly show how the same skill adapts:
 
 ## What This Skill Does Not Do
 
-- It does not generate generic AI use cases.
 - It does not recommend building every idea.
 - It does not assume access to private databases, CRMs, data rooms or proprietary systems.
 - It does not ignore compliance, confidentiality or reputational risk.
 - It does not treat fundraising and investing as the same job.
-- It does not imply AI replaces investor, GP, LP, IR or compliance judgment.
 
 ## Tone
 
-Write like a practical AI consultant for investment firms.
+Practical and specific, in the language investment firms use.
 
 Default to:
 
@@ -502,18 +593,3 @@ Avoid:
 - Overly technical jargon
 - Vague transformation claims
 - "This will revolutionize your firm" language
-
-## Quality Checks Before Finalizing
-
-Before delivering the final output, confirm:
-
-- Each idea has a clear user
-- Investment and fundraising users are distinguished
-- The inputs are realistic
-- The output is concrete
-- The workflow is repeatable
-- The value is obvious
-- Risks and controls are named
-- The top 3 are actually prioritized, not just listed
-- At least one idea could be built immediately as a `SKILL.md`
-- The ideas feel consistent with a practical investment-firm skill library

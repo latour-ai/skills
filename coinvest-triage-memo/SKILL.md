@@ -9,11 +9,17 @@ description: >-
   the company and terms, and a participate/pass recommendation with the
   key questions for the GP call — every claim labeled verified,
   GP-asserted, or inferred, because a two-week process cannot verify much
-  and should be honest about it. For allocators, fund-of-funds, OCIOs,
+  and should be honest about it. The program's criteria and the location
+  of the co-invest book (SharePoint / OneDrive, Google Drive, Box, Dropbox,
+  a local folder, or a portfolio-system export) are set once in a short
+  first-run setup, so the fit and concentration tests run on every offer
+  without being re-entered. For allocators, fund-of-funds, OCIOs,
   endowments, foundations, and family offices running co-invest
   programs. Trigger on phrases like "co-invest triage," "GP just offered
   us a co-investment," "two weeks to decide on this deal," "should we
-  take this co-invest," "triage this allocation," or when a user uploads
+  take this co-invest," "triage this allocation," "set up
+  coinvest-triage-memo," "change my coinvest-triage-memo settings," or when
+  a user uploads
   GP co-investment materials with a decision deadline. Do NOT use for
   screening a CIM as a direct buyer — use the cim-first-pass skill. Do
   NOT use for diligence on the GP's fund itself — use the
@@ -22,7 +28,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '2.0'
 ---
 
 # Coinvest Triage Memo
@@ -40,21 +46,43 @@ The third problem is epistemic laundering. A two-week memo is built almost entir
 ## Inputs
 
 **Required:**
-- The GP's co-investment materials — deck, deal summary, model output, whatever was provided
+- The GP's co-investment materials — deck, deal summary, model output, whatever was provided; attached, pasted, or pulled from connected file storage if the user names where they live
 - The GP, the company, and the decision deadline
-- **The program's co-invest criteria** — check size range, relationship requirements, sector and deal-type exclusions, concentration limits. Fit is the fastest kill test and it cannot run without them.
+- **The program's co-invest criteria** — check size range, relationship requirements, sector and deal-type exclusions, concentration limits. Fit is the fastest kill test and it cannot run without them. Read from the settings, or given with the request.
 
 **Optional but high-value:**
-- **The current co-invest book** — positions, sectors, vintages, GP exposure — without it the concentration section is skipped, and concentration is a common silent killer
+- **The current co-invest book** — positions, sectors, vintages, GP exposure — read from the location saved in setup, or attached. Without it the concentration section is skipped, and concentration is a common silent killer
 - The fund relationship context: which of the GP's funds you hold, its vintage, remaining dry powder, and how this deal sits in it
 - The proposed structure and terms: fees and carry on the co-invest, governance rights, information rights, transfer restrictions, follow-on obligations
 - How the opportunity arrived and who else is being shown it
-- Prior co-invest history with this GP, including how the last one was allocated and how it performed
+- Prior co-invest history with this GP, including how the last one was allocated and how it performed; from the firm's records or a connected CRM (Salesforce, HubSpot, Dynamics 365, DealCloud, Affinity) if one holds it
 - Any independent material on the company — news, filings, prior research in your own archive
 
-**Missing-input behavior:** Triage runs on whatever exists — that is its nature — but every skipped section is named as skipped, not silently absent. No criteria: the fit section becomes the questions to resolve about fit, labeled accordingly. No book data: concentration is flagged as unassessed and listed as a pre-decision requirement. And the skill never fills gaps from the deck's own framing: if the GP's materials are the only source on a point, the point is labeled GP-asserted no matter how plausible it reads.
+**Set once in setup (step 0):** the program's co-invest criteria, where the co-invest book and GP relationship records live, memo conventions, and where memos are saved.
+
+**Missing-input behavior:** If a saved location isn't connected or can't be read, say which system was unavailable, treat that input as not provided, and carry on. Triage runs on whatever exists — that is its nature — but every skipped section is named as skipped, not silently absent. No criteria: the fit section becomes the questions to resolve about fit, labeled accordingly. No book data: concentration is flagged as unassessed and listed as a pre-decision requirement. And the skill never fills gaps from the deck's own framing: if the GP's materials are the only source on a point, the point is labeled GP-asserted no matter how plausible it reads.
 
 ## How it works
+
+### 0. First-run setup (once, then only when asked)
+
+Run setup the first time the skill is used, or when the user says "set up coinvest-triage-memo" or "change my coinvest-triage-memo settings". Look for a saved settings file first (`coinvest-triage-memo-settings.md`, in the project's files or the co-invest folder). If one exists, read it and skip setup.
+
+Setup is one short round of questions, each with a default the user can accept:
+
+1. **Detect before asking.** Check which file storage and CRM are connected, and pre-fill what detection settles.
+2. **Ask, in one message:**
+   - **Program criteria:** check size range, relationship requirements, sector and deal-type exclusions, and concentration limits (per deal, per GP, per sector), pasted or as the location of the policy document. Default: none; the fit section then lists the questions to resolve.
+   - **Co-invest book:** the file or portfolio-system export holding current positions, sectors, vintages and GP exposure, and where it is kept. Default: attached with each request.
+   - **GP relationship records (optional):** where fund commitments and prior co-invest history are kept, in file storage or a CRM. Default: supplied with each request.
+   - **Memo conventions (optional):** the IC's preferred headings, a required header or confidentiality legend, and who the memo goes to. Default: the format below.
+   - **Where memos are saved,** or "just send me the file" (default).
+3. **Save the settings** to `coinvest-triage-memo-settings.md` in plain language the user can edit. If nothing persistent can be written, show the settings as a short block and tell the user to paste it into their project instructions.
+4. **Continue straight into the triage** if the user gave deal materials with the setup request. A deadline is running, so setup never delays it.
+
+On later runs, read the settings and don't re-ask. Setup never blocks a first run: if the user says "skip setup", work from what is attached, use the defaults, and say which were used.
+
+### Steps for each offer
 
 1. **Fix the clock first.** Deadline, days remaining, and what can realistically be verified in them — which determines what the memo can honestly claim and what must be labeled as unverified regardless of how important it is. State this in the header; it frames every judgment after it.
 2. **Summarize the deal in plain English, sourced:** business, deal structure, entry valuation and multiple, leverage, the GP's stated thesis, and proposed co-invest terms. Every number tagged to its source — this pass builds the verified/GP-asserted/inferred discipline into the memo's foundation before any analysis begins.
@@ -133,11 +161,14 @@ None of these is disqualifying alone. The pattern across them is the finding.
 - **No fabricated market checks.** If no independent reference on valuation or growth exists within the time available, the load-bearing-assumptions table says so; it does not invent a comp.
 - **Relationship pressure is named, not obeyed.** Where the real argument for participating is the GP relationship rather than the deal, the memo says that explicitly so the IC can weigh it as what it is.
 - **Not investment advice.** The memo structures a triage for a professional investment team; the decision, and accountability for it, are the firm's.
+- **Read-only on firm records.** The skill reads the book and relationship records; it does not update the book, the CRM or any tracker, and it sends nothing to the GP. The memo is saved only to the location chosen in setup or returned as a file.
 - **Confidentiality:** co-investment materials are shared under NDA and often contain MNPI about a private transaction. Assume a firm-approved AI environment, restrict the memo to the deal team, and flag any content whose sensitivity outlives a pass decision.
 
 ## Example prompts
 
 > "GP deck and model summary attached for [company] — [GP] offered us $8M, decision due [date], nine days out. Criteria: existing fund relationships only, $5–15M checks, max 3% of program NAV per deal, no turnarounds. Book summary attached. Full triage, and be blunt on why they're showing us this."
+
+> "Set up coinvest-triage-memo. Criteria: existing fund relationships only, $5–15M checks, max 3% of program NAV per deal and 10% per GP, no turnarounds or pre-revenue. The book is 'Co-invest book.xlsx' in the Private Markets folder on Box; save memos to 'Co-invest triage' in the same place."
 
 > "Second co-invest from [GP] this year, this time fee-bearing — deck attached, deadline in twelve days. We don't have the book file handy, so flag concentration as open. I mainly want the adverse-selection read and the alignment section: what changed that they're now charging?"
 

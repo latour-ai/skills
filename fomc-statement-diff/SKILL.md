@@ -19,7 +19,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '1.1'
 ---
 
 # FOMC Statement Diff
@@ -37,8 +37,6 @@ Doing that comparison by hand under time pressure is exactly the kind of task wh
 **Required:**
 - The new statement, in full, pasted or attached
 - The prior meeting's statement, in full, pasted or attached
-
-Both are genuinely required. See the guardrails — this skill does not reconstruct statements from memory.
 
 **Optional but high-value:**
 - The Summary of Economic Projections (new and prior), for the dot-plot section

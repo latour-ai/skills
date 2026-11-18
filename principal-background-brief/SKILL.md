@@ -21,7 +21,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '1.1'
 ---
 
 # Principal Background Brief
@@ -48,6 +48,8 @@ The brief this skill produces is organized around that distinction. Every line i
 - LinkedIn profiles or other self-published histories, as a second version of the narrative to triangulate
 - Prior background briefs on the same principals, for a what-changed comparison
 - The open questions already in the diligence file, so discrepancies can be connected to them
+
+Bios, pulled records and prior briefs can be attached, pasted, or pulled from connected file storage if the user names where they live.
 
 **Missing-input behavior:** With bios but no pulled records and no web access, the skill inverts into planning mode: it produces the record-pull checklist — which databases to query for each principal and what to look for, based on what the bio claims — plus the internal-consistency review of the bios themselves, which regularly surfaces gaps and oddities on its own. It says plainly that no record checking was performed. It never simulates a database result, never asserts that a search "found nothing" unless that search was actually run and provided, and never fills a timeline gap with a guess.
 

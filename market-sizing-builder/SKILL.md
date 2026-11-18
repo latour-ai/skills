@@ -30,7 +30,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '1.1'
 ---
 
 # Market Sizing Builder
@@ -63,6 +63,8 @@ For the screening question, size alone is not the answer. "Large and fragmented"
 - **Competitor revenue or share estimates** for the concentration read
 - **A third-party TAM figure to test**, with whatever is known about how it was built
 - **The time horizon** for obtainable market and any growth-rate view
+
+Material can be attached, pasted, or pulled from connected file storage if the user names where it lives. A published source the user names without attaching (a census table, a trade association report, a public company's segment disclosure) can be retrieved from a connected market data source or the open web, and is cited with its publisher and date like any other. If it cannot be retrieved, that input is treated as missing.
 
 **Missing-input behavior:** The skill builds with what it has and labels every gap. If no top-down source is supplied or named, the top-down leg is marked not built rather than filled from recall, and the output says which published series would close it. If a bottom-up input has no source, the skill proposes a value with its reasoning, labels it as an assumption, and moves it into the sensitivity table. If the business type is ambiguous, both frames are sketched and the user is asked which applies. If no time horizon is given for obtainable market, five years is used and stated.
 

@@ -21,7 +21,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '1.1'
 ---
 
 # Credit Agreement Covenant Extractor
@@ -35,7 +35,7 @@ The terms that hurt a lender show up years later, and they are almost never in t
 ## Inputs
 
 **Required:**
-- The credit agreement, indenture, note purchase agreement, or term sheet (uploaded file or pasted text). Amendments and the first-lien/second-lien intercreditor should be included if they exist.
+- The credit agreement, indenture, note purchase agreement, or term sheet (attached, pasted, or pulled from connected file storage such as SharePoint / OneDrive, Google Drive, Box or Dropbox if the user names where it lives). Amendments and the first-lien/second-lien intercreditor should be included if they exist.
 
 **Optional but high-value:**
 - Deal type and market context: broadly syndicated, middle-market unitranche, club deal, high-yield indenture — this determines what "market" means for the off-market flags

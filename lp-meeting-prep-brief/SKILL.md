@@ -7,22 +7,28 @@ description: >-
   they use, open items promised or requested in prior conversations, recent
   news about their organization worth acknowledging, and the five questions
   they are most likely to ask — each with a suggested answer — plus anything
-  sensitive the partner should raise proactively. For IR, fundraising, and
-  BD teams at private equity, private credit, hedge fund, real assets, and
-  venture managers, and the partners they send into the room. Trigger on
-  phrases like "prep me for the [LP] meeting," "briefing for [pension] on
-  Thursday," "what do I need to know before I see [LP]," "meeting prep for
-  [investor]," "build the one-pager for tomorrow's LP call," or when a user
-  names a scheduled LP meeting and attaches relationship materials. Do NOT
-  use for capturing what happened after the meeting — use the
-  call-transcript-followup skill. Do NOT use for a multi-meeting conference
-  schedule — use the conference-prep-planner skill. Do NOT use for a deep
-  profile of one individual — use the professional-profile-brief skill. LP
-  data is confidential; assume a firm-approved AI environment.
+  sensitive the partner should raise proactively. Reads the relationship
+  record from whatever the firm runs: a CRM (Salesforce, HubSpot, Dynamics
+  365, DealCloud, Affinity), email and calendar (Microsoft 365 / Outlook or
+  Google Workspace / Gmail), meeting notes and file storage, chosen once in
+  a short first-run setup, or from exports and notes the user attaches. For
+  IR, fundraising, and BD teams at private equity, private credit, hedge
+  fund, real assets, and venture managers, and the partners they send into
+  the room. Trigger on phrases like "prep me for the [LP] meeting,"
+  "briefing for [pension] on Thursday," "what do I need to know before I see
+  [LP]," "meeting prep for [investor]," "build the one-pager for tomorrow's
+  LP call," "set up lp-meeting-prep-brief," "change my lp-meeting-prep-brief
+  settings," or when a user names a scheduled LP meeting and attaches
+  relationship materials. Do NOT use for capturing what happened after the
+  meeting — use the call-transcript-followup skill. Do NOT use for a
+  multi-meeting conference schedule — use the conference-prep-planner skill.
+  Do NOT use for a deep profile of one individual — use the
+  professional-profile-brief skill. LP data is confidential; assume a
+  firm-approved AI environment.
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '2.0'
 ---
 
 # LP Meeting Prep Brief
@@ -41,7 +47,15 @@ There is also a translation failure. The firm thinks in its own metrics; the pen
 
 **Required:**
 - Who the meeting is with — the LP organization, the attendees on their side if known, the date, and the meeting's purpose if there is one (routine update, re-up conversation, first meeting on a new fund, damage control).
-- **Whatever relationship record exists** — a CRM export, email threads, prior meeting notes, or at minimum a plain description of the history. The brief is assembled from this; it cannot be conjured.
+- **Whatever relationship record exists** — the CRM record, email threads, prior meeting notes, or at minimum a plain description of the history. The brief is assembled from this; it cannot be conjured. The record can be read from connected systems or supplied as exports, attachments, or pasted text.
+
+**Read from connected systems, when they are connected:**
+- The CRM (Salesforce, HubSpot, Dynamics 365, DealCloud, Affinity): the LP's account, contacts, logged activities and open tasks
+- Email and calendar (Microsoft 365 / Outlook, or Google Workspace / Gmail): the meeting invite and attendee list, and the threads with the LP's people
+- Meeting notes and transcripts (Zoom, Teams, Fireflies, Granola, Otter, or saved notes files) from prior meetings with this LP
+- File storage (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local folder): holdings and performance reports, if the user or the settings say where they live
+
+**Set once in setup (step 0):** which CRM, email and calendar, notes source and file storage to read; where LP holdings and performance reports live; the firm's funds; where briefs are saved; and any firm rules.
 
 **Optional but high-value:**
 - **Current holdings and performance for this LP across the firm's funds** — commitments, NAV, called and distributed capital, net IRR/DPI/TVPI — because framing performance in their numbers is half the meeting
@@ -51,12 +65,29 @@ There is also a translation failure. The firm thinks in its own metrics; the pen
 - Attendee names and titles on their side, for the who-knows-whom mapping
 - Known sensitivities: a markdown, a team departure, a delayed exit, a prior complaint
 
-**Missing-input behavior:** Build the best brief the supplied record supports and label every gap in place — "no contact history provided before 2024," "holdings data not supplied; performance section omitted" — rather than smoothing over the holes. Recent organizational news may be drawn from public sources and cited as such; everything about the relationship itself comes only from the supplied record. Never invent a touchpoint, a promise, a holding, or a performance figure. If the record is so thin the meeting is effectively cold, say so plainly — "treat this as a first meeting" is a useful briefing conclusion, and the brief then leans on public information about the organization and its program.
+**Missing-input behavior:** If a system isn't connected or fails, continue with attached or pasted material and name the system that was unavailable under "Gaps in this brief". Build the best brief the supplied record supports and label every gap in place — "no contact history provided before 2024," "holdings data not supplied; performance section omitted" — rather than smoothing over the holes. Recent organizational news may be drawn from public sources and cited as such; everything about the relationship itself comes only from the supplied record. Never invent a touchpoint, a promise, a holding, or a performance figure. If the record is so thin the meeting is effectively cold, say so plainly — "treat this as a first meeting" is a useful briefing conclusion, and the brief then leans on public information about the organization and its program.
 
 ## How it works
 
+**0. First-run setup (once, then only when asked).** Run setup the first time the skill is used, or when the user says "set up lp-meeting-prep-brief" or "change my lp-meeting-prep-brief settings". Look first for a saved `lp-meeting-prep-brief-settings.md` in the project's files or the briefs folder. If one exists, read it and skip setup.
+
+Setup is a single round of questions, each with a default the user can accept; "none" is a valid answer.
+
+- **Detect before asking.** Check which tools are connected in this environment: a CRM, Outlook or Gmail and the matching calendar, a meeting-notes tool, file storage. Pre-fill every answer detection settles and show it for confirmation.
+- **Ask only what detection could not settle, in one message:**
+  - **CRM:** which one, or none (the user will attach an export or describe the history).
+  - **Email and calendar:** Microsoft 365 (Outlook), Google Workspace (Gmail and Google Calendar), or neither.
+  - **Meeting notes:** where notes or transcripts from past LP meetings are kept, or none.
+  - **Holdings and performance:** the folder or report that holds LP-level commitments, NAV and returns, or "I'll attach it each time" (default).
+  - **The firm's funds:** the list of funds an LP might hold, so holdings are labeled consistently.
+  - **Where briefs are saved,** or "just send me the brief" (default), plus any firm rules, for example "answers on performance need IR sign-off" or "never include consultant fee arrangements".
+- **Save the settings** to `lp-meeting-prep-brief-settings.md` in plain language the user can edit. If nothing persistent can be written, show the settings as a short block and tell the user to paste it into their project instructions.
+- **Continue straight into the brief** if the user named a meeting with the setup request.
+
+On later runs, read the settings and don't re-ask. Setup never blocks a first run: if the user says "skip setup", build the brief from whatever is attached or pasted. The skill only reads these systems. It does not log anything to the CRM, send or draft email, or change a calendar event.
+
 1. **Establish the frame.** Who is this meeting with, what kind of LP are they, what is the meeting for, and what does the firm want out of it? A routine update, a re-up ask, and a nervous-LP repair call need different briefs — the same facts, differently weighted. If the purpose isn't stated, infer it from the timeline and say what you inferred.
-2. **Build the relationship timeline** from the CRM and email record: first contact, meetings, commitments made and declined, and the trajectory — warming, stable, cooling. Note who on each side knows whom, and flag if the firm-side relationship is concentrated in one person. The single most useful line is often "last meeting ended with X."
+2. **Build the relationship timeline** from the CRM, email and meeting-notes record: first contact, meetings, commitments made and declined, and the trajectory — warming, stable, cooling. Note who on each side knows whom, and flag if the firm-side relationship is concentrated in one person. The single most useful line is often "last meeting ended with X."
 3. **Assemble holdings and performance in their dialect.** State what they hold across the firm's funds, then frame performance in the metrics this LP uses — and at the level they experience it, their commitments, not the flagship fund's headline. If their vintage or fee terms make their numbers differ from the marketing figures, the brief says so before the LP does.
 4. **Hunt the open items.** Read the record specifically for promises and requests still outstanding — materials promised, questions taken away, intros offered, follow-ups committed. Date each one and name who owns it. An open item the partner raises first is diligence; the same item raised by the LP is a lapse.
 5. **Scan recent news about their organization** — leadership changes, published returns, allocation announcements, strategy shifts, headlines. Two purposes: things worth acknowledging in the room, and things that change what they'll ask. A new CIO reviewing all external managers turns a routine update into an audition, and the brief should say that.
@@ -133,6 +164,8 @@ Across all types: whatever is worst in the current numbers will be asked about. 
 ## Example prompts
 
 > "I'm seeing [pension fund] Thursday — their side is [CIO name] and [PE program lead]. Attached: CRM export for the relationship, the email history, and their holdings summary across Funds II and III. Build the one-pager. They care about net IRR versus [benchmark], and I want the open items front and center — I think we owe them co-invest data from the spring."
+
+> "Set up lp-meeting-prep-brief. We're on Outlook, the CRM is DealCloud, meeting notes are in the 'LP Meetings' folder on SharePoint, and the quarterly LP holdings report is in 'Investor Reporting'. Funds are I through IV. Send me the brief as a file."
 
 > "First meeting with a family office that got introduced through [mutual contact] — no history with us at all. Here's the fund one-pager and what we know about them. Build the brief around who they are, what a family office will push on, and the five questions I should expect on a first meeting about Fund I."
 

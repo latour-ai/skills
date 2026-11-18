@@ -20,7 +20,7 @@ description: >-
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '1.1'
 ---
 
 # Expert Call Synthesis
@@ -38,7 +38,7 @@ The last output matters most for spend. Knowing which questions remain unanswere
 ## Inputs
 
 **Required:**
-- Two or more expert call transcripts on the same company or industry. Five to twenty is the intended range; below five the synthesis is thin, above twenty it still works but flag that coverage may be uneven.
+- Two or more expert call transcripts on the same company or industry. Five to twenty is the intended range; below five the synthesis is thin, above twenty it still works but flag that coverage may be uneven. Transcripts can be attached, pasted, or pulled from a connected transcript library or file storage if the user names where they live.
 
 **Optional but high-value:**
 - **Your current thesis, in a sentence or two** — this enables the contradiction check, which is the section most likely to change your mind

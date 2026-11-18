@@ -1,6 +1,26 @@
 ---
 name: market-map-builder
-description: Build a sourced market map of a sector for VC and growth investors — segmentation logic, players per segment with funding stage and amounts from public sources (each dated), recent entrants and exits, and whitespace observations. Trigger on "market map of [sector]", "map the [space] landscape", "who's building in [category]", "competitive landscape for [sector]", "what companies are in [space]", "whitespace in [market]", "landscape analysis", or when a user names a sector/theme and wants to know the players, funding activity, and gaps. Uses your AI's web search; flags stale or conflicting funding data; never invents companies. Do NOT use for deep research on a single company — use the tear-sheet-private-co or public-company-first-pass skill. Do NOT use for prepping on a specific LP or person — use the lp-meeting-prep-brief or professional-profile-brief skill.
+description: >-
+  Build a sourced market map of a sector for VC and growth investors:
+  segmentation logic, players per segment with funding stage and amounts
+  (each dated and sourced), recent entrants and exits, and whitespace
+  observations. Researches from a connected private-market data source
+  (PitchBook, S&P Capital IQ, Preqin, AlphaSense or similar) where there is
+  one, plus company announcements, filings and the open web; flags stale or
+  conflicting funding data and never invents a company. Trigger on "market
+  map of [sector]", "map the [space] landscape", "who's building in
+  [category]", "competitive landscape for [sector]", "what companies are in
+  [space]", "whitespace in [market]", "landscape analysis", or when a user
+  names a sector or theme and wants to know the players, funding activity
+  and gaps. Do NOT use for deep research on a single company; use the
+  tear-sheet-private-co or public-company-first-pass skill. Do NOT use to
+  put a dollar size on the market; use the market-sizing-builder skill. Do
+  NOT use for prepping on a specific LP or person; use the
+  lp-meeting-prep-brief or professional-profile-brief skill.
+license: MIT
+metadata:
+  author: latourai
+  version: '2.0'
 ---
 
 # Market Map Builder
@@ -21,6 +41,9 @@ Market maps are how venture teams turn "AI for logistics is interesting" into a 
 - A working segmentation hypothesis to test rather than build from scratch
 - Companies already known/portfolio companies in the space (to position, and to avoid awkward omissions)
 - Time horizon for "recent" (default: last 24 months)
+- Material of the user's own (a prior map, a deal log, conference notes), attached, pasted, or pulled from connected file storage if the user names where it lives
+
+**Sources:** a connected private-market or company data source (PitchBook, S&P Capital IQ, Preqin, AlphaSense or similar) if there is one, plus company announcements, regulatory filings and the open web. If no data source is connected or it fails, build the map from the web and the user's material and say so under Limitations. If web search is unavailable too, map only what the user supplied and label the map as partial.
 
 **Missing-input behavior:** If the sector is too broad to map usefully ("fintech"), ask once for a narrower cut or a lens; if the user declines, pick the 2–3 most fundable sub-segments, map those, and label the choice. For all other missing inputs, proceed with defaults stated at the top of the memo.
 
@@ -28,7 +51,7 @@ Market maps are how venture teams turn "AI for logistics is interesting" into a 
 
 1. **Define the market boundary first.** One sentence on what's in and what's out, with the edge cases named ("includes claims-automation startups; excludes core policy-admin systems"). A map without a boundary is a list.
 2. **Build the segmentation** from how the market actually divides — by customer, by workflow stage, by business model, or by technology approach. Pick the single axis that best predicts who competes with whom, and say why. Segments should be mutually exclusive on that axis. 3–6 segments; more means the axis is wrong.
-3. **Populate segments via web search.** For each segment, find real, verifiable companies. For each: one-line description, HQ/geography if relevant, last known funding round (stage, amount, lead if notable), and **the date of the source for that funding data**. Prioritize primary-ish sources: company announcements, credible press, regulatory filings. 
+3. **Populate segments from the available sources.** For each segment, find real, verifiable companies. For each: one-line description, HQ/geography if relevant, last known funding round (stage, amount, lead if notable), and **the date of the source for that funding data**. Prioritize primary sources: company announcements, credible press, regulatory filings. A database record counts as a source when cited by name with its as-of date; where it disagrees with the company's own announcement, treat that as conflicting data (step 4).
 4. **Handle data quality explicitly:**
    - Funding data older than ~18 months: tag **[stale — as of {date}]**
    - Conflicting figures across sources: report both with sources — never average or pick silently
@@ -95,7 +118,7 @@ Test the chosen axis: do companies in the same segment actually lose deals to ea
 - **Never reconcile conflicting data silently** — surface both numbers.
 - **Funding ≠ quality.** Don't rank companies by capital raised or imply the best-funded player wins; note it as one signal among several.
 - **Whitespace humility:** "no company found" is a search result, not a market fact. Always include the counter-case (the gap may exist because the economics don't work).
-- Private company data is inherently incomplete and lagged — the Limitations section is mandatory, not decorative.
+- Private company data is inherently incomplete and lagged, so every map carries its Limitations section.
 - No investment recommendations; the map informs a thesis, it isn't one.
 
 ## Example prompts

@@ -1,6 +1,26 @@
 ---
 name: investment-folder-organizer
-description: Organize a messy folder of investment files into a clean, standardized subfolder structure and rename every file with a consistent, sortable convention. Use this skill whenever the user points at a folder of deal or diligence files and wants it tidied, sorted, structured, or renamed — for a hedge fund (allocator), a public security, a private company (PE buyout), or a startup (VC). Trigger on phrases like "organize this deal folder," "clean up these diligence files," "sort and rename these documents," "structure my data room," "put these investment files in order," "organize this fund's folder," or when the user shares a folder path full of pitch decks, CIMs, financials, DDQs, term sheets, letters, or memos and wants it made navigable. Works on a local filesystem and is non-destructive — it copies originals into a new organized folder, never moves or deletes. Do NOT use for organizing non-investment folders (photos, code repos, personal documents).
+description: >-
+  Organize a messy folder of investment files into a clean, standardized
+  subfolder structure and rename every file with a consistent, sortable
+  convention. For investment professionals who inherit or build deal and
+  diligence folders: allocators reviewing a hedge fund, public-equity
+  analysts, private equity deal teams, venture investors. Works on a local
+  folder or a folder in connected file storage (SharePoint / OneDrive, Google
+  Drive, Box, Dropbox), and is non-destructive: it copies originals into a new
+  organized folder and does not move or delete them. Trigger on "organize this
+  deal folder", "clean up these diligence files", "sort and rename these
+  documents", "structure my data room", "put these investment files in
+  order", "organize this fund's folder", or when the user shares a folder
+  full of pitch decks, CIMs, financials, DDQs, term sheets, letters or memos
+  and wants it made navigable. Do NOT use for organizing non-investment
+  folders (photos, code repositories, personal documents). Do NOT use to
+  analyze the documents themselves; use the cim-first-pass or
+  hedge-fund-diligence skill.
+license: MIT
+metadata:
+  author: latourai
+  version: '2.0'
 ---
 
 # Investment Folder Organizer
@@ -11,41 +31,56 @@ generated index that doubles as an audit trail. Same structure for every investo
 type — allocator, public-equity, PE, or VC — so the layout is learnable once and
 reused forever.
 
-**Non-destructive by design:** originals are never moved or deleted. Files are
-*copied* into a new sibling folder. If the user explicitly asks to move/replace in
-place, confirm that intention before doing anything irreversible.
+**Non-destructive by design:** originals are not moved or deleted. Files are
+copied into a new sibling folder, because a misfiled copy is easy to fix and a
+lost original is not. If the user asks to move or replace files in place,
+confirm that intention before doing anything irreversible.
+
+**Where the folder lives.** The folder can be on the local filesystem or in
+connected file storage (SharePoint / OneDrive, Google Drive, Box, Dropbox). A
+cloud folder that is synced to the local machine is handled as a local folder.
+For a folder reached through a storage connection, read the files there and
+create the organized copy in the same parent location; shared drives are seen
+by colleagues, so the preview in step 4 is confirmed by the user before
+anything is written. If the storage isn't connected, can't be written to, or
+fails partway, don't stop: deliver the full plan as a table (original path,
+target folder, new filename, confidence, note) plus the index text, so the
+user can apply it by hand, and say which system was unavailable.
 
 ## Workflow
 
 ### 1. Locate and scope the folder
-Confirm the source folder path. If the user hasn't given one, ask. Then inventory
-everything, **including nested subfolders** — these get flattened into the new
-structure. List files with their type and size:
+Use the source folder the user named. If they haven't given one, ask. Then inventory
+everything, including nested subfolders — these get flattened into the new
+structure. List files with their type and size. For a local folder:
 
 ```bash
 find "<source_folder>" -type f -not -name '.*' -printf '%P\t%s bytes\n' | sort
 ```
 
+For a folder in connected storage, list its contents through that connection.
+
 Note the likely investor context (fund / public co / private co / startup) from the
-filenames and the user's framing — it informs DocType choices but **not** the folder
-structure, which is always the same eight folders.
+filenames and the user's framing. It informs DocType choices but not the folder
+structure, which is the same eight folders for every asset class.
 
 ### 2. Read enough of each file to classify it
-Classify on **content first, filename second** — investment files are notoriously
-mislabeled (`Project Atlas v3 FINAL.pdf` could be anything). You usually do **not**
-need the whole file; the first page / first slide / first sheet plus the filename is
-typically decisive. Read more only when torn.
+Classify on content first, filename second — investment files are notoriously
+mislabeled (`Project Atlas v3 FINAL.pdf` could be anything), and fixing bad names is
+the point of the exercise. The whole file is rarely needed; the first page / first
+slide / first sheet plus the filename is typically decisive. Read more only when torn.
 
-- PDFs: read the first page or two (text or rasterize). For PDF reading strategy see
-  the `pdf-reading` skill if available.
-- Office files (.docx/.pptx/.xlsx): use the relevant skill (`docx`, `pptx`, `xlsx`)
-  or extract text; the title slide, document heading, or first sheet usually suffices.
-- For other types and a routing cheat-sheet, consult the `file-reading` skill.
+- PDFs: read the first page or two (extract the text, or render the page as an
+  image if it is a scan).
+- Office files (.docx/.pptx/.xlsx): use whatever document-reading tools are
+  available, or extract the text; the title slide, document heading, or first sheet
+  usually suffices.
 - Sample large files — don't burn context reading a 300-page data dump end to end.
 
-Read **`references/taxonomy.md`** for the folder definitions, the content-based
+Read `references/taxonomy.md` for the folder definitions, the content-based
 classification tie-breakers (e.g. Marketing vs. Research, Financials vs. Legal), and
-the full DocType vocabulary. Consult it whenever a placement is non-obvious.
+the full DocType vocabulary. Consult it whenever a placement is non-obvious. If that
+file isn't present in this installation, classify from the folder table in step 3.
 
 ### 3. Build the plan
 For every file, decide three things: which of the eight folders, the new filename,
@@ -69,13 +104,13 @@ The eight folders (defined fully in `references/taxonomy.md`):
 | `99_Unsorted` | Anything not confidently classified |
 
 **Naming:** `YYYY-MM-DD_DocType_Descriptor.ext` — date first (use the content date,
-fall back to file mtime), PascalCase DocType, short hyphenated descriptor, **no
-company/fund name** (the parent folder carries it). Full rules and examples are in
+fall back to file mtime), PascalCase DocType, short hyphenated descriptor, no
+company/fund name (the parent folder carries it). Full rules and examples are in
 `references/taxonomy.md`.
 
 ### 4. Preview, then execute
-Show the user a compact summary of the plan before copying — counts per folder and,
-critically, any files headed to `99_Unsorted` or flagged low-confidence. Invite a
+Show the user a compact summary of the plan before copying — counts per folder and
+any files headed to `99_Unsorted` or flagged low-confidence. Invite a
 quick correction. For a small set you can list every rename; for a large set, show
 the per-folder counts plus the flagged items and a handful of representative renames.
 
@@ -93,11 +128,20 @@ The script handles the deterministic, error-prone parts so you don't have to:
 canonicalizing folder names, sanitizing filenames, preserving extensions, resolving
 name collisions (`-2`, `-3`, …), copying with `copy2`, and writing `00_INDEX.md`.
 
+The script works on local paths. If it isn't present in this installation, or the
+folder is in connected storage, do the same job directly: create the eight folders,
+copy each file under its new name with its extension and modified date preserved,
+add `-2`, `-3` to colliding names, and write `00_INDEX.md` listing every file's
+original path, new location, confidence and note, with a "Needs review" section for
+unsorted and low- or medium-confidence items.
+
 ### 5. Present the result
-Point the user to the new folder and `00_INDEX.md`. Explicitly call out the **Needs
+Point the user to the new folder and `00_INDEX.md`. Call out the **Needs
 review** section — the unsorted and low-confidence files — and offer to re-file any
 of them based on the user's steer. If they correct a placement, edit the plan and
 re-run (re-running into a fresh output folder is cheap and clean).
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 ## Plan JSON shape
 
@@ -124,11 +168,3 @@ re-run (re-running into a fresh output folder is cheap and clean).
   unknown values are routed to `99_Unsorted` and flagged.
 - `confidence` is `high` | `medium` | `low` (default `high`).
 - `note` is optional but always shown in the index for unsorted/low/medium items.
-
-## Principles
-- **Never destructive.** Copy. Leave the original folder untouched unless the user
-  explicitly and knowingly asks otherwise.
-- **Content over filenames.** The whole point is to fix bad names, so don't trust them.
-- **Flag, don't guess.** A file in `99_Unsorted` with a note beats a confident misfile.
-- **One structure, every asset class.** Don't fork the taxonomy per investor type;
-  adapt only the DocType words.

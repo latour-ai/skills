@@ -1,7 +1,29 @@
 ---
 name: executive-briefing
 description: >-
-  Turn messy source material into a concise executive briefing (500 words or fewer). For executives, founders, investors, consultants, and operators who need to quickly understand a topic, meeting, company, market, project, or decision context. Use whenever the user says "brief me," "executive summary," "executive briefing," "decision brief," "what do I need to know," "catch me up," "prepare me for," "summarize this for a meeting," "key takeaways," "background context," "what's important here," "TL;DR," "bottom line," "prep me," "distill this," "boil this down," or "what matters here." Also trigger when the user provides articles, meeting notes, PDFs, memos, or pasted text and wants a summary for a busy reader or decision-maker — even without the word "briefing." If the user is preparing for a meeting, board session, or investor call and wants to understand background material quickly, this skill applies. Source-agnostic.
+  Turn messy source material into a concise executive briefing (500 words or
+  fewer). For executives, founders, investors, consultants, and operators who
+  need to quickly understand a topic, meeting, company, market, project, or
+  decision context. Trigger on "brief me", "executive summary", "executive
+  briefing", "decision brief", "what do I need to know", "catch me up",
+  "prepare me for", "summarize this for a meeting", "key takeaways",
+  "background context", "what's important here", "TL;DR", "bottom line",
+  "prep me", "distill this", "boil this down", or "what matters here". Also
+  trigger when the user provides articles, meeting notes, PDFs, memos, or
+  pasted text and wants a summary for a busy reader or decision-maker, even
+  without the word "briefing", or is preparing for a meeting, board session,
+  or investor call and wants to understand background material quickly.
+  Source-agnostic: works from whatever material is attached, pasted, or
+  pointed to. Do NOT use to learn a topic from general knowledge with no
+  source material; use the teach-me skill. Do NOT use for a brief on a person
+  before a meeting; use the professional-profile-brief skill. Do NOT use to
+  turn a call transcript into follow-ups and action items; use the
+  call-transcript-followup skill. Do NOT use to build slides; use the
+  idea-to-slide skill.
+license: MIT
+metadata:
+  author: latourai
+  version: '1.1'
 ---
 
 # Executive Briefing
@@ -20,8 +42,8 @@ This matters because executives make decisions based on briefings. An unsupporte
 
 ## How to produce the briefing
 
-1. Read all available source material carefully — attachments, pasted text, linked pages, conversation context.
-2. Identify the main topic, the apparent purpose, and who the briefing is for (infer from context or ask).
+1. Read all available source material — attachments, pasted text, linked pages, conversation context. Material can also be pulled from connected file storage, email, or meeting notes if the user names where it lives; if that system isn't connected, ask for the material to be attached or pasted.
+2. Identify the main topic, the apparent purpose, and who the briefing is for. Infer the reader from context and name the assumption in Source Notes; don't hold the briefing to ask.
 3. Extract the most relevant facts. Relevance means: would an executive preparing for a decision or meeting need this?
 4. Separate confirmed facts from open questions. This distinction is the backbone of a good briefing.
 5. Preserve important background context — history, stakeholders, prior events, market dynamics — but only what appears in the sources.

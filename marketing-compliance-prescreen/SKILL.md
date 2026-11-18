@@ -1,6 +1,33 @@
 ---
 name: marketing-compliance-prescreen
-description: Pre-screen fund marketing material against common SEC Marketing Rule pitfall categories — gross performance without net, cherry-picked track records, hypothetical/backtested performance without required context, testimonials and endorsements, unsubstantiated claims like "best-in-class", and missing disclosures — producing severity-ranked flags with the exact quoted language and what a compliance officer would likely require. Trigger on "pre-screen this deck for compliance", "check this pitch deck against the Marketing Rule", "compliance review of this one-pager", "anything in here compliance will flag?", "scrub this marketing material", "is this LP letter compliant", or when a user shares fund marketing material (pitch deck, one-pager, website copy, DDQ marketing sections, LP letter excerpts) and asks about compliance risk. This is a pre-screen to save compliance time — explicitly NOT legal advice and never a substitute for review by the firm's compliance officer or counsel. Do NOT use for creating marketing material — use the fund-marketing-one-pager skill. Do NOT use for drafting DDQ answers — use the ddq-response-drafter skill.
+description: >-
+  Pre-screen fund marketing material against common SEC Marketing Rule
+  pitfall categories — gross performance without net, cherry-picked track
+  records, hypothetical/backtested performance without required context,
+  testimonials and endorsements, unsubstantiated claims like "best-in-class",
+  and missing disclosures — producing severity-ranked flags with the exact
+  quoted language and what a compliance officer would likely require. The
+  firm's registration status, usual audience, standard disclosure legends and
+  house compliance rules are recorded once in a short first-run setup. For
+  IR, marketing and fundraising teams at investment advisers and fund
+  managers, and the compliance officers who review their drafts. Trigger on
+  "pre-screen this deck for compliance", "check this pitch deck against the
+  Marketing Rule", "compliance review of this one-pager", "anything in here
+  compliance will flag?", "scrub this marketing material", "is this LP letter
+  compliant", "set up marketing-compliance-prescreen", "change my
+  marketing-compliance-prescreen settings", or when a user shares fund
+  marketing material (pitch deck, one-pager, website copy, DDQ marketing
+  sections, LP letter excerpts) and asks about compliance risk. This is a
+  pre-screen to save compliance time: not legal advice, and not a substitute
+  for review by the firm's compliance officer or counsel. Do NOT use for
+  creating marketing material — use the fund-marketing-one-pager skill. Do
+  NOT use for drafting DDQ answers — use the ddq-response-drafter skill. Do
+  NOT use to check fund documents against each other — use the
+  fund-doc-consistency-checker skill.
+license: MIT
+metadata:
+  author: latourai
+  version: '2.0'
 ---
 
 # Marketing Compliance Pre-Screen
@@ -16,7 +43,7 @@ The IR team finishes the deck Thursday night; compliance flags gross-only return
 ## Inputs
 
 **Required:**
-- The marketing material: deck, one-pager, website copy, letter, email campaign, or excerpts (text or file)
+- The marketing material: deck, one-pager, website copy, letter, email campaign, or excerpts. It can be attached, pasted, or pulled from connected file storage (SharePoint / OneDrive, Google Drive, Box, Dropbox, a local folder) if the user names where it lives; if that storage can't be reached, say so and ask for the file.
 
 **Optional but high-value:**
 - Audience and use: who receives it, one-on-one vs. broad distribution, prospective vs. existing investors (the rule's reach depends on this)
@@ -24,9 +51,27 @@ The IR team finishes the deck Thursday night; compliance flags gross-only return
 - The firm's existing disclosure pages/legends, so the screen can check whether required context exists elsewhere in the document
 - Prior compliance feedback on similar materials
 
-**Missing-input behavior:** If no material is provided, ask once. If registration status or audience is unknown, screen anyway under the assumption "SEC-registered adviser, material going to prospective investors" — the strictest common case — and label the assumption.
+**Set once in setup (step 0):** registration status, usual audience and distribution, the firm's standard disclosure legends, house compliance rules, and where prior compliance feedback is kept.
+
+**Missing-input behavior:** If no material is provided, ask once. If registration status or audience is unknown from both the request and the settings, screen anyway under the assumption "SEC-registered adviser, material going to prospective investors" — the strictest common case — and label the assumption.
 
 ## How it works
+
+**0. First-run setup (once, then only when asked).** Run setup the first time the skill is used, or when the user says "set up marketing-compliance-prescreen" or "change my marketing-compliance-prescreen settings". Look first for a saved `marketing-compliance-prescreen-settings.md` in the project's files or the skill's working folder. If one exists, read it and skip setup.
+
+Setup is one short round of questions, each with a default the user can accept; "none" is a valid answer.
+
+- **Detect before asking.** Check whether file storage is connected, and pre-fill anything the request or the attached material already settles (a registration statement in the footer, the legend on the disclosure page). Show what was pre-filled for confirmation.
+- **Ask, in one message:**
+  - **Registration status:** SEC-registered adviser (default), exempt reporting adviser, state-registered, or non-US manager.
+  - **Usual audience and distribution:** prospective investors in broad distribution (default, the strictest common case), one-on-one institutional presentations, existing investors, or the public website.
+  - **Standard disclosure legends:** the firm's approved performance, hypothetical-performance and general disclaimers, pasted or pointed to in file storage, so the screen can tell an approved legend from a missing one.
+  - **House compliance rules:** anything the firm's compliance officer applies beyond the six categories, for example words the firm never uses, a rule that every case study carries selection criteria, or a ban on showing deal-level returns.
+  - **Prior compliance feedback:** where past comment memos or marked-up drafts are kept, so recurring findings are swept first.
+- **Save the settings** to `marketing-compliance-prescreen-settings.md` in plain language the user can edit. If nothing persistent can be written, show the settings as a short block and tell the user to paste it into their project instructions.
+- **Continue straight into the screen** if the user gave material with the setup request.
+
+On later runs, read the settings and don't re-ask; the user can override any of them for one document ("this one goes to existing LPs only"). Setup never blocks a first run: if the user says "skip setup", screen under the strictest-case assumption and label it. House rules from setup are flagged as their own category, "Firm rule", so the reviewer can tell them from Marketing Rule patterns.
 
 1. **Read the full document first**, including footnotes and disclosure pages — many apparent violations are cured by a disclosure elsewhere, and the screen must check before flagging.
 2. **Sweep for the six pitfall categories:**
@@ -98,7 +143,7 @@ Language patterns that account for most routine findings:
 
 ## Guardrails
 
-- **Not legal advice — say it twice.** The disclaimer appears in the header and the framing never drifts into "this is compliant" / "this violates the rule." The vocabulary is "matches a pattern that draws scrutiny" and "a compliance officer would likely require."
+- **Not legal advice.** The disclaimer appears in the header and again at the close, and the framing never drifts into "this is compliant" / "this violates the rule." The vocabulary is "matches a pattern that draws scrutiny" and "a compliance officer would likely require."
 - **A clean screen is not clearance.** If few or no flags are found, say explicitly that absence of flags is not a compliance determination.
 - **Quote exactly, locate precisely.** Never paraphrase flagged language; never flag language the document doesn't contain.
 - **Check before flagging:** a gross figure with compliant net presentation alongside is not a finding — read the whole document, footnotes included.
@@ -111,6 +156,8 @@ Language patterns that account for most routine findings:
 > "Attaching our Fund IV pitch deck before it goes to compliance Monday. We're an SEC-registered adviser, deck goes to prospective institutional LPs. Pages 8–11 have the track record and there's an LP quote on page 14 I'm nervous about. Pre-screen it — exact language, severity, and what compliance will probably make us change — so I can fix the obvious stuff this weekend."
 
 > "Pasting the new strategy page copy for our website before the redesign ships. Public audience, registered adviser. Screen it — especially the 'proven track record of outperformance' line marketing loves."
+
+> "Set up marketing-compliance-prescreen. We're an SEC-registered adviser, most material goes to prospective institutional LPs, our approved legends are in the 'Compliance / Disclosures' folder, and our CCO never allows deal-level gross returns or the word 'guaranteed'."
 
 > "Our placement agent drafted this two-pager for a webinar. We're an exempt reporting adviser — screen it anyway under the strictest assumptions and label the framework caveat."
 

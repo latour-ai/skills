@@ -1,6 +1,27 @@
 ---
 name: ic-minutes-generator
-description: Turn an investment committee meeting transcript or detailed notes into formal IC minutes — attendees, agenda items, balanced per-item discussion summaries including dissent and risks raised, decisions with vote outcomes, action items with owners, and documents referenced. Built for fund operations, compliance, and CCO teams that need a defensible written record. Trigger on "draft IC minutes", "turn this transcript into minutes", "minutes for the investment committee meeting", "formalize these IC notes", "document the committee's decision", "write up Tuesday's IC", or when a user provides an IC/valuation committee/credit committee transcript and needs the formal record. Accuracy over polish — flags inaudible or ambiguous passages rather than guessing. Do NOT use for client/prospect call recaps and follow-up emails — use the call-transcript-followup skill. Do NOT use for summarizing portfolio company board packs.
+description: >-
+  Turn an investment committee meeting transcript or detailed notes into
+  formal IC minutes — attendees, agenda items, balanced per-item discussion
+  summaries including dissent and risks raised, decisions with vote outcomes,
+  action items with owners, and documents referenced. The committee roster,
+  voting rules, and the firm's minutes format are saved once in a short
+  first-run setup. Built for fund operations, compliance, and CCO teams that
+  need a defensible written record. Trigger on "draft IC minutes", "turn this
+  transcript into minutes", "minutes for the investment committee meeting",
+  "formalize these IC notes", "document the committee's decision", "write up
+  Tuesday's IC", "set up ic-minutes-generator", "change my
+  ic-minutes-generator settings", or when a user provides an IC, valuation
+  committee, or credit committee transcript and needs the formal record.
+  Accuracy over polish — flags inaudible or ambiguous passages rather than
+  guessing. Do NOT use for client/prospect call recaps and follow-up emails —
+  use the call-transcript-followup skill. Do NOT use for a meeting with no
+  transcript that is not a committee meeting — use the no-recording skill. Do
+  NOT use for summarizing portfolio company board packs.
+license: MIT
+metadata:
+  author: latourai
+  version: '2.0'
 ---
 
 # IC Minutes Generator
@@ -14,21 +35,41 @@ IC minutes are one of the most consequential documents a fund produces and one o
 ## Inputs
 
 **Required:**
-- The meeting transcript (preferred) or detailed contemporaneous notes
+- The meeting transcript (preferred) or detailed contemporaneous notes. The transcript can be attached, pasted, or pulled from a connected meeting tool (Zoom, Teams, Fireflies, Granola, Otter) or file storage if the user names the meeting or where the file lives.
 - Meeting identity: committee name, date, fund/vehicle if applicable
 
 **Optional but high-value:**
-- Attendee list with roles (transcripts mangle names; a roster fixes attribution)
+- Who attended this meeting, including guests and absences (transcripts mangle names; checking against the saved roster fixes attribution)
 - The agenda (gives the minutes their structure; otherwise structure is inferred and labeled)
-- The firm's prior minutes format (match it — consistency matters to auditors)
-- Voting rules (quorum, who votes vs. advises, whether abstentions are recorded)
 - Documents distributed before/at the meeting
 
-**Missing-input behavior:** If the transcript/notes are missing, ask once. If attendee roles or voting rules are missing, draft with **[CONFIRM: …]** placeholders rather than guessing — a wrong vote count in minutes is worse than a placeholder. If no agenda exists, infer item boundaries from the discussion and note "agenda structure inferred from transcript."
+**Set once in setup (step 0):** the committees the firm runs and their standing members with roles, voting rules (quorum, who votes vs. advises, whether abstentions are recorded), the firm's minutes format, how people are named in minutes, and where drafts are saved.
+
+**Missing-input behavior:** If the transcript/notes are missing, ask once. If a connected meeting tool or file store can't be reached, say which one and work from an attached or pasted transcript. If attendee roles or voting rules are neither saved nor supplied, draft with **[CONFIRM: …]** placeholders rather than guessing — a wrong vote count in minutes is worse than a placeholder. If no agenda exists, infer item boundaries from the discussion and note "agenda structure inferred from transcript."
 
 ## How it works
 
-1. **Establish the frame:** committee, date, time, location/medium, attendees (present/absent/guests, with roles), quorum status if rules were provided, and who chaired.
+### 0. First-run setup (once, then only when asked)
+
+Run setup the first time the skill is used, or when the user says "set up ic-minutes-generator" or "change my ic-minutes-generator settings". Look for a saved settings file first (`ic-minutes-generator-settings.md`, in the project's files or the folder where minutes are kept). If one exists, read it and skip setup.
+
+Setup is one short round of questions, each with a default the user can accept:
+
+1. **Detect before asking.** If prior minutes are attached, or are findable in connected file storage under the name the user gives, read them and pre-fill the format, the committee name, the roster and the naming convention for confirmation. Check whether a meeting-transcript tool is connected.
+2. **Ask, in one message:**
+   - **Committees and rosters:** each committee the skill will minute (investment, valuation, credit), its standing members with roles, who chairs, and who votes versus advises. "None" is valid; attendance is then drafted from the transcript with [CONFIRM] placeholders.
+   - **Voting rules:** quorum, the majority required, and whether abstentions and recusals are recorded by name. Default: record every vote by name where the transcript supports it, quorum marked [CONFIRM].
+   - **Minutes format:** the firm's prior minutes to match (attach one or say where they live), or the built-in format below (default). Consistency from meeting to meeting matters to auditors.
+   - **Naming convention:** full names, "Mr./Ms. Surname", or initials. Default: full name on first mention, surname after.
+   - **Where transcripts come from and where drafts go:** a connected meeting tool or folder to read from, and a folder to save drafts to. Default: the user attaches the transcript and the draft is returned in the conversation.
+3. **Save the settings** to `ic-minutes-generator-settings.md` in plain language the user can edit. If nothing persistent can be written, show the settings as a short block and tell the user to paste it into their project instructions.
+4. **Continue straight into the minutes** if the user gave a transcript with the setup request.
+
+On every later run: read the settings and never re-ask. The saved roster says who could have attended, never who did: attendance, votes and recusals for a given meeting come only from that meeting's transcript, notes or attendee list. Setup never blocks a first run: if the user says "skip setup", draft in the built-in format with [CONFIRM] placeholders.
+
+### Steps for each meeting
+
+1. **Establish the frame:** committee, date, time, location/medium, attendees (present/absent/guests, with roles), quorum status if rules are saved or were provided, and who chaired.
 2. **Segment the transcript by agenda item.** Mark where each item starts and ends; discussion that wanders gets attributed to the item it substantively belongs to.
 3. **Summarize discussion per item — balanced by construction.** For each item capture: the proposal or matter presented and by whom; the material points raised in support; **the concerns, risks, and dissenting views raised, attributed appropriately**; questions asked and whether they were answered or deferred; any conditions or modifications introduced during discussion. Minutes are a summary, not a transcript — but a summary that omits the pushback is a misrepresentation.
 4. **Record decisions with precision.** For each decision: the exact matter decided (including amendments adopted along the way — the thing voted on is often not the thing originally proposed), the vote outcome (for/against/abstain/recused, by name where the transcript supports it), and conditions attached to approval. Recusals and their stated reasons always get recorded. Vote counts must reconcile with the voting members recorded as present; if they don't, flag the discrepancy.
@@ -97,9 +138,11 @@ The recurring judgment call in minutes is granularity. Working rules:
 
 ## Example prompts
 
-> "Here's the transcript of yesterday's investment committee — we considered the Project Atlas add-on acquisition and the Q2 valuation marks. Five voting members, Sarah recused on Atlas (her brother works at the target). Draft the minutes in our usual format (attaching last month's as a template). Flag anything where the vote or wording is unclear — our CCO reviews these and we're a registered adviser."
+> "Here's the transcript of yesterday's investment committee — we considered the Project Atlas add-on acquisition and the Q2 valuation marks. One of the five voting members recused on Atlas (a family member works at the target). Draft the minutes in our usual format. Flag anything where the vote or wording is unclear — our CCO reviews these and we're a registered adviser."
 
-> "Valuation committee call, transcript attached, four marks reviewed and one written down. No formal agenda existed — infer the structure and say so. Attendee roster pasted below."
+> "Set up ic-minutes-generator. Two committees: investment committee (five voting partners, the general counsel attends as a non-voting adviser, quorum is three) and valuation committee (the CFO chairs, three voting members). Match the format of the attached minutes from last quarter, use 'Mr./Ms. Surname', and save drafts to the 'IC minutes — drafts' folder on our shared drive."
+
+> "Valuation committee call, transcript attached, four marks reviewed and one written down. No formal agenda existed — infer the structure and say so. Two members were absent; attendee list pasted below."
 
 > "These are my typed notes from Tuesday's credit committee (no recording — counsel's preference). Turn them into draft minutes and be aggressive with [CONFIRM] flags wherever my notes are thin."
 

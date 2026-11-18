@@ -1,10 +1,26 @@
 ---
 name: call-transcript-followup
-description: "Turn a raw meeting, sales call, client call, or expert-call transcript into a clean post-call package. Produces an executive summary, key decisions and takeaways, action items with owners and due dates, open questions, and risks. Especially useful for investment firms, lead generation, consultants, advisors, investors, executives, and client-facing teams who need to quickly convert conversations into next steps. Load when the user provides a transcript, meeting notes, or asks to process a call recording."
+description: >-
+  Turn a raw meeting, sales call, client call, or expert-call transcript into
+  a clean post-call package: an executive summary, key takeaways, decisions,
+  action items with owners and due dates, open questions, risks, and a short
+  CRM note. The transcript can be pasted, attached, or pulled from a
+  connected meeting tool (Zoom, Teams, Fireflies, Granola, Otter). For
+  investment firms, business development and lead generation teams,
+  consultants, advisors, executives, and client-facing teams who need to
+  convert conversations into next steps. Trigger on "process this call",
+  "summarize this transcript", "action items from this meeting", "post-call
+  summary", "follow-up from my call with [name]", "write the CRM note for
+  this call", or when the user provides a transcript or meeting notes. Do
+  NOT use when no transcript or recording exists; use the no-recording
+  skill. Do NOT use for investment committee meetings; use the
+  ic-minutes-generator skill. Do NOT use to combine several expert calls into
+  one view; use the expert-call-synthesis skill. Do NOT use for public
+  earnings calls; use the earnings-call-extractor skill.
 license: MIT
 metadata:
   author: latourai
-  version: '1.0'
+  version: '2.0'
 ---
 
 # Call Transcript Follow-Up
@@ -31,11 +47,15 @@ The user may provide:
 - Client or company name
 - Context about the relationship or meeting goal
 
+The transcript can be pasted or attached. If a meeting tool is connected (Zoom, Teams, Fireflies, Granola, Otter) and the user names the meeting, read the transcript from there. If the tool isn't connected or the transcript can't be found, say so and ask for it to be pasted.
+
 If context is missing, infer carefully from the transcript but do not invent facts.
 
 ## Core Instructions
 
 When given a transcript, produce a post-call package using the structure below.
+
+Length follows the substance: cover what the task needs and leave out filler sections, restated summaries, and boilerplate.
 
 ### 1. Meeting Snapshot
 
@@ -128,22 +148,13 @@ If none are apparent, write:
 
 ### 8. CRM Note
 
-Add a short CRM-style note for sales, consulting, or client-development conversations — especially relevant for investment and lead generation workflows.
+Add a short CRM-style note for sales, consulting, or client-development conversations. It is especially relevant for investment and lead generation workflows.
 
 Use this format:
 
 > **CRM Note:** [3–5 sentence summary of the relationship, client need, opportunity, next step, and any relevant timing.]
 
-## Quality Bar
-
-The final output should feel like it was prepared by a sharp chief of staff after sitting in the meeting. It should be:
-
-- Concise
-- Accurate
-- Action-oriented
-- Easy to skim
-- Careful about uncertainty
-- Ready to paste into a CRM or project tracker
+The note is returned as text, ready to paste into the firm's CRM (Salesforce, HubSpot, Dynamics 365, DealCloud, Affinity) or project tracker. If a CRM is connected and the user asks for the note to be logged, show the note and the matched account, and write it as an activity only after the user confirms. Do not create or edit accounts, contacts or opportunities. If the write fails, say so and leave the note as text.
 
 ## Guardrails
 
@@ -152,3 +163,4 @@ The final output should feel like it was prepared by a sharp chief of staff afte
 - Preserve uncertainty where the transcript is ambiguous.
 - Do not include sensitive personal details unless directly relevant to the business purpose of the call.
 - Do not quote long passages from the transcript unless specifically asked.
+- Nothing is sent or shared. Any follow-up message the user asks for is a draft for them to send.
